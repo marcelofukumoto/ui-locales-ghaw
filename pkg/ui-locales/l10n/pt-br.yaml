@@ -1,0 +1,275 @@
+logging:
+  clusterFlow:
+    noOutputsBanner: Não há saídas de cluster no namespace selecionado.
+  flow:
+    clusterOutputs:
+      doesntExistTooltip: Esta saída de cluster não existe
+      label: Saídas de Cluster
+    matches:
+      banner: Configure de quais logs de container serão coletados
+      unsupportedConfig: Este recurso contém uma configuração de correspondência que o editor de formulário não suporta. Por favor, use a edição YAML.
+      label: Correspondências
+      addSelect: Adicionar Regra de Inclusão
+      addExclude: Adicionar Regra de Exclusão
+      pods:
+        title:
+          include: Incluir Pods
+          exclude: Excluir Pods
+        keyLabel: Chave de Label do Pod
+        valueLabel: Valor de Label do Pod
+        addLabel: Adicionar Pod
+      nodes:
+        title:
+          include: Limitar a nodes específicos
+          exclude: Excluir nodes específicos
+        placeholder: "Padrão: Qualquer node"
+      containerNames:
+        title:
+          include: Limitar a nomes de container específicos
+          exclude: Excluir nomes de container específicos
+        placeholder: "Padrão: Qualquer container"
+        enter: Digite o nome do container para selecionar
+      namespaces:
+        title:
+          include: Limitar a Namespaces específicos
+          exclude: Excluir Namespaces específicos
+        placeholder: "Padrão: Qualquer Namespace"
+
+    filters:
+      label: Filtros
+    outputs:
+      doesntExistTooltip: Esta saída não existe
+      sameNamespaceError: A saída deve residir no mesmo Namespace que o fluxo.
+      label: Saídas
+  install:
+    k3sContainerEngine: Motor de Container K3S
+    enableAdditionalLoggingSources: Ativar registro aprimorado do provedor de nuvem
+    dockerRootDirectory: Diretório Raiz do Docker
+    systemdLogPath: Caminho do Log systemd
+    tooltip: 'Algumas distribuições Kubernetes registram em <code>journald</code>. Para coletar esses logs, o <code>systemdLogPath</code> precisa ser definido. Embora o diretório <code>/run/log/journal</code> seja usado por padrão, algumas distribuições Linux não utilizam este caminho como padrão.'
+    url: '<a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Saiba mais</a>'
+    default: /run/log/journal
+  elasticsearch:
+    host: Host
+    scheme: Esquema
+    port: Porta
+    indexName: Nome do Índice
+    user: Usuário
+    password: Senha do Secret
+    caFile:
+      label: Arquivo CA do Secret
+    clientCert:
+      label: Certificado do Cliente do Secret
+      placeholder: Cole o certificado CA
+    clientKey:
+      label: Chave do Cliente do Secret
+      placeholder: Cole a chave do cliente
+    clientKeyPass: Senha da Chave do Cliente do Secret
+    verifySsl: Verificar SSL
+    sslVersion: Versão SSL
+    suppressTypeName:
+      label: Suprimir Nomes de Tipo
+      elasticSearchTips: Suprimir nomes de tipo por padrão para compatibilidade com o servidor de log. Você deve ativá-lo para Elasticsearch >= 8.0.0
+      openSearchTips: Suprimir nomes de tipo por padrão para compatibilidade com o servidor de log. Você deve ativá-lo para OpenSearch >= 2.0.0
+  redis:
+    host: Host
+    port: Porta
+    dbNumber: Número do banco de dados Redis
+    ttl: TTL para cada chave
+    password: Senha do Secret
+    format:
+      title: Formato
+      type: Tipo
+  gelf:
+    host: Host
+    port: Porta
+    protocol: Protocolo
+    tls: Ativar TLS
+    tlsOptions:
+      clientCert: Certificado do Cliente
+      clientKey: Chave do Certificado do Cliente
+      allCiphers: Permitir o uso de qualquer cifra
+      tlsVersion: Versão TLS
+      noVerify: Ignorar verificação TLS
+  kafka:
+    brokers: Brokers
+    defaultTopic: Tópico Padrão
+    saslOverSsl: SASL sobre SSL
+    scramMechanism: Mecanismo Scram
+    username: Nome de usuário do Secret
+    password: Senha do Secret
+    sslCaCert:
+      label: Certificado CA do Secret
+      placeholder: Cole o certificado CA
+    sslClientCert:
+      label: Certificado do Secret
+      placeholder: Cole o certificado do cliente
+    sslClientCertChain:
+      label: Cadeia de Certificados do Secret
+      placeholder: Cole a cadeia de certificados do cliente
+    sslClientCertKey: Chave do Certificado do Secret
+  loki:
+    url: URL
+    urlInvalid: Formato de URL incorreto. Por favor, verifique e corrija o formato da URL antes de salvar.
+    tenant: Tenant
+    username: Usuário do Secret
+    password: Senha do Secret
+    configureKubernetesLabels: Configurar metadados Kubernetes em um formato semelhante ao Prometheus
+    extractKubernetesLabels: Extrair labels Kubernetes como labels do Loki
+    dropSingleKey: Se um registro tiver apenas 1 chave, defina a linha de log como o valor e descarte a chave
+    caCert: Certificado CA do Secret
+    cert: Certificado do Secret
+    key: Chave do Secret
+  awsElasticsearch:
+    url: URL
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
+  azurestorage:
+    storageAccount: Conta do Secret
+    accessKey:  Chave de Acesso do Secret
+    container: Container
+    path: Caminho
+    storeAs: Armazenar Como
+  cloudwatch:
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
+    endpoint: Endpoint
+    region: Região
+    logGroupName: Nome do Grupo de Log
+    logStreamName: Nome do Stream de Log
+  datadog:
+    apiKey: Chave de API do Secret
+    useSSL: Usar SSL
+    useCompression: Usar Compressão
+    host: Host
+  file:
+    path: Caminho
+  gcs:
+    project: Projeto
+    credentialsJson: Credenciais do Secret
+    bucket: Bucket
+    path: Caminho
+    overwriteExistingPath: Sobrescrever Caminho Existente
+  kinesisStream:
+    streamName: Nome do Stream
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
+  logdna:
+    apiKey: Chave de API
+    hostname: Hostname
+    app: App
+  logz:
+    url: URL
+    port: Porta
+    token: Token de API do Secret
+    enableCompression: Ativar Compressão
+  newrelic:
+    apiKey: Chave de API do Secret
+    licenseKey: Chave de Licença do Secret
+    baseURI: URI Base
+  sumologic:
+    endpoint: Endpoint do Secret
+    sourceName: Nome da Fonte
+  syslog:
+    host: Host
+    port: Porta
+    transport: Transporte
+    insecure: inseguro
+    trustedCaPath: Caminho CA do Secret
+    format:
+      title: Formato
+      type: Tipo
+      addNewLine: Adicionar Nova Linha
+      messageKey: Chave de Mensagem
+    buffer:
+      title: Buffer
+      tags: Tags
+      chunkLimitSize: Tamanho Limite do Chunk
+      chunkLimitRecords: Limite de Chunk chunkLimitRecords
+      totalLimitSize: Tamanho Total do Limite
+      flushInterval: Intervalo de Flush
+      timekey: Timekey
+      timekeyWait: Espera do Timekey
+      timekeyUseUTC: Timekey Usar UTC
+  s3:
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
+    endpoint: Endpoint
+    bucket: Bucket
+    path: Caminho
+    overwriteExistingPath: Sobrescrever Caminho Existente
+  output:
+    buffer:
+      label: Buffer de Saída
+    selectOutputs: Selecionar Saídas
+    selectBanner: Selecione para configurar uma saída
+    sections:
+      target: Destino
+      access: Acesso
+      certificate: Conexão
+      labels: Labels
+      configuration: Configuração
+    tips:
+      singleProvider: Esta saída está configurada com múltiplos provedores. Atualmente, suportamos apenas um único provedor por saída. Você pode visualizar ou editar o YAML.
+      multipleProviders: Esta saída está configurada com provedores que ainda não suportamos. Você pode visualizar ou editar o YAML.
+  outputProviders:
+    elasticsearch: Elasticsearch
+    opensearch: OpenSearch
+    redis: Redis
+    splunkHec: Splunk
+    kafka: Kafka
+    forward: Fluentd
+    gelf: GELF
+    loki: Loki
+    awsElasticsearch: Amazon Elasticsearch
+    azurestorage: Azure Storage
+    cloudwatch: Cloudwatch
+    datadog: Datadog
+    file: Arquivo
+    gcs: GCS
+    kinesisStream: Kinesis Stream
+    logdna: LogDNA
+    logz: LogZ
+    newrelic: New Relic
+    sumologic: SumoLogic
+    syslog: Syslog
+    s3: S3
+    unknown: Desconhecido
+  overview:
+    poweredBy: Banzai Cloud
+    clusterLevel: Nível de Cluster
+    namespaceLevel: Nível de Namespace
+  provider: Provedor
+  splunk:
+    host: Host
+    port: Porta
+    protocol: Protocolo
+    index: Índice
+    token: Token do Secret
+    insecureSsl: SSL Inseguro
+    indexName: Nome do Índice
+    source: Fonte
+    caFile: Arquivo CA do Secret
+    caPath: Caminho CA do Secret
+    clientCert: Certificado do Cliente do Secret
+    clientKey: Chave do Cliente do Secret
+  forward:
+    host: Host
+    port: Porta
+    sharedKey: Chave Compartilhada do Secret
+    username: Nome de usuário do Secret
+    password: Senha do Secret
+    clientCertPath: Caminho do Certificado do Cliente do Secret
+    clientPrivateKeyPath: Caminho da Chave Privada do Cliente do Secret
+    clientPrivateKeyPassphrase: Frase-senha da Chave Privada do Cliente do Secret
+
+longhorn:
+  overview:
+    title: Visão Geral
+    subtitle: "Desenvolvido por: <a href='https://github.com/longhorn' target='_blank' rel='noopener nofollow noreferrer'>Longhorn</a>"
+    linkedList:
+      longhorn:
+        label: 'Longhorn'
+        description: 'Gerenciar sistema de armazenamento via UI'
+        na: Recurso Indisponível
+        uiServiceUnavailable: O serviço de UI do Longhorn não está disponível ou você não tem permissão para acessá-lo.
