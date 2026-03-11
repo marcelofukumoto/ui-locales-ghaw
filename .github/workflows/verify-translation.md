@@ -1,12 +1,11 @@
 ---
 description: |
-  This workflow verifies and fixes translation files in pull requests on-demand
-  via the '/verify-translation' slash command. It compares the target locale YAML
-  against en-us.yaml to ensure structural parity: same keys, same nesting, same
-  ordering, no duplicate keys, no invented keys, and valid YAML syntax. When issues
-  are found it fixes them and pushes corrections. When the file is perfect it reports
-  success. Results are logged to a shared learnings discussion so future add-language
-  runs avoid the same mistakes.
+  This workflow performs a read-only verification of translation files in pull
+  requests on-demand via the '/verify-translation' slash command. It compares the
+  target locale YAML against en-us.yaml and produces a detailed report covering
+  structural integrity, translation coverage, placeholder preservation, and key
+  ordering. It does NOT modify any files — it only reports findings. When issues
+  are found it recommends running '/improve-translation' to apply fixes.
 
 on:
   slash_command:
@@ -29,7 +28,6 @@ tools:
   bash: true
 
 safe-outputs:
-  push-to-pull-request-branch:
   add-comment: {}
   create-discussion:
     title-prefix: "[learnings] "
@@ -43,7 +41,11 @@ safe-outputs:
 
 # Verify Translation
 
-You are an AI assistant specialized in verifying and fixing translation YAML files for the Rancher UI locales project. Your job is to ensure the translated locale file in pull request #${{ github.event.issue.number }} of ${{ github.repository }} is **structurally identical** to `en-us.yaml` — same keys, same nesting, same order, valid YAML, no duplicates, no invented keys.
+You are an AI assistant specialized in auditing translation YAML files for the Rancher UI locales project. Your job is to **verify** the translated locale file in pull request #${{ github.event.issue.number }} of ${{ github.repository }} and produce a detailed quality report. You do **NOT** modify or fix any files — you only analyze and report.
+
+## Important: read-only workflow
+
+This workflow is strictly read-only. You must **never** push changes, edit files, or modify the PR branch. All findings are reported as a PR comment. If issues are found, recommend that the user runs `/improve-translation` to apply fixes.
 
 ## Learnings discussion
 
@@ -56,7 +58,7 @@ Before doing anything else, search for a discussion in this repository with the 
 
 Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
 
-- If there are previous `/verify-translation` comments from earlier runs, read them to understand what was already fixed and what issues remain.
+- If there are previous `/verify-translation` comments from earlier runs, read them to understand what was already reported and whether issues have been addressed since.
 - Take heed of any additional instructions in the slash command: "${{ steps.sanitized.outputs.text }}"
 - Identify which locale file is being added or modified (e.g. `pkg/ui-locales/l10n/pt-br.yaml`).
 
@@ -66,33 +68,37 @@ Check out the branch for pull request #${{ github.event.issue.number }} and set 
 
 ## 3. Structural validation
 
-This is the core of your work. The translated file **must be a mirror** of `en-us.yaml` with only the values changed. Perform ALL of the following checks:
+The translated file **must be a mirror** of `en-us.yaml` with only the values changed. Perform ALL of the following checks and collect the results for the final report.
 
 ### 3a. Valid YAML
 
-Parse the locale file with a YAML parser. If it fails to parse, the file is broken. Common causes:
-- **Duplicate keys** at the same nesting level (YAML spec forbids this) — the AI may have generated the same key twice with different translations
+Parse the locale file with a YAML parser. Report whether it parses successfully. If it fails, report the error details. Common causes:
+- **Duplicate keys** at the same nesting level (YAML spec forbids this)
 - Incorrect indentation
 - Unescaped special characters in values
 - Missing quotes around values that need them
 
 ### 3b. Exact key parity
 
-Extract every fully-qualified key path (e.g. `generic.actions.activate`) from both `en-us.yaml` and the locale file. Then:
-- **Missing keys**: keys in `en-us.yaml` that are absent from the locale file — these must be added
-- **Extra/invented keys**: keys in the locale file that do NOT exist in `en-us.yaml` — these must be removed
-- Both sets must be **exactly equal** when done
+Extract every fully-qualified key path (e.g. `generic.actions.activate`) from both `en-us.yaml` and the locale file. Then report:
+- **Missing keys**: keys in `en-us.yaml` that are absent from the locale file (list up to 30 examples)
+- **Extra/invented keys**: keys in the locale file that do NOT exist in `en-us.yaml` (list up to 30 examples)
+- Total missing key count and total extra key count
 
 ### 3c. Key ordering
 
-Keys within each nesting level must appear in the **same order** as in `en-us.yaml`. Out-of-order keys suggest the AI generated them from memory rather than following the source. Reorder them to match.
+Check whether keys within each nesting level appear in the **same order** as in `en-us.yaml`. Report:
+- Number of out-of-order keys
+- Up to 20 examples of misordered keys
 
 ### 3d. Structure parity
 
-For every key, the type must match:
+For every key, verify the type matches:
 - If a key is a **mapping** (has children) in `en-us.yaml`, it must also be a mapping in the locale file
 - If a key is a **scalar** (leaf value) in `en-us.yaml`, it must also be a scalar in the locale file
 - The nesting depth of every key must be identical
+
+Report any structural mismatches found.
 
 ### 3e. Preserved placeholders
 
@@ -102,65 +108,94 @@ For every leaf value, verify that all placeholders from `en-us.yaml` are present
 - HTML tags: `<b>`, `<a href="...">`, `<code>`, `<br/>`, etc.
 - Template expressions: anything inside `{` and `}`
 
-If a placeholder is missing from the translation, it is a bug that must be fixed.
+Report any keys where placeholders are missing or altered (list up to 30 examples).
 
 ### 3f. Empty and special values
 
-- If a value is empty in `en-us.yaml`, it must be empty in the locale file
+- If a value is empty in `en-us.yaml`, verify it is also empty in the locale file
 - Values that are `'—'` or similar special characters should be preserved exactly
 - YAML comments (lines starting with `#`) in `en-us.yaml` should be preserved in the same positions
 
-## 4. Fix all issues
+Report any mismatches.
 
-For every issue found in step 3, fix it directly in the locale file:
-- Add missing keys with a correct translation (translate the English value)
-- Remove invented/extra keys
-- Fix duplicate keys (keep the correct translation, remove the duplicate)
-- Reorder keys to match `en-us.yaml`
-- Fix placeholder issues
-- Fix structural mismatches
+## 4. Translation coverage
 
-When the file is very large (en-us.yaml is ~9500 lines), work in chunks by top-level key section to stay within output limits.
+Use bash to write and run a script that calculates translation coverage:
 
-## 5. Re-validate
+1. Parse both YAML files and extract every leaf key-value pair (fully-qualified key path → value).
+2. A string is **untranslated** if its value in the locale file is **identical** to the value in `en-us.yaml`. Exception: values that should NOT be translated (empty strings, pure numbers, single characters, URLs, technical identifiers, variable-only values like `{name}`, special values like `'—'`) — count those as **skipped**.
+3. Calculate:
+   - **Total leaf keys** in `en-us.yaml`
+   - **Translated**: value differs from English (count and percentage)
+   - **Untranslated**: value is still identical to English (count and percentage)
+   - **Skipped**: non-translatable values (count)
+   - **Overall coverage**: translated / (total - skipped) as a percentage
+4. Break down coverage by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.) — for each section report the number of translated vs untranslated leaf keys.
 
-After applying all fixes, re-run the validation from step 3 to confirm:
-- The YAML parses without errors
-- The key sets are exactly equal
-- The key order matches
-- All placeholders are preserved
+## 5. Post the report as a PR comment
 
-If new issues remain, go back to step 4 and fix them. Repeat until the file is perfect.
+Add a single, detailed comment to the PR with the full verification report. Use this structure:
 
-## 6. Push and comment
+### If all checks passed and coverage is 100%:
 
-### If fixes were made:
+```
+✅ **Verify Translation — All Checks Passed**
 
-Push the corrected file to the PR branch and add a **detailed comment** to the PR with:
+**Locale file**: `pkg/ui-locales/l10n/<locale>.yaml`
+**Language**: <Language Name>
 
-- A summary header (e.g. "🔧 Verify Translation — Fixes Applied")
-- How many issues were found and fixed, broken down by category:
-  - Duplicate keys removed
-  - Missing keys added
-  - Extra/invented keys removed
-  - Keys reordered
-  - Placeholder fixes
-  - Structural fixes
-- A list of the most notable fixes (up to 20 examples)
-- A note that another `/verify-translation` run can be triggered to re-check
+### Structural Integrity
+- ✅ Valid YAML — no parse errors
+- ✅ Key parity — all {N} keys present, no extra keys
+- ✅ Key ordering — matches en-us.yaml
+- ✅ Structure parity — all types match
+- ✅ Placeholders — all preserved
+- ✅ Empty/special values — all preserved
 
-### If no issues were found:
+### Translation Coverage
+- **Overall**: {percentage}% ({translated}/{translatable} translatable strings)
+- **Skipped**: {skipped} non-translatable values
 
-Add a comment to the PR:
+The file is structurally sound and fully translated. Ready for native speaker review of translation quality.
+```
 
-- "✅ **Verify Translation — All Checks Passed**"
-- Confirm: valid YAML, exact key parity with en-us.yaml, correct ordering, all placeholders preserved
-- State the total number of keys verified
-- Note that the file is ready for human review of translation quality
+### If issues were found or coverage is incomplete:
 
-## 7. Update learnings discussion
+```
+📋 **Verify Translation — Report**
 
-After completing the work (whether fixes were needed or not), update the learnings discussion with what you learned during this run.
+**Locale file**: `pkg/ui-locales/l10n/<locale>.yaml`
+**Language**: <Language Name>
+
+### Structural Integrity
+- {✅ or ❌} Valid YAML — {details}
+- {✅ or ⚠️} Key parity — {N} missing keys, {N} extra keys
+- {✅ or ⚠️} Key ordering — {N} out-of-order keys
+- {✅ or ⚠️} Structure parity — {N} type mismatches
+- {✅ or ⚠️} Placeholders — {N} keys with missing placeholders
+- {✅ or ⚠️} Empty/special values — {N} mismatches
+
+{If there are structural issues, list them here with details}
+
+### Translation Coverage
+- **Overall**: {percentage}% ({translated}/{translatable} translatable strings)
+- **Untranslated**: {untranslated} strings still in English
+- **Skipped**: {skipped} non-translatable values
+
+#### Coverage by Section
+| Section | Translated | Untranslated | Coverage |
+|---------|-----------|-------------|----------|
+| generic | X / Y     | Z           | NN%      |
+| nav     | X / Y     | Z           | NN%      |
+| ...     | ...       | ...         | ...      |
+
+### Recommended Actions
+Run `/improve-translation` to fix structural issues and translate remaining strings.
+```
+
+## 6. Update learnings discussion
+
+After completing the verification, update the learnings discussion with what you learned during this run.
 
 - **If the discussion already exists**: update its body using `update_discussion`, merging your new observations into the existing content — do not discard previous learnings
 - **If the discussion does not exist**: create it using `create_discussion` with title `[learnings] Add New Language Translation`
