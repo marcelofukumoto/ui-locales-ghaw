@@ -1390,7 +1390,7 @@ catalog:
       rancher-partner-charts: Parceiros
       rancher-rke2-charts: RKE2
       rancher-ui-plugins: Extensões do Rancher
-      suse-application-collection: SUSE App Collection
+      suse-application-collection: Coleção de Aplicativos SUSE
 
     target:
       git: 
@@ -1403,7 +1403,7 @@ catalog:
         title: Repositório OCI
         description: Registro compatível com OCI hospedando charts Helm como artefatos
       suseAppCollection: 
-        title: SUSE App Collection
+        title: Coleção de Aplicativos SUSE
         description: Aplicações empresariais selecionadas do SUSE Application Collection
       label: Destino
     url:
@@ -2847,7 +2847,7 @@ drivers:
       placeholder: https://test.com/ui
       tooltip: A URL a carregar para a tela personalizada de Adicionar Nodes para este driver. Consulte https://github.com/rancher/ui-driver-skel para mais informações.
     checksum:
-      label: Checksum
+      label: Soma de Verificação
       tooltip: Checksum para verificar se o driver baixado corresponde ao checksum esperado.
     whitelist: Domínios da Lista de Permissões
   actions:
@@ -2957,7 +2957,7 @@ fleet:
         system-store:
           label: system-store
         strict:
-          label: strict
+          label: Estrito
     agentCheckinInterval:
       label: Intervalo de Checkin
       description: Uma string de duração para a frequência com que os agentes devem reportar um heartbeat.
@@ -8723,7 +8723,7 @@ action:
 
 unit:
   sec: segs
-  min: mins
+  min: min
   hour: |-
     {count, plural,
       one { hora }
@@ -9120,7 +9120,7 @@ customLinks:
     issues:     Reportar um Problema
     getStarted: Primeiros Passos
     commercialSupport: Suporte Comercial
-    appCo: SUSE Application Collection
+    appCo: Coleção de Aplicativos SUSE
 
 ##############################
 ### Support Page
