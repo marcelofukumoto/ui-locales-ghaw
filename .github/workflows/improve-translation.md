@@ -30,10 +30,6 @@ safe-outputs:
   push-to-pull-request-branch:
   add-comment:
     hide-older-comments: true
-  create-discussion:
-    title-prefix: "[learnings] "
-    category: general
-    labels: [translations, automated]
   update-discussion:
     body:
     target: "*"
@@ -53,9 +49,9 @@ Do **NOT** use Python or pip in any scripts. The runner does not have access to 
 Before doing anything else, search for discussions in this repository with the title `[learnings] Add New Language Translation`. There should be **at most one** such discussion — it accumulates knowledge from all previous runs.
 
 - If you find one (or more), open the **most recent** one, **read it carefully**, and **save its discussion number** — you will need it later to call `update_discussion`. It contains chunking strategies, token limits, and tips from previous runs. Apply this knowledge throughout your work.
-- If none exists at all, you will create it at the end.
+- If none exists, skip the learnings step — only the `add-language` workflow creates this discussion.
 
-**Critical**: Never create a new discussion if one already exists. Always reuse the existing one via `update_discussion`.
+**Critical**: This workflow can only update existing discussions, not create new ones. Always use `update_discussion`.
 
 ## 1. Read the PR and previous comments
 
@@ -149,8 +145,8 @@ Push the improved file and add a **detailed comment** to the PR:
 
 After completing the work, update the learnings discussion.
 
-- **If you saved a discussion number earlier** (from the pre-work step): you **must** use `update_discussion` with that discussion number, **merging** new observations — do not discard previous learnings. **Do NOT call `create_discussion`** — a discussion already exists.
-- **Only if no discussion was found earlier**: create one using `create_discussion` with title `[learnings] Add New Language Translation`
+- **If you saved a discussion number earlier** (from the pre-work step): use `update_discussion` with that discussion number, **merging** new observations — do not discard previous learnings.
+- **If no discussion was found earlier**: skip this step. The learnings discussion is created by the `add-language` workflow.
 
 Add or update:
 - **Coverage optimization**: which sections are largest, which have the most untranslated strings, best order to tackle them
