@@ -31,6 +31,7 @@ tools:
 safe-outputs:
   add-comment:
     hide-older-comments: true
+  add-labels:
   update-discussion:
     body:
     target: "*"
@@ -127,14 +128,24 @@ Report any mismatches.
 Use bash to write and run a script that calculates translation coverage:
 
 1. Parse both YAML files and extract every leaf key-value pair (fully-qualified key path → value).
-2. A string is **untranslated** if its value in the locale file is **identical** to the value in `en-us.yaml`. Exception: values that should NOT be translated (empty strings, pure numbers, single characters, URLs, technical identifiers, variable-only values like `{name}`, special values like `'—'`) — count those as **skipped**.
+2. Classify every leaf key into one of four categories:
+   - **Translated**: value in the locale file **differs** from the English value.
+   - **Kept in English**: value is **identical** to English but is **correct to keep as-is**. This includes:
+     - Brand names and proper nouns (e.g. `Rancher`, `Kubernetes`, `Docker`, `Helm`, `Longhorn`, `Harvester`, `Prometheus`, `Grafana`, `Istio`, `Fleet`, `Epinio`, `NeuVector`, `RKE2`, `K3s`, `Linux`, `Windows`, `Azure`, `AWS`, `GKE`, `EKS`, `AKS`)
+     - Technical terms, CLI commands, and identifiers (e.g. `kubectl`, `etcd`, `nginx`, `containerd`, `CronJob`, `DaemonSet`, `StatefulSet`, `ConfigMap`, `PersistentVolume`)
+     - Acronyms and abbreviations (e.g. `CPU`, `GPU`, `RAM`, `DNS`, `API`, `HTTP`, `HTTPS`, `SSH`, `TCP`, `UDP`, `CIDR`, `RBAC`, `OIDC`, `LDAP`, `SAML`, `PVC`, `CSI`)
+     - File extensions, formats, and protocols (e.g. `.yaml`, `.json`, `base64`, `PEM`, `PKCS`)
+     - Values that are a single word that is also a universal technical term in IT (commonly left in English even in fully translated software)
+   - **Skipped**: values that are inherently non-translatable — empty strings, pure numbers, single characters, URLs, variable-only values like `{name}`, special values like `'—'`, HTML-only values
+   - **Untranslated**: value is identical to English and does **not** fit in "Kept in English" or "Skipped" — these genuinely need translation.
 3. Calculate:
    - **Total leaf keys** in `en-us.yaml`
-   - **Translated**: value differs from English (count and percentage)
-   - **Untranslated**: value is still identical to English (count and percentage)
-   - **Skipped**: non-translatable values (count)
-   - **Overall coverage**: translated / (total - skipped) as a percentage
-4. Break down coverage by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.) — for each section report the number of translated vs untranslated leaf keys.
+   - **Translated** (count and percentage of translatable)
+   - **Kept in English** (count — correctly identical to English)
+   - **Skipped** (count — non-translatable)
+   - **Untranslated** (count and percentage of translatable — genuinely need translation)
+   - **Overall coverage**: (translated + kept in English) / (total - skipped) as a percentage
+4. Break down coverage by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.) — for each section report translated, kept-in-english, and untranslated counts.
 
 ## 5. Post the report as a PR comment
 
@@ -158,7 +169,11 @@ Add a single, detailed comment to the PR with the full verification report. Use 
 
 ### Translation Coverage
 - **Overall**: {percentage}% ({translated}/{translatable} translatable strings)
+- **Translated**: {translated} strings
+- **Kept in English**: {kept} strings (brand names, technical terms, acronyms)
 - **Skipped**: {skipped} non-translatable values
+
+🏷️ Label `ready-to-merge` added.
 
 The file is structurally sound and fully translated. Ready for native speaker review of translation quality.
 ```
@@ -182,24 +197,32 @@ The file is structurally sound and fully translated. Ready for native speaker re
 {If there are structural issues, list them here with details}
 
 ### Translation Coverage
-- **Overall**: {percentage}% ({translated}/{translatable} translatable strings)
-- **Untranslated**: {untranslated} strings still in English
+- **Overall**: {percentage}% ({translated + kept}/{translatable} translatable strings)
+- **Translated**: {translated} strings
+- **Kept in English**: {kept} strings (brand names, technical terms, acronyms)
+- **Untranslated**: {untranslated} strings still need translation
 - **Skipped**: {skipped} non-translatable values
 
 #### Coverage by Section
-| Section | Translated | Untranslated | Coverage |
-|---------|-----------|-------------|----------|
-| generic | X / Y     | Z           | NN%      |
-| nav     | X / Y     | Z           | NN%      |
-| ...     | ...       | ...         | ...      |
+| Section | Translated | Kept in English | Untranslated | Coverage |
+|---------|-----------|----------------|-------------|----------|
+| generic | X         | Y              | Z           | NN%      |
+| nav     | X         | Y              | Z           | NN%      |
+| ...     | ...       | ...            | ...         | ...      |
 
 ### Recommended Actions
 Run `/improve-translation` to fix structural issues and translate remaining strings.
 ```
 
-## 6. Update learnings discussion
+## 6. Add label on 100% coverage
 
-After completing the verification, update the learnings discussion with what you learned during this run.
+If **all** structural checks passed (valid YAML, key parity, key ordering, structure parity, placeholders, empty/special values) **and** overall translation coverage is **100%** (i.e. zero untranslated strings), then add the label `ready-to-merge` to pull request #${{ github.event.issue.number }}.
+
+If the coverage is below 100% or any structural check failed, do **not** add the label.
+
+## 7. Update learnings discussion
+
+After completing the verification and labeling, update the learnings discussion with what you learned during this run.
 
 - **If you saved a discussion number earlier** (from the pre-work step): use `update_discussion` with that discussion number, merging your new observations into the existing content — do not discard previous learnings.
 - **If no discussion was found earlier**: skip this step. The learnings discussion is created by the `add-language` workflow.
