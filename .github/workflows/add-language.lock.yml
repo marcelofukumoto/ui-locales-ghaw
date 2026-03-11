@@ -25,7 +25,7 @@
 # a new language translation. It reads the en-us.yaml file, translates all values
 # into the requested language, and opens a Pull Request with the new locale file.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"7c1ee70b5cd1d67de57c8efb885a84c2b524d9c0274348a526f96b2ff4cf753c","compiler_version":"v0.56.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"a594fcc51ed9f2d7d9ffdf25cfdf09769d57bad6369ab5e8e0b434db5d231164","compiler_version":"v0.56.2","strict":true}
 
 name: "Add New Language Translation"
 "on":
@@ -811,7 +811,7 @@ jobs:
                 "env": {
                   "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_MCP_SERVER_TOKEN}",
                   "GITHUB_READ_ONLY": "1",
-                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests"
+                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests,discussions"
                 }
               },
               "safeoutputs": {

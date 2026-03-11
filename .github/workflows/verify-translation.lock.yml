@@ -28,7 +28,7 @@
 # ordering. It does NOT modify any files — it only reports findings. When issues
 # are found it recommends running '/improve-translation' to apply fixes.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"37d7b4f2c8500a5806e70dabd7839ba403e3171bab5bf70bb83579a98c487998","compiler_version":"v0.56.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"fe4c3deefb2c09da61255c0ff2b56b535db8154990bad38007f0030d0e787f4f","compiler_version":"v0.56.2","strict":true}
 
 name: "Verify Translation"
 "on":
@@ -729,7 +729,7 @@ jobs:
                 "env": {
                   "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_MCP_SERVER_TOKEN}",
                   "GITHUB_READ_ONLY": "1",
-                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests"
+                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests,discussions"
                 }
               },
               "safeoutputs": {

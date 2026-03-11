@@ -25,6 +25,7 @@ timeout-minutes: 60
 tools:
   github:
     lockdown: false
+    toolsets: [default, discussions]
   bash: true
 
 safe-outputs:

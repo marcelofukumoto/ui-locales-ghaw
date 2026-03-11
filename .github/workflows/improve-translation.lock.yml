@@ -27,7 +27,7 @@
 # pushes the improved file, and reports progress. Can be run repeatedly until
 # 100% coverage is reached. Results are logged to the shared learnings discussion.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"8446350061e129dd53590d603ac3ed4a1ec441b06157cc96a088d71b59ee491a","compiler_version":"v0.56.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"ae259211605e4c9a946693f24857211e3ba9bdecf1c14ece5a09c86613baf061","compiler_version":"v0.56.2","strict":true}
 
 name: "Improve Translation"
 "on":
@@ -788,7 +788,7 @@ jobs:
                 "env": {
                   "GITHUB_PERSONAL_ACCESS_TOKEN": "\${GITHUB_MCP_SERVER_TOKEN}",
                   "GITHUB_READ_ONLY": "1",
-                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests"
+                  "GITHUB_TOOLSETS": "context,repos,issues,pull_requests,discussions"
                 }
               },
               "safeoutputs": {
