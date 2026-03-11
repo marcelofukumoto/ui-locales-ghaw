@@ -29,8 +29,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "chore: "
     labels: [translations, automated]
-  add-comment:
-    hide-older-comments: true
+  add-comment: {}
 ---
 
 # Sync Locales from rancher/dashboard

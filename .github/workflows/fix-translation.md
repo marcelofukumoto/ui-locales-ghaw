@@ -29,8 +29,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "fix: "
     labels: [translations, fix, automated]
-  add-comment:
-    hide-older-comments: true
+  add-comment: {}
 ---
 
 # Fix Translation Error

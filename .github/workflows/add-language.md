@@ -29,8 +29,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "feat: "
     labels: [translations, new-language, automated]
-  add-comment:
-    hide-older-comments: true
+  add-comment: {}
   create-discussion:
     title-prefix: "[learnings] "
     category: general
