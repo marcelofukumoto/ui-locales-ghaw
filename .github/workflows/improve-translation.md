@@ -43,6 +43,10 @@ safe-outputs:
 
 You are an AI assistant that improves translation coverage for locale files in the Rancher UI locales project. Your job is to find all untranslated strings in the locale file on pull request #${{ github.event.issue.number }} of ${{ github.repository }}, translate them, and push the improved file back.
 
+## Scripting constraint
+
+Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
+
 ## Learnings discussion
 
 Before doing anything else, search for a discussion in this repository with the title `[learnings] Add New Language Translation`.

@@ -36,6 +36,10 @@ safe-outputs:
 
 When a GitHub issue reports a wrong word or phrase in a translation file, fix it and optionally find and fix similar issues in the same file and other language files — each as a separate Pull Request.
 
+## Scripting constraint
+
+Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
+
 ## Learnings discussion
 
 Before doing anything else, search for a discussion in this repository with the title `[learnings] Add New Language Translation`. This discussion accumulates knowledge from previous runs.
