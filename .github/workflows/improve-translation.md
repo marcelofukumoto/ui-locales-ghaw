@@ -112,14 +112,30 @@ Translate the untranslated strings, working in chunks to stay within output limi
 
 ## 5. Validate after translation
 
-After translating, run the same validation as verify-translation:
+After translating, run validation using bash/Node.js:
 
 - The file is valid YAML (no parse errors, no duplicate keys)
 - Exact key parity with `en-us.yaml` (no missing, no extra keys)
 - Key order matches
 - All placeholders preserved
 
-Fix any issues found.
+### Fixing YAML parse errors
+
+If the locale file has **any YAML parse errors** (syntax errors, invalid quoting, bad indentation, duplicate keys, etc.), you **must** fix them before proceeding:
+
+1. **Identify the broken key(s)** from the YAML parser error output (it will report the line number and error type).
+2. **Look up the same key in `en-us.yaml`** to get the original English value and its exact YAML formatting (quoting style, indentation, multiline format).
+3. **Re-translate that value** from the English source into the target language, preserving the exact same YAML formatting (single quotes, double quotes, block scalars `|`, folded scalars `>`, etc.) as `en-us.yaml`.
+4. **Replace the broken line(s)** in the locale file with the corrected translation.
+5. **Re-run the YAML parser** to confirm the error is fixed. Repeat until the file parses cleanly.
+
+Common causes of YAML parse errors in translations:
+- **Unescaped special characters**: colons (`:`), hash (`#`), quotes inside quoted strings — the translation may introduce characters that need quoting
+- **Broken quoting**: the source uses single quotes but the translation dropped them or switched styles incorrectly
+- **Multiline string issues**: `|` or `>` block scalars where the translation changed the indentation
+- **ICU/placeholder corruption**: `{count, plural, ...}` syntax got mangled during translation
+
+**Always mirror the quoting and formatting style of `en-us.yaml`** for the corresponding key. If `en-us.yaml` uses `'single quotes'`, the translation must too. If it uses `|` block scalar, keep that format.
 
 ## 6. Calculate final coverage
 

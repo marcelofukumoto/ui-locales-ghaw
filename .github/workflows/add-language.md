@@ -89,6 +89,8 @@ If the issue does not meet these criteria, do nothing and stop.
    - All placeholders (`{...}`, `&hellip;`, HTML tags) from `en-us.yaml` are present in the corresponding translated values
    - If any issues are found, fix them and re-validate until the file is clean
 
+   **Fixing YAML parse errors**: If the generated file has YAML parse errors, identify the broken key from the parser error (line number), look up that key in `en-us.yaml` to get the original value and formatting, re-translate it preserving the exact same YAML quoting and formatting style (single quotes, block scalars `|`/`>`, etc.), replace the broken line, and re-validate. Common causes: unescaped colons/hashes in translations, broken quoting, mangled ICU `{count, plural, ...}` syntax. Always mirror `en-us.yaml`'s formatting.
+
 6. **Open a Pull Request** that:
    - Creates the new file at `pkg/ui-locales/l10n/<locale-code>.yaml` with the translated content
    - Has the title: `feat: add <Language Name> (<locale-code>) translation`
