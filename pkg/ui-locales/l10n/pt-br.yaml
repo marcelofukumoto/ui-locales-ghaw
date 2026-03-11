@@ -6118,9 +6118,9 @@ resourceDetail:
     clone: "Clonar de {subtype} {name}"
     create: Criar {subtype}
     import: Importar {subtype}
-    edit: {subtype} {name}
+    edit: "{subtype} {name}"
     stage: "Preparar de {subtype} {name}"
-    view: {subtype} {name}
+    view: "{subtype} {name}"
   masthead:
     ariaLabel:
       favoriteAction: Adicionar {resource} à sua lista de favoritos
