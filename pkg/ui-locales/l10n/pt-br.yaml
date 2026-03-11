@@ -205,7 +205,7 @@ nav:
     mainMenuRancherLogo: Logo do Rancher no menu principal
     userAvatar: Imagem de avatar do usuário
   expandCollapseAppBar: Expandir/Recolher a Barra de Aplicativos
-  harvesterDashboard: Harvester Dashboard
+  harvesterDashboard: Painel do Harvester
   backToRancher: Gerenciador de Cluster
   tools: Ferramentas
   clusterTools: Ferramentas do Cluster
@@ -243,7 +243,7 @@ nav:
     providers: Provedores
     RKE1Configuration: Configuração RKE1
     admission: Admissão
-    apps: Apps
+    apps: Aplicativos
     clusterProvisioning: Provisionamento de Cluster
     jwt.authentication: Autenticação JWT
     core: Core
@@ -269,7 +269,7 @@ nav:
     project: "Projeto: {name}"
     system: Somente Namespaces do Sistema
     user: Somente Namespaces do Usuário
-  apps: Apps
+  apps: Aplicativos
   categories:
     explore: Explorar Cluster
     multiCluster: Apps Globais
@@ -317,7 +317,7 @@ nav:
     separator: ou
 
 product:
-  apps: Apps
+  apps: Aplicativos
   auth: Usuários e Autenticação
   backup: Backups do Rancher
   compliance: Conformidade
@@ -328,7 +328,7 @@ product:
   manager: Gerenciamento de Cluster
   gatekeeper: OPA Gatekeeper
   istio: Istio
-  logging: Logging
+  logging: Registro de Logs
   settings: Configurações Globais
   clusterManagement: Gerenciamento de Cluster
   monitoring: Monitoramento
@@ -390,7 +390,7 @@ about:
     version: Versão
     cli: CLI
     helm: Helm
-    machine: Machine
+    machine: Máquina
     rancher: Rancher
     releaseNotes: 'Ver notas de versão'
   os:
@@ -767,7 +767,7 @@ authConfig:
       custom: Especificar
       standard: Gerar
     url: URL
-    realm: Realm
+    realm: Domínio
     keycloak:
       url: URL do Keycloak
       realm: Realm do Keycloak
@@ -834,7 +834,7 @@ assignTo:
       =1 { Atribuir Cluster a&hellip; }
       other { Atribuir {count} Clusters a&hellip; }
     }
-  workspace: Workspace
+  workspace: Área de Trabalho
 
 asyncButton:
   alt:
@@ -1514,7 +1514,7 @@ compliance:
     description: Descrição
     fail: Falhou
     lastScanTime: Hora da Última Varredura
-    notApplicable: N/A
+    notApplicable: N/D
     number: Número
     pass: Aprovado
     remediation: Remediação
@@ -1543,37 +1543,37 @@ cluster:
       <code>Cluster Management > Advanced > JWT Authentication</code>"
   addonChart:
     rancher-vsphere-cpi:
-      label: "Add-on: vSphere CPI"
+      label: "Complemento: vSphere CPI"
       configuration: vSphere CPI
     rancher-vsphere-csi:
-      label: "Add-on: vSphere CSI"
+      label: "Complemento: vSphere CSI"
       configuration: vSphere CSI
     rke2-calico:
-      label: "Add-on: Calico"
+      label: "Complemento: Calico"
       configuration: Calico
     rke2-calico-crd:
-      label:  "Add-on: Calico"
+      label:  "Complemento: Calico"
       configuration: Calico
     rke2-canal:
-      label: "Add-on: Canal"
+      label: "Complemento: Canal"
       configuration: Canal
     rke2-cilium:
-      label: "Add-on: Cilium"
+      label: "Complemento: Cilium"
       configuration: Cilium
     rke2-coredns:
-      label: "Add-on: CoreDNS"
+      label: "Complemento: CoreDNS"
       configuration: CoreDNS
     rke2-ingress-nginx:
-      label: "Add-on: NGINX"
+      label: "Complemento: NGINX"
       configuration: NGINX Ingress
     rke2-kube-proxy:
-      label: "Add-on: Kube Proxy"
+      label: "Complemento: Kube Proxy"
       configuration: Kube Proxy
     rke2-metrics-server:
-      label: "Add-on: Metrics Server"
+      label: "Complemento: Metrics Server"
       configuration: Metrics Server
     rke2-multus:
-      label: "Add-on: Multus"
+      label: "Complemento: Multus"
       configuration: Multus
   agentEnvVars:
     label: Ambiente do Agente
@@ -2034,7 +2034,7 @@ cluster:
         description: Escolha em qual hipervisor a máquina virtual será agendada
         dataCenter: Data Center
         resourcePool: Pool de Recursos
-        dataStore: Datastore
+        dataStore: Armazenamento de Dados
         dataStoreCluster: Cluster de Datastore
         folder: Pasta
         host:
@@ -2051,19 +2051,19 @@ cluster:
         disk: Disco
         creationMethod: Método de criação
         template:
-          label: Template
+          label: Modelo
           none: Nenhum Template Encontrado
-        contentLibrary: Content library
+        contentLibrary: Biblioteca de Conteúdo
         libraryTemplate: Template da biblioteca
         virtualMachine: Máquina virtual
         osIsoUrl:
           label: URL do ISO do SO
           placeholder: 'Padrão: Imagem rancheros-vmware mais recente'
         cloudInit:
-          label: Cloud Init
+          label: Inicialização na Nuvem
           placeholder: 'ex.: http://meu_host/cloud-config.yml'
           note: Arquivo Cloud-init ou URL para definir no guestinfo
-        cloudConfigYaml: Cloud Config YAML
+        cloudConfigYaml: YAML de Configuração em Nuvem
         os: Sistema Operacional
       tags:
         label: Tags
@@ -2360,7 +2360,7 @@ cluster:
     quantity:
       label: Contagem de Máquinas
     drain:
-      header: Drain
+      header: Drenar
       label: Fazer Drain Antes de Excluir
     role:
       label: Funções
@@ -2767,9 +2767,9 @@ clusterIndexPage:
         etcd:
           label: Etcd
         scheduler:
-          label: Scheduler
+          label: Agendador
         controller-manager:
-          label: Controller Manager
+          label: Gerenciador de Controladores
         cattle:
           label: Cattle
         fleet:
@@ -3042,14 +3042,14 @@ fleet:
     applicationResourcesSummary: Recursos
   dashboard:
     pageTitle: Dashboard de Entrega Contínua
-    menuLabel: Dashboard
+    menuLabel: Painel
     welcome: Bem-vindo à Entrega Contínua do Fleet
     gitOpsScale: GitOps em escala.
     learnMore: Saiba mais.
     learnMoreLink: https://fleet.rancher.io
     noApplications: "Você não tem nenhum App Bundle em seus Workspaces"
     getStarted: Começar
-    workspace: Workspace
+    workspace: Área de Trabalho
     expand: Expandir
     collapse: Recolher
     expandAll: Expandir Tudo
@@ -3304,7 +3304,7 @@ fleet:
       specify: Especificar certificados adicionais a serem aceitos
       skip: Aceitar qualquer certificado (inseguro)
     workspace:
-      label: Workspace
+      label: Área de Trabalho
       addWorkspace: Criar um workspace
     helmRepoURLRegex: Repos Helm (Regex de URL)
   helmOp:
@@ -3494,7 +3494,7 @@ fleet:
   secrets:
     label: Segredos
 footer:
-  docs: Docs
+  docs: Documentação
   download: Baixar CLI
   forums: Fóruns
   issue: Registrar um Problema
@@ -3529,7 +3529,7 @@ gatekeeperConstraint:
       editAsForm: Editar como Formulário
       editAsYaml: Editar como YAML
       title: Parâmetros
-  template: Template
+  template: Modelo
   enforcement:
     action: Ação de Aplicação
   violations:
@@ -3688,7 +3688,7 @@ hpa:
       periodSeconds: Segundos do período
       periodSecondsTooltip: A janela de tempo durante a qual a política deve ser válida.
   tabs:
-    labels: Labels
+    labels: Rótulos
     metrics: Métricas
     target: Alvo
     workload: Workload
@@ -3827,7 +3827,7 @@ ingress:
       port: Porta
       target: Service de Destino
       certificates: Certificados
-    hostname: Hostname
+    hostname: Nome do Host
     path:
       label: Caminho
       placeholder: ex. /foo
@@ -3874,7 +3874,7 @@ istio:
     title:
       new: Adicionar Destination Rule
       edit: Editar Destination Rule
-      view: "Destination Rule: {name}"
+      view: "Regra de Destino: {name}"
     port:
       label: Porta
       placeholder: ex. 8080 ou myport
@@ -3884,7 +3884,7 @@ istio:
     name:
       placeholder: ex. myrule
     loadBalancer:
-      title: Load Balancer
+      title: Balanceador de Carga
       label: Algoritmo
       detail: Configurar os algoritmos de load balancer
       simple:
@@ -4061,14 +4061,14 @@ labels:
   addAnnotation: Adicionar Annotation
   protectedWarning: Esta chave é protegida e será descartada
   labels:
-    title: Labels
+    title: Rótulos
     description: Pares de chave/valor anexados a objetos que especificam atributos de identificação.
     fleetClusterTooltip: As alterações de label são feitas no Cluster de Gerenciamento e sincronizadas com o Fleet Cluster
     show: Exibir Labels e Annotations do Sistema
     hide: Ocultar Labels e Annotations do Sistema
   annotations:
-    title: Annotations
-    singular: Annotation
+    title: Anotações
+    singular: Anotação
 
 labelSelect:
   noOptions:
@@ -4092,10 +4092,10 @@ landing:
       showingAll: Exibindo {total} clusters.
       showingSome: Exibindo {rows} de {total} clusters criados recentemente.
     provider: Provedor
-    distro: Distro
+    distro: Distribuição
     kubernetesVersion: Versão do Kubernetes
     architecture: Arquitetura
-    explorer: Explorer
+    explorer: Explorador
     explore: Explorar
     cores: |-
       {count, plural,
@@ -4111,7 +4111,7 @@ landing:
   support: Suporte
   community:
     title: Suporte da Comunidade
-    docs: Docs
+    docs: Documentação
     forums: Fóruns
   commercial:
     title: Suporte Comercial
@@ -4283,7 +4283,7 @@ logging:
   logdna:
     apiKey: Chave de API
     hostname: Hostname
-    app: App
+    app: Aplicativo
   logz:
     url: URL
     port: Porta
@@ -4314,7 +4314,7 @@ logging:
       chunkLimitRecords: Limite de Chunk chunkLimitRecords
       totalLimitSize: Tamanho Total do Limite
       flushInterval: Intervalo de Flush
-      timekey: Timekey
+      timekey: Chave de Tempo
       timekeyWait: Espera do Timekey
       timekeyUseUTC: Timekey Usar UTC
   s3:
@@ -4333,7 +4333,7 @@ logging:
       target: Destino
       access: Acesso
       certificate: Conexão
-      labels: Labels
+      labels: Rótulos
       configuration: Configuração
     tips:
       singleProvider: Esta saída está configurada com múltiplos provedores. Atualmente, suportamos apenas um único provedor por saída. Você pode visualizar ou editar o YAML.
@@ -4589,7 +4589,7 @@ monitoring:
         description: Destinos Configurados
         label: Destinos Prometheus
     subtitle: 'Desenvolvido Por: <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer nofollow">Prometheus</a>'
-    title: Dashboard
+    title: Painel
   prometheus:
     config:
       adminApi: API de Admin
@@ -4812,7 +4812,7 @@ nameNsDescription:
     label: Namespace
     placeholder: ''
   workspace:
-    label: Workspace
+    label: Área de Trabalho
     placeholder:
   description:
     label: Descrição
@@ -5344,7 +5344,7 @@ persistentVolume:
       existingCharacter: Um dispositivo de caractere existente
       existingBlock: Um dispositivo de bloco existente
   gcePersistentDisk:
-    label: Google Persistent Disk
+    label: Disco Persistente do Google
     persistentDiskName:
       label: Nome do Disco Persistente
       placeholder: 'ex.: abc'
@@ -5404,7 +5404,7 @@ persistentVolumeClaim:
     notSupported: A classe de armazenamento não suporta expansão de volume
     notBound: Apenas PVCs vinculados podem ser expandidos
   volumeClaim:
-    label: Volume Claim
+    label: Reclamação de Volume
     storageClass: Classe de Armazenamento
     requestStorage: Solicitar Armazenamento
     persistentVolume: Volume Persistente
@@ -5550,7 +5550,7 @@ plugins:
         message: A imagem do Catálogo de Extensão foi importada com sucesso
     headers:
       image:
-        name: images
+        name: imagens
         label: Imagem do Deployment
       repository:
         label: Nome do Repositório
@@ -5655,8 +5655,8 @@ prefs:
   language: Idioma
   landing:
     label: Página Inicial de Login
-    vue: Cluster Explorer
-    ember: Cluster Manager
+    vue: Explorador de Cluster
+    ember: Gerenciador de Cluster
   displaySettings:
     title: Configurações de Exibição
     detail: Altere a forma como as informações são exibidas na interface.
@@ -5822,10 +5822,10 @@ prometheusRule:
       label: Rótulos
       severity:
         choices:
-          critical: critical
+          critical: crítico
           label: Valor do Rótulo de Gravidade
-          none: none
-          warning: warning
+          none: nenhum
+          warning: aviso
         label: Gravidade
     name: Nome do Alerta
     removeAlert: Remover Alerta
@@ -5914,7 +5914,7 @@ promptRollback:
   placeholder: Escolher uma Revisão...
   attemptingToRollBack: Tentando reverter workload...
   differences: Diferenças
-  revisionOption: "Revisão {revisionNumber}, criada há {revisionAge} {units}"
+  revisionOption: "Revisão {revisionNumber}, criada há {revisionAge} {units} {currentLabel}"
   currentLabel: "(Atual)"
   multipleWorkloadError: "Apenas um workload pode ser revertido por vez."
   singleRevisionBanner: Não há revisões para reverter.
@@ -6134,7 +6134,7 @@ resourceDetail:
       hide: Ocultar Valores Sensíveis
       show: Mostrar Valores Sensíveis
     namespace: Namespace
-    workspace: Workspace
+    workspace: Área de Trabalho
     project: Projeto
     detail: Detalhe
     config: Configuração
@@ -6175,7 +6175,7 @@ resourceTable:
     notInAProject: Não está em um Projeto
     project: "<span>Projeto:</span> <span>{name}</span>"
     notInAWorkspace: Não está em um Workspace
-    workspace: "<span>Workspace:</span> {name}"
+    workspace: "<span>Área de Trabalho:</span> {name}"
     notInANodePool: "Não está em um Pool"
     nodePool: "<span>Pool:</span> {name}"
     node: "<span>Nó:</span> {name}"
@@ -6238,7 +6238,7 @@ secret:
       copy: "Via Secret de Projeto"
   data: Dados
   registry:
-    address: Registry
+    address: Registro
     domainName: Nome de Domínio do Registry
     password: Senha
     username: Usuário
@@ -6271,8 +6271,8 @@ secret:
   types:
     'opaque': 'Opaco'
     'kubernetes.io/service-account-token': 'Token de Conta de Serviço'
-    'kubernetes.io/dockercfg': 'Registry'
-    'kubernetes.io/dockerconfigjson': 'Registry'
+    'kubernetes.io/dockercfg': 'Registro'
+    'kubernetes.io/dockerconfigjson': 'Registro'
     'kubernetes.io/basic-auth': 'Autenticação HTTP Básica'
     'kubernetes.io/ssh-auth': 'Chave SSH'
     'kubernetes.io/tls': 'Certificado TLS'
@@ -6648,14 +6648,14 @@ storageClass:
     title: Volume VMWare vSphere
     diskFormat:
       label: Formato de Disco
-      thin: Thin
-      zeroedthick: Zeroed Thick
-      eagerzeroedthick: Eager Zeroed Thick
+      thin: Fino
+      zeroedthick: Espesso Zerado
+      eagerzeroedthick: Espesso Zerado Antecipado
     storagePolicyName:
       label: Nome da Política de Armazenamento
       placeholder: ex. gold
     datastore:
-      label: Datastore
+      label: Armazenamento de Dados
       placeholder: ex. VSANDatastore
     hostFailuresToTolerate:
       label: Falhas de Host a Tolerar
@@ -6749,7 +6749,7 @@ storageClass:
       label: Servidor de API Quobyte
       placeholder: "ex. http://138.68.74.142:7860"
     registry:
-      label: Registry
+      label: Registro
       placeholder: ex. 138.68.74.142:7861
     adminSecretNamespace:
       label: Namespace do Secret do Admin
@@ -6808,8 +6808,8 @@ storageClass:
       placeholder: ex. sp1
     storageMode:
       label: Modo de Armazenamento
-      thin: Thin Provisioned
-      thick: Thick Provisioned
+      thin: Provisionamento Fino
+      thick: Provisionamento Espesso
     secretRef:
       label: Referência do Secret
       placeholder: ex. sio-secret
@@ -6870,7 +6870,7 @@ tableHeaders:
   backupTarget: Destino de Backup
   builtIn: Integrado
   bundlesReady: Bundles Prontos
-  bundleDeploymentsReady: Deployments
+  bundleDeploymentsReady: Implantações
   builtin: Integrado
   chart: Chart
   capacity: Capacidade
@@ -7938,8 +7938,8 @@ workload:
 model:
   account:
     kind:
-      admin: Admin
-      agent: Agent
+      admin: Administrador
+      agent: Agente
       project: Ambiente
       registeredAgent: Agente Registrado
       service: Serviço
@@ -7987,7 +7987,7 @@ model:
     displayKind: Ingress L7
   machine:
     role:
-      controlPlane: Control Plane
+      controlPlane: Plano de Controle
       etcd: etcd
       worker: Worker
   openldapconfig:
@@ -8749,7 +8749,7 @@ keyValue:
   protip: 'Cole linhas de <em>chave=valor</em> ou <em>chave:valor</em> em qualquer campo de chave para entrada em massa fácil'
 
 registryMirror:
-  header: Mirrors
+  header: Espelhos
   toolTip: 'Mirrors podem ser usados para redirecionar solicitações de imagens de um registro para uma lista de endpoints que você especifica. Por exemplo, o docker.io pode ser redirecionado para seu registro interno em vez de acessar o DockerHub.'
   addLabel: Adicionar Mirror
   description: Mirrors definem os nomes e endpoints para registros privados. Os endpoints são tentados um a um, e o primeiro que funcionar é usado.
@@ -8839,8 +8839,8 @@ advancedSettings:
     'ui-banners': Esta configuração recebe um objeto JSON contendo 3 parâmetros raiz; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> é um objeto contendo; <code>textColor</code>, <code>background</code> e <code>text</code>, onde <code>textColor</code> e <code>background</code> são qualquer valor de cor CSS válido.
   enum:
     'ui-default-landing':
-      ember: Cluster Manager
-      vue: Cluster Explorer
+      ember: Gerenciador de Cluster
+      vue: Explorador de Cluster
     'ui-offline-preferred':
       dynamic: Dinâmico
       true: Local
@@ -8850,9 +8850,9 @@ advancedSettings:
       bundled: 'Integrado'
       external: 'Externo'
     'harv-log-level':
-      info: Info
-      debug: Debug
-      trace: Trace
+      info: Informação
+      debug: Depuração
+      trace: Rastreamento
     'agent-tls-mode':
       strict: 'Estrito'
       system-store: 'Repositório do Sistema'
@@ -8860,7 +8860,7 @@ advancedSettings:
     header: Provisionamento de Cluster
 
 featureFlags:
-  label: Feature Flags
+  label: Sinalizadores de Funcionalidade
   title: "Tem certeza?"
   warning: |-
     Os feature flags permitem que o {vendor} controle determinados recursos por meio de flags.
@@ -9024,7 +9024,7 @@ branding:
     suse: Tema SUSE
     custom: Definir um Tema Personalizado
   uiPL:
-    label: Private Label
+    label: Rótulo Privado
   color:
     label: Cor Principal
     tip: Você pode substituir a cor principal usada em toda a interface por uma cor personalizada de sua escolha.
@@ -9358,7 +9358,7 @@ component:
           ariaResourceName: pods
         jobsCard:
           title: Jobs
-          ariaResourceName: jobs
+          ariaResourceName: trabalhos
         insightsCard:
           title: Insights
           rows:
@@ -9391,11 +9391,11 @@ component:
           certificate: Certificado
           issuer: Emissor
           expires: Expira
-          workspace: Workspace
+          workspace: Área de Trabalho
         annotations:
           title: Anotações
         labels:
-          title: Labels
+          title: Rótulos
         keyValue:
           noRows: Não há {propertyName} configurados neste recurso.
           showConfiguration: Mostrar Configuração
