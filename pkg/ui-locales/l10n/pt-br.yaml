@@ -34,7 +34,7 @@ generic:
   create: Criar
   created: Criado
   customize: Personalizar
-  dashboard: Dashboard
+  dashboard: Painel
   default: Padrão
   descending: decrescente
   disabled: Desativado
@@ -52,7 +52,7 @@ generic:
     never: Nunca
   labels: Rótulos
   labelsAndAnnotations: Rótulos e Anotações
-  podSecurityAdmission: Pod Security Admission
+  podSecurityAdmission: Admissão de Segurança de Pod
   links: Links
   loading: Carregando&hellip;
   members: Membros
@@ -108,19 +108,19 @@ generic:
   no: Não
   units:
     time:
-        5s: 5s
-        10s: 10s
-        30s: 30s
+        5s: '5s'
+        10s: '10s'
+        30s: '30s'
         1m: 1m
         5m: 5m
         15m: 15m
         30m: 30m
-        1h: 1h
-        2h: 2h
-        6h: 6h
-        1d: 1d
-        7d: 7d
-        30d: 30d
+        1h: '1h'
+        2h: '2h'
+        6h: '6h'
+        1d: '1d'
+        7d: '7d'
+        30d: '30d'
   tooltip: Dica
   completed: Concluído
   enable: Ativar
@@ -134,8 +134,8 @@ generic:
   featured: Destaque
   shortFeatured: Dest
   category: Categoria
-  tags: Tags
-  tag: Tag
+  tags: Etiquetas
+  tag: Etiqueta
   placeholder: "p.ex. {text}"
   moreInfo: Mais Informações
   selectors:
@@ -178,7 +178,7 @@ graph:
 
 locale:
   menu: Menu seletor de idioma
-  en-us: English
+  en-us: Inglês
   zh-hans: 简体中文
   none: (Nenhum)
 
@@ -215,8 +215,8 @@ nav:
     options: Opções do KubeConfig
   import: Importar YAML
   home: Início
-  shell: Kubectl Shell
-  shellShortcut: Kubectl Shell {key}
+  shell: Shell do Kubectl
+  shellShortcut: Shell do Kubectl {key}
   support: |-
     {hasSupport, select,
       true {Suporte}
@@ -1127,7 +1127,7 @@ catalog:
         inputLabel: Registro de Contêiner
         placeholder: 'Domínio e portas do registro, ex.: registry.io:5000'
     header:
-      charts: Charts
+      charts: Gráficos
     info:
       appVersion: Versão do Aplicativo
       chartVersions:
@@ -1140,7 +1140,7 @@ catalog:
       maintainers: Mantenedores
       maintainerContactTooltip: Contatar {maintainer}
       related: Relacionados
-      chartUrls: Chart
+      chartUrls: Gráfico
       keywords: Palavras-chave
     errors:
       clusterToolExists: Este chart possui um namespace e nome fixos. Uma <a href="{url}">aplicação</a> correspondente foi encontrada e quaisquer alterações serão feitas nela.
@@ -1168,7 +1168,7 @@ catalog:
     deploysOnWindows: Implanta no Windows
     windowsIncompatible: Somente Linux
     versionWindowsIncompatible: Versão somente para Linux
-    header: Charts
+    header: Gráficos
     noCharts:
       title: Nenhum chart para exibir
       message: '<b>Dicas:</b> desfaça o último filtro aplicado ou <resetAllFilters>limpe todos os filtros</resetAllFilters>, e certifique-se de ter os <repositoriesUrl>repositórios</repositoriesUrl> corretos configurados.'
@@ -1220,7 +1220,7 @@ catalog:
         keyword: palavra-chave
         repo: repositório
         category: categoria
-        tag: tag
+        tag: etiqueta
     isFromSuseAppCoRepository: Do SUSE App Collection.
   install:
     action:
@@ -1259,7 +1259,7 @@ catalog:
         fetchChart: Erro ao recuperar chart do repositório
         alreadyInstalled: Chart já instalado
         timeoutWaiting: Tempo esgotado aguardando logs
-    chart: Chart
+    chart: Gráfico
     warning:
       managed:
         Aviso, {manager} gerencia a implantação e a atualização do aplicativo {name}. A atualização deste aplicativo não é suportada.<br>
@@ -2032,7 +2032,7 @@ cluster:
       scheduling:
         label: Agendamento
         description: Escolha em qual hipervisor a máquina virtual será agendada
-        dataCenter: Data Center
+        dataCenter: Centro de Dados
         resourcePool: Pool de Recursos
         dataStore: Armazenamento de Dados
         dataStoreCluster: Cluster de Datastore
@@ -2366,7 +2366,7 @@ cluster:
       label: Funções
       etcd: etcd
       controlPlane: Plano de Controle
-      worker: Worker
+      worker: Trabalhador
     labels:
       label: Rótulos de Node do Kubernetes
     noAccessBanner: "Você não tem acesso para ver a configuração deste pool de máquinas."
@@ -2491,7 +2491,7 @@ cluster:
         verifySettings: 'Antes de continuar, verifique as seguintes configurações:'
     snapshots:
       suffix: Snapshots por node
-      s3Suffix: Snapshots
+      s3Suffix: Instantâneos
     systemService:
       rke2-coredns: 'CoreDNS'
       rke2-ingress-nginx: 'NGINX Ingress'
@@ -2732,8 +2732,8 @@ clusterIndexPage:
     units:
       cores: |-
         {count, plural,
-        =1 {core}
-        other {cores}}
+        =1 {núcleo}
+        other {núcleos}}
   header: Dashboard do Cluster
   resourceGauge:
     totalResources: Recursos Totais
@@ -2992,10 +2992,10 @@ fleet:
       label: Métricas
       description: 'Habilitar métricas'
     debug:
-      label: Debug
+      label: Depuração
       description: 'Habilitar modo debug'
     controllerAnnotations:
-      label: Controller
+      label: Controlador
       description: ""
       add: Adicionar Anotação
     gitjobAnnotations:
@@ -3007,7 +3007,7 @@ fleet:
       description: ""
       add: Adicionar Anotação
     controllerReplicas:
-      label: Controller
+      label: Controlador
       description: ""
     gitjobReplicas:
       label: Gitjob
@@ -3147,8 +3147,8 @@ fleet:
             other {+ {n, number} clusters a mais}
             }
   application:
-    pageTitle: App Bundles
-    menuLabel: App Bundles
+    pageTitle: Pacotes de App
+    menuLabel: Pacotes de App
     intro:
       add: Criar App Bundle
       empty: Nenhum App Bundle foi criado
@@ -3340,14 +3340,14 @@ fleet:
           description: Informações básicas do Helm Op
         chart:
           label: Chart
-          title: chart
+          title: Gráfico
           subtext: 'Definir detalhes da fonte do Chart Helm'
-          description: chart
+          description: Gráfico
         values:
           label: Valores
-          title: values
+          title: Valores
           subtext: 'Definir Valores Helm para o chart'
-          description: values
+          description: Valores
         targetInfo:
           label: Detalhes do destino
           title: Especifique para qual destino sincronizar este repositório
@@ -3384,7 +3384,7 @@ fleet:
         label: Versão
         placeholder: A versão do Chart
       release:
-        title: Release
+        title: Versão
         label: Nome
         placeholder: O nome da release Helm
     values:
@@ -3490,7 +3490,7 @@ fleet:
           other { Apenas os <code>allowedTargetNamespaces</code> da Restrição do Git Repo são gerenciados aqui. Você pode fazer alterações adicionais na Restrição do Git Repo}
         }"
   configMaps:
-    label: Config Maps
+    label: Mapas de Configuração
   secrets:
     label: Segredos
 footer:
@@ -3691,7 +3691,7 @@ hpa:
     labels: Rótulos
     metrics: Métricas
     target: Alvo
-    workload: Workload
+    workload: Carga de Trabalho
     behavior: Comportamento
   types:
     cpu: CPU
@@ -4218,7 +4218,7 @@ logging:
       tlsVersion: Versão TLS
       noVerify: Ignorar verificação TLS
   kafka:
-    brokers: Brokers
+    brokers: Agentes
     defaultTopic: Tópico Padrão
     saslOverSsl: SASL sobre SSL
     scramMechanism: Mecanismo Scram
@@ -4237,7 +4237,7 @@ logging:
   loki:
     url: URL
     urlInvalid: Formato de URL incorreto. Por favor, verifique e corrija o formato da URL antes de salvar.
-    tenant: Tenant
+    tenant: Locatário
     username: Usuário do Secret
     password: Senha do Secret
     configureKubernetesLabels: Configurar metadados Kubernetes em um formato semelhante ao Prometheus
@@ -4253,7 +4253,7 @@ logging:
   azurestorage:
     storageAccount: Conta do Secret
     accessKey:  Chave de Acesso do Secret
-    container: Container
+    container: Contêiner
     path: Caminho
     storeAs: Armazenar Como
   cloudwatch:
@@ -4282,7 +4282,7 @@ logging:
     secretKey: Chave Secreta do Secret
   logdna:
     apiKey: Chave de API
-    hostname: Hostname
+    hostname: Nome do Host
     app: Aplicativo
   logz:
     url: URL
@@ -4309,7 +4309,7 @@ logging:
       messageKey: Chave de Mensagem
     buffer:
       title: Buffer
-      tags: Tags
+      tags: Etiquetas
       chunkLimitSize: Tamanho Limite do Chunk
       chunkLimitRecords: Limite de Chunk chunkLimitRecords
       totalLimitSize: Tamanho Total do Limite
@@ -4395,7 +4395,7 @@ longhorn:
     subtitle: "Desenvolvido por: <a href='https://github.com/longhorn' target='_blank' rel='noopener nofollow noreferrer'>Longhorn</a>"
     linkedList:
       longhorn:
-        label: 'Longhorn'
+        label: Longhorn
         description: 'Gerenciar sistema de armazenamento via UI'
         na: Recurso Indisponível
         uiServiceUnavailable: O serviço de UI do Longhorn não está disponível ou você não tem permissão para acessá-lo.
@@ -4405,12 +4405,12 @@ neuvector:
     subtitle: "Desenvolvido por: <a href='https://github.com/neuvector' target='_blank' rel='noopener nofollow noreferrer'>NeuVector</a>"
     linkedList:
       neuvector:
-        label: 'NeuVector'
+        label: NeuVector
         description: 'Segurança de Contêiner em Todo o Ciclo de Vida'
         na: Recurso Indisponível
 
 login:
-  login: Login
+  login: Entrar
   howdy: Olá!
   welcome: Bem-vindo ao {vendor}
   landscapeAlt: Imagem de paisagem
@@ -4830,13 +4830,13 @@ namespace:
   disableAutoInjection: Desativar Injeção Automática do Istio
   move: Mover
   total: Total
-  workloads: Workloads
+  workloads: Cargas de Trabalho
   label: Namespace
   selectNamespace: Selecionar Namespace
   createNamespace: Criar um novo Namespace
   selectOrCreate: Selecionar ou Criar um Namespace
   snapshots:
-    label: Snapshots
+    label: Instantâneos
     totalSnapshotSize: Tamanho Total dos Snapshots
   resourceStates:
       success: 'Ativo'
@@ -4851,7 +4851,7 @@ namespace:
 
 namespaceFilter:
   noMatchingOptions: Nenhuma opção correspondente
-  more: "+{more}"
+  more: +{more}
   selected:
     label: |-
       {total, plural,
@@ -5002,7 +5002,7 @@ node:
   list:
     pool: Pool
     noNodes: Este pool está vazio
-    nodeTaint: Taints
+    nodeTaint: Restrições
     scaleDown: Reduzir Pool
     scaleUp: Aumentar Pool
     poolDescription:
@@ -5047,7 +5047,7 @@ node:
           osImage: Imagem
           systemUUID: UUID do Sistema
       pods: Pods
-      taints: Taints
+      taints: Restrições
   actions:
     downloadSSHKey: Baixar Chave SSH
     downloadNodeConfig: Baixar Chaves
@@ -5624,7 +5624,7 @@ plugins:
         title: Remover a Definição de Recurso Personalizado de Extensões Rancher
         prompt: Há uma ou mais extensões instaladas - remover o CRD exigirá que você reinstale manualmente essas extensões se você subsequentemente reativar o suporte a extensões.
 podSecurityAdmission:
-  name: Pod Security Admission
+  name: Admissão de Segurança de Pod
   description: Defina o modo de controle de admissão que deseja usar para a segurança do pod
   banner:
     modifications: 'Alterar qualquer template que esteja atualmente em uso causará uma atualização nos clusters ativos na próxima vez que o cluster for atualizado'
@@ -5675,8 +5675,8 @@ prefs:
   keymap:
     label: Mapeamento de Teclas do Editor YAML
     sublime: 'Normal'
-    emacs: 'Emacs'
-    vim: 'Vim'
+    emacs: Emacs
+    vim: Vim
   advFeatures:
     title: Recursos Avançados
     viewInApi: Ativar "Ver na API"
@@ -5902,7 +5902,7 @@ promptRestore:
   name: Nome
   date: Data
   fromS3: Restaurar do S3
-  label: Snapshot
+  label: Instantâneo
   placeholder: Selecionar um snapshot para restaurar
   notification:
     title: Restaurar Snapshot
@@ -6118,9 +6118,9 @@ resourceDetail:
     clone: "Clonar de {subtype} {name}"
     create: Criar {subtype}
     import: Importar {subtype}
-    edit: "{subtype} {name}"
+    edit: {subtype} {name}
     stage: "Preparar de {subtype} {name}"
-    view: "{subtype} {name}"
+    view: {subtype} {name}
   masthead:
     ariaLabel:
       favoriteAction: Adicionar {resource} à sua lista de favoritos
@@ -6166,18 +6166,18 @@ resourceTable:
     device: Agrupar por Dispositivo
     pool: Agrupar por Pool
   groupLabel:
-    cluster: "<span>Cluster:</span> {name}"
+    cluster: '<span>Cluster:</span> {name}'
     notInACluster: Não está em um Cluster
-    namespace: "<span>Namespace:</span> {name}"
+    namespace: '<span>Namespace:</span> {name}'
     notInAMachinePool: "Não Está em um Deployment"
-    machinePool: "<span>Pool:</span> {name}"
+    machinePool: '<span>Pool:</span> {name}'
     notInANamespace: Sem Namespace
     notInAProject: Não está em um Projeto
     project: "<span>Projeto:</span> <span>{name}</span>"
     notInAWorkspace: Não está em um Workspace
     workspace: "<span>Área de Trabalho:</span> {name}"
     notInANodePool: "Não está em um Pool"
-    nodePool: "<span>Pool:</span> {name}"
+    nodePool: '<span>Pool:</span> {name}'
     node: "<span>Nó:</span> {name}"
   autoRefresh:
     label: Atualização Automática
@@ -6344,7 +6344,7 @@ selectOrCreateAuthSecret:
     passwordPersonalAccessToken: Senha/Token de Acesso Pessoal
   rke:
     info: "Um secret de configuração de Auth RKE contém o nome de usuário e a senha concatenados e codificados em base64 na chave 'auth' do secret"
-  namespaceGroup: "Namespace: {name}"
+  namespaceGroup: 'Namespace: {name}'
   chooseExisting: "Escolher um secret existente:"
   createSsh: Criar um Secret de Chave SSH
   createBasic: Criar um Secret de Autenticação HTTP Básica
@@ -6382,7 +6382,7 @@ servicePorts:
 serviceTypes:
   clusterip: IP do Cluster
   externalname: Nome Externo
-  headless: Headless
+  headless: Sem Cabeça
   loadbalancer: Balanceador de Carga
   nodeport: Porta do Nó
 
@@ -6464,7 +6464,7 @@ servicesPage:
     headless:
       abbrv: H
       description: Criar um Serviço sem IP de cluster ou balanceador de carga. Este é um caso de uso avançado.
-      label: Headless
+      label: Sem Cabeça
     loadBalancer:
       abbrv: LB
       description: Criar um balanceador de carga na infraestrutura subjacente (ex. o balanceador de carga de um provedor de nuvem) e atribuir um endereço IP público ao serviço. Permite que clientes externos acessem o serviço usando o endereço IP público e a porta especificada na definição do serviço.
@@ -6852,7 +6852,7 @@ storageClass:
 tableHeaders:
   isLegacy: Legado
   assuredConcurrencyShares: Cotas de Concorrência Assegurada
-  autoscaler: Autoscaler
+  autoscaler: Autoescalador
   accessKey: Chave de Acesso
   addressType: Tipo de Endereço
   accessModes: Modos de Acesso
@@ -6872,7 +6872,7 @@ tableHeaders:
   bundlesReady: Bundles Prontos
   bundleDeploymentsReady: Implantações
   builtin: Integrado
-  chart: Chart
+  chart: Gráfico
   capacity: Capacidade
   current: Atual
   clusterCreatorDefault: Padrão para Criador de Cluster
@@ -6900,7 +6900,7 @@ tableHeaders:
   defaultVersion: Versão padrão
   destination: Destino
   deployed: Implantado
-  download: Download
+  download: Baixar
   duration: Duração
   diskState: Estado do Disco
   drivers: Drivers
@@ -6922,7 +6922,7 @@ tableHeaders:
   host: Host
   hostIp: IP do Host
   holder: Detentor
-  hpaReference: Workload
+  hpaReference: Carga de Trabalho
   health: Saúde
   handSize: Tamanho do Lote
   ipAddress: Endereço IP
@@ -6974,7 +6974,7 @@ tableHeaders:
   object: Objeto
   operatingSystem: SO
   output: Saída
-  p95: 95%tile
+  p95: '95° Percentil'
   persistentVolumeClaim: Reivindicação de Volume Persistente
   persistentVolumeSource: Fonte
   phase: Fase
@@ -7031,7 +7031,7 @@ tableHeaders:
   scale: Escala
   scope: Escopo
   selector: Seletor
-  secrets: Secrets
+  secrets: Segredos
   secret:
     origin: Origem
     originTooltip: "Mostra se um secret foi criado ou gerenciado por outro Secret com Escopo de Projeto. Leia a documentação do Secret com Escopo de Projeto para saber mais sobre este conceito do Rancher"
@@ -7056,7 +7056,7 @@ tableHeaders:
   success: Sucesso
   summary: Resumo
   subobject: Subobjeto
-  taints: Taints
+  taints: Restrições
   target: Destino
   targetKind: Tipo de Destino
   targetPort: Destino
@@ -7363,7 +7363,7 @@ wm:
     logActionMenu: Menu de ações de logs
     clear: Limpar
     containerName: "Contêiner: {label}"
-    download: Download
+    download: Baixar
     follow: Seguir
     noData: Não há entradas de log para exibir no intervalo atual.
     noMatch: Nenhuma linha corresponde ao filtro atual.
@@ -7395,12 +7395,12 @@ wm:
       info: INFO
       error: ERRO
       warning: AVISO
-      debug: DEBUG
+      debug: DEPURAÇÃO
     logMessage:
       containerError: "{ logLevel }: Shell executável ausente no contêiner (/bin/sh)"
 
   kubectlShell:
-    title: "Kubectl: {name}"
+    title: 'Kubectl: {name}'
 
 workload:
   scaleWorkloads: Escalar workloads
@@ -7633,7 +7633,7 @@ workload:
     node: Nó
     podIP: IP do Pod
     podRestarts: Reinicializações do Pod
-    workload: Workload
+    workload: Carga de Trabalho
     pods: Pods por Estado
     runs: Execuções
     started: Iniciado
@@ -7677,7 +7677,7 @@ workload:
     dnsPolicy:
       label: Política de DNS
       options:
-        clusterFirst: Cluster First
+        clusterFirst: Cluster Primeiro
         clusterFirstWithHostNet: Cluster First com Rede do Host
         default: Padrão
         none: Nenhum
@@ -7786,9 +7786,9 @@ workload:
       effect: Efeito
       effectOptions:
         all: Todos
-        noExecute: NoExecute
-        noSchedule: "NoSchedule"
-        preferNoSchedule: PreferNoSchedule
+        noExecute: NãoExecutar
+        noSchedule: NãoAgendar
+        preferNoSchedule: PreferirNãoAgendar
       labelKey: Chave
       operator: Operador
       operatorOptions:
@@ -7802,7 +7802,7 @@ workload:
   serviceName: Nome do Serviço
   storage:
     subtypes:
-      secret: Secret
+      secret: Segredo
       configMap: ConfigMap
       hostPath: Montagem de Bind
       persistentVolumeClaim: Reivindicação de Volume Persistente
@@ -7849,7 +7849,7 @@ workload:
       storagePolicyName: Nome da Política de Armazenamento
       volumePath: Caminho do Volume
     defaultMode: Modo Padrão
-    driver: driver
+    driver: Driver
     hostPath:
       label: O Caminho no Nó deve ser
       options:
@@ -7989,7 +7989,7 @@ model:
     role:
       controlPlane: Plano de Controle
       etcd: etcd
-      worker: Worker
+      worker: Trabalhador
   openldapconfig:
     domain:
       help: Somente usuários abaixo desta base serão utilizados.
@@ -8053,8 +8053,8 @@ typeDescription:
 typeLabel:
   management.cattle.io.oidcclient: |-
     {count, plural,
-      one { OIDC App }
-      other { OIDC Apps }
+    one { App OIDC }
+    other { Apps OIDC }
     }
   management.cattle.io.token: |-
     {count, plural,
@@ -8098,13 +8098,13 @@ typeLabel:
     }
   chartinstallaction: |-
     {count, plural,
-      one { App }
-      other { Apps }
+    one { App }
+    other { Apps }
     }
   chartupgradeaction: |-
     {count, plural,
-      one { App }
-      other { Apps }
+    one { App }
+    other { Apps }
     }
   cloudcredential: |-
     {count, plural,
@@ -8123,13 +8123,13 @@ typeLabel:
     }
   endpoints: |-
     {count, plural,
-      one { Endpoint }
-      other { Endpoints }
+    one { Endpoint }
+    other { Endpoints }
     }
   fleet.cattle.io.cluster: |-
     {count, plural,
-      =1 { Cluster }
-      other {Clusters }
+    =1 { Cluster }
+    other { Clusters }
     }
   fleet.cattle.io.clustergroup: |-
     {count, plural,
@@ -8138,8 +8138,8 @@ typeLabel:
     }
   fleet.cattle.io.application: |-
     {count, plural,
-      one { App Bundle }
-      other { App Bundles }
+    one { Pacote de App }
+    other { Pacotes de App }
     }
   fleet.cattle.io.gitrepo: |-
     {count, plural,
@@ -8148,8 +8148,8 @@ typeLabel:
     }
   fleet.cattle.io.helmop: |-
     {count, plural,
-      one { Helm Op }
-      other { Helm Ops }
+    one { Operação Helm }
+    other { Operações Helm }
     }
   management.cattle.io.authconfig: |-
     {count, plural,
@@ -8168,8 +8168,8 @@ typeLabel:
     }
   management.cattle.io.feature: |-
     {count, plural,
-      one { Feature Flag }
-      other { Feature Flags }
+    one { Sinalizador de Recurso }
+    other { Sinalizadores de Recurso }
     }
   management.cattle.io.setting: |-
     {count, plural,
@@ -8178,28 +8178,28 @@ typeLabel:
     }
   management.cattle.io.fleetworkspace: |-
     {count, plural,
-      one { Workspace }
-      other { Workspaces }
+    one { Espaço de Trabalho }
+    other { Espaços de Trabalho }
     }
   management.cattle.io.podsecurityadmissionconfigurationtemplate: |-
     {count, plural,
-      one { Pod Security Admission }
-      other { Pod Security Admissions }
+    one { Admissão de Segurança de Pod }
+    other { Admissões de Segurança de Pod }
     }
   policy.poddisruptionbudget: |-
     {count, plural,
-      one { Pod Disruption Budget }
-      other { Pod Disruption Budgets }
+    one { Orçamento de Interrupção de Pod }
+    other { Orçamentos de Interrupção de Pod }
     }
   limitrange: |-
     {count, plural,
-      one { Limit Range }
-      other { Limit Ranges }
+    one { Intervalo de Limite }
+    other { Intervalos de Limite }
     }
   resourcequota: |-
     {count, plural,
-      one { Resource Quota }
-      other { Resource Quotas }
+    one { Cota de Recurso }
+    other { Cotas de Recurso }
     }
   auditlog.cattle.io.auditpolicy: |-
     {count, plural,
@@ -8209,8 +8209,8 @@ typeLabel:
   # pruh-mee-thee-eyes https://www.prometheus.io/docs/introduction/faq/#what-is-the-plural-of-prometheus
   monitoring.coreos.com.prometheus: |-
     {count, plural,
-      one { Prometheus }
-      other { Prometheis }
+    one { Prometheus }
+    other { Prometheis }
     }
   helm.cattle.io.projecthelmchart: |-
     {count, plural,
@@ -8219,33 +8219,33 @@ typeLabel:
     }
   monitoring.coreos.com.servicemonitor: |-
     {count, plural,
-      one { Service Monitor }
-      other { Service Monitors }
+    one { Monitor de Serviço }
+    other { Monitores de Serviço }
     }
   monitoring.coreos.com.alertmanager: |-
     {count, plural,
-      one { Alertmanager }
-      other { Alertmanagers }
+    one { Alertmanager }
+    other { Alertmanagers }
     }
   monitoring.coreos.com.alertmanagerconfig: |-
     {count, plural,
-      one { AlertmanagerConfig }
-      other { AlertmanagerConfigs }
+    one { AlertmanagerConfig }
+    other { AlertmanagerConfigs }
     }
   monitoring.coreos.com.podmonitor: |-
     {count, plural,
-      one { Pod Monitor }
-      other { Pod Monitors }
+    one { Monitor de Pod }
+    other { Monitores de Pod }
     }
   monitoring.coreos.com.prometheusrule: |-
     {count, plural,
-      one { PrometheusRule }
-      other { PrometheusRules }
+    one { Regra do Prometheus }
+    other { Regras do Prometheus }
     }
   monitoring.coreos.com.thanosruler: |-
     {count, plural,
-      one { Thanos Rule }
-      other { Thanos Rules }
+    one { Regra do Thanos }
+    other { Regras do Thanos }
     }
   monitoring.coreos.com.receiver: |-
     {count, plural,
@@ -8264,13 +8264,13 @@ typeLabel:
     }
   'cluster.x-k8s.io.cluster': |-
     {count, plural,
-      one { CAPI Cluster }
-      other { CAPI Clusters }
+    one { Cluster CAPI }
+    other { Clusters CAPI }
     }
   'provisioning.cattle.io.cluster': |-
     {count, plural,
-      one { Cluster }
-      other { Clusters }
+    one { Cluster }
+    other { Clusters }
     }
   management.cattle.io.user: |-
     {count, plural,
@@ -8279,13 +8279,13 @@ typeLabel:
     }
   namespace: |-
     {count, plural,
-      one { Namespace }
-      other { Namespaces }
+    one { Namespace }
+    other { Namespaces }
     }
   node: |-
     {count, plural,
-      one { Node }
-      other { Nodes }
+    one { Nó }
+    other { Nós }
     }
   event: |-
     {count, plural,
@@ -8294,183 +8294,183 @@ typeLabel:
     }
   apps.deployment: |-
     {count, plural,
-      one { Deployment }
-      other { Deployments }
+    one { Deployment }
+    other { Deployments }
     }
   batch.cronjob: |-
     {count, plural,
-      one { CronJob }
-      other { CronJobs }
+    one { CronJob }
+    other { CronJobs }
     }
   apps.daemonset: |-
     {count, plural,
-      one { DaemonSet }
-      other { DaemonSets }
+    one { DaemonSet }
+    other { DaemonSets }
     }
   batch.job: |-
     {count, plural,
-      one { Job }
-      other { Jobs }
+    one { Job }
+    other { Jobs }
     }
   apps.statefulset: |-
     {count, plural,
-      one { StatefulSet }
-      other { StatefulSets }
+    one { StatefulSet }
+    other { StatefulSets }
     }
   pod: |-
     {count, plural,
-      one { Pod }
-      other { Pods }
+    one { Pod }
+    other { Pods }
     }
   autoscaling.horizontalpodautoscaler: |-
     {count, plural,
-      one { HorizontalPodAutoscaler }
-      other { HorizontalPodAutoscalers }
+    one { Autoescalador Horizontal de Pod }
+    other { Autoescaladores Horizontais de Pod }
     }
   networking.k8s.io.ingress: |-
     {count, plural,
-      one { Ingress }
-      other { Ingresses }
+    one { Ingress }
+    other { Ingresses }
     }
   networking.k8s.io.networkpolicy: |-
     {count, plural,
-      one { Network Policy }
-      other { Network Policies }
+    one { Política de Rede }
+    other { Políticas de Rede }
     }
   service: |-
     {count, plural,
-      one { Serviço }
-      other { Serviços }
+    one { Serviço }
+    other { Serviços }
     }
   persistentvolume: |-
     {count, plural,
-      one { PersistentVolume }
-      other { PersistentVolumes }
+    one { Volume Persistente }
+    other { Volumes Persistentes }
     }
   storage.k8s.io.storageclass: |-
     {count, plural,
-      one { StorageClass }
-      other { StorageClasses }
+    one { Classe de Armazenamento }
+    other { Classes de Armazenamento }
     }
   configmap: |-
     {count, plural,
-      one { ConfigMap }
-      other { ConfigMaps }
+    one { ConfigMap }
+    other { ConfigMaps }
     }
   persistentvolumeclaim: |-
     {count, plural,
-      one { PersistentVolumeClaim }
-      other { PersistentVolumeClaims }
+    one { Reivindicação de Volume Persistente }
+    other { Reivindicações de Volume Persistente }
     }
   secret: |-
     {count, plural,
-      one { Secret }
-      other { Secrets }
+    one { Segredo }
+    other { Segredos }
     }
   projectsecret: |-
     {count, plural,
-      one { Secret de Projeto }
-      other { Secrets de Projeto }
+    one { Segredo de Projeto }
+    other { Segredos de Projeto }
     }
   apiregistration.k8s.io.apiservice: |-
     {count, plural,
-      one { APIService }
-      other { APIServices }
+    one { APIService }
+    other { APIServices }
     }
   apiextensions.k8s.io.customresourcedefinition: |-
     {count, plural,
-      one { CustomResourceDefinition }
-      other { CustomResourceDefinitions }
+    one { Definição de Recurso Personalizado }
+    other { Definições de Recurso Personalizado }
     }
   flowcontrol.apiserver.k8s.io.flowschema: |-
     {count, plural,
-      one { FlowSchema }
-      other { FlowSchemas }
+    one { Esquema de Fluxo }
+    other { Esquemas de Fluxo }
     }
   flowcontrol.apiserver.k8s.io.prioritylevelconfiguration: |-
     {count, plural,
-      one { PriorityLevelConfiguration }
-      other { PriorityLevelConfigurations }
+    one { Configuração de Nível de Prioridade }
+    other { Configurações de Nível de Prioridade }
     }
   apps.replicaset: |-
     {count, plural,
-      one { ReplicaSet }
-      other { ReplicaSets }
+    one { ReplicaSet }
+    other { ReplicaSets }
     }
   coordination.k8s.io.lease: |-
     {count, plural,
-      one { Lease }
-      other { Leases }
+    one { Lease }
+    other { Leases }
     }
   serviceaccount: |-
     {count, plural,
-      one { ServiceAccount }
-      other { ServiceAccounts }
+    one { Conta de Serviço }
+    other { Contas de Serviço }
     }
   discovery.k8s.io.endpointslice: |-
     {count, plural,
-      one { EndpointSlice }
-      other { EndpointSlices }
+    one { Fatia de Endpoint }
+    other { Fatias de Endpoint }
     }
   admissionregistration.k8s.io.mutatingwebhookconfiguration: |-
     {count, plural,
-      one { MutatingWebhookConfiguration }
-      other { MutatingWebhookConfigurations }
+    one { Configuração de Webhook de Mutação }
+    other { Configurações de Webhook de Mutação }
     }
   admissionregistration.k8s.io.validatingwebhookconfiguration: |-
     {count, plural,
-      one { ValidatingWebhookConfiguration }
-      other { ValidatingWebhookConfigurations }
+    one { Configuração de Webhook de Validação }
+    other { Configurações de Webhook de Validação }
     }
   group.principal: |-
     {count, plural,
-      one { Grupo }
-      other { Grupos }
+    one { Grupo }
+    other { Grupos }
     }
   token: |-
     {count, plural,
-      one { Chave de API }
-      other { Chaves de API }
+    one { Token }
+    other { Tokens }
     }
   workload: |-
     {count, plural,
-      one { Workload }
-      other { Workloads }
+    one { Carga de Trabalho }
+    other { Cargas de Trabalho }
     }
   harvesterhci.io.management.cluster: |-
     {count, plural,
-      one { Harvester Cluster }
-      other { Harvester Clusters }
+    one { Cluster Harvester }
+    other { Clusters Harvester }
     }
   harvesterhci.io.cloudtemplate: |-
     {count, plural,
-      one { Template de Configuração de Nuvem }
-      other { Templates de Configuração de Nuvem }
+    one { Modelo de Nuvem }
+    other { Modelos de Nuvem }
     }
   fleet.cattle.io.content: |-
     {count, plural,
-      one { Conteúdo }
-      other { Conteúdos }
+    one { Conteúdo }
+    other { Conteúdos }
     }
   fleet.cattle.io.bundle: |-
     {count, plural,
-      one { Bundle }
-      other { Bundles }
+    one { Pacote }
+    other { Pacotes }
     }
   fleet.cattle.io.bundledeployment: |-
     {count, plural,
-      one { BundleDeployment }
-      other { BundleDeployments }
+    one { Implantação de Pacote }
+    other { Implantações de Pacote }
     }
   k3s.cattle.io.addon: |-
     {count, plural,
-      one { Addon }
-      other { Addons }
+    one { Complemento }
+    other { Complementos }
     }
   management.cattle.io.apiservice: |-
     {count, plural,
-      one { APIService }
-      other { APIServices }
+    one { APIService }
+    other { APIServices }
     }
   management.cattle.io.catalog: |-
     {count, plural,
@@ -8479,160 +8479,159 @@ typeLabel:
     }
   fleet.cattle.io.clusterregistration: |-
     {count, plural,
-      one { ClusterRegistration }
-      other { ClusterRegistrations }
+    one { Registro de Cluster }
+    other { Registros de Cluster }
     }
   management.cattle.io.dynamicschema: |-
     {count, plural,
-      one { DynamicSchema }
-      other { DynamicSchemas }
+    one { Esquema Dinâmico }
+    other { Esquemas Dinâmicos }
     }
   management.cattle.io.globalrolebinding: |-
     {count, plural,
-      one { GlobalRoleBinding }
-      other { GlobalRoleBindings }
+    one { Vinculação de Papel Global }
+    other { Vinculações de Papel Global }
     }
   management.cattle.io.kontainerdriver: |-
     {count, plural,
-      one { KontainerDriver }
-      other { KontainerDrivers }
+    one { KontainerDriver }
+    other { KontainerDrivers }
     }
   management.cattle.io.nodedriver: |-
     {count, plural,
-      one { NodeDriver }
-      other { NodeDrivers }
+    one { Driver de Nó }
+    other { Drivers de Nó }
     }
   management.cattle.io.podsecuritypolicytemplate: |-
     {count, plural,
-      one { PodSecurityPolicyTemplate }
-      other { PodSecurityPolicyTemplates }
+    one { Modelo de Política de Segurança de Pod }
+    other { Modelos de Política de Segurança de Pod }
     }
   management.cattle.io.userattribute: |-
     {count, plural,
-      one { UserAttribute }
-      other { UserAttributes }
+    one { Atributo de Usuário }
+    other { Atributos de Usuário }
     }
   management.cattle.io.catalogtemplate: |-
     {count, plural,
-      one { CatalogTemplate }
-      other { CatalogTemplates }
+    one { Modelo de Catálogo }
+    other { Modelos de Catálogo }
     }
   management.cattle.io.catalogtemplateversion: |-
     {count, plural,
-      one { CatalogTemplateVersion }
-      other { CatalogTemplateVersions }
+    one { Versão de Modelo de Catálogo }
+    other { Versões de Modelo de Catálogo }
     }
   management.cattle.io.cisbenchmarkversion: |-
     {count, plural,
-      one { CisBenchmarkVersion }
-      other { CisBenchmarkVersions }
+    one { Versão de Benchmark CIS }
+    other { Versões de Benchmark CIS }
     }
   management.cattle.io.cisconfig: |-
     {count, plural,
-      one { CisConfig }
-      other { CisConfigs }
+    one { Configuração CIS }
+    other { Configurações CIS }
     }
   management.cattle.io.clusteralertgroup: |-
     {count, plural,
-      one { ClusterAlertGroup }
-      other { ClusterAlertGroups }
+    one { Grupo de Alerta de Cluster }
+    other { Grupos de Alerta de Cluster }
     }
   management.cattle.io.clusteralertrule: |-
     {count, plural,
-      one { ClusterAlertRule }
-      other { ClusterAlertRules }
+    one { Regra de Alerta de Cluster }
+    other { Regras de Alerta de Cluster }
     }
   management.cattle.io.clusterregistrationtoken: |-
     {count, plural,
-      one { ClusterRegistrationToken }
-      other { ClusterRegistrationTokens }
+    one { Token de Registro de Cluster }
+    other { Tokens de Registro de Cluster }
     }
   management.cattle.io.node: |-
     {count, plural,
-      one { Node }
-      other { Nodes }
+    one { Nó }
+    other { Nós }
     }
   management.cattle.io.projectalertgroup: |-
     {count, plural,
-      one { ProjectAlertGroup }
-      other { ProjectAlertGroups }
+    one { Grupo de Alerta de Projeto }
+    other { Grupos de Alerta de Projeto }
     }
   management.cattle.io.projectalertrule: |-
     {count, plural,
-      one { ProjectAlertRule }
-      other { ProjectAlertRules }
+    one { Regra de Alerta de Projeto }
+    other { Regras de Alerta de Projeto }
     }
   management.cattle.io.rkeaddon: |-
     {count, plural,
-      one { RkeAddon }
-      other { RkeAddons }
+    one { Complemento RKE }
+    other { Complementos RKE }
     }
   management.cattle.io.rkek8sserviceoption: |-
     {count, plural,
-      one { RkeK8sServiceOption }
-      other { RkeK8sServiceOptions }
+    one { Opção de Serviço RKE K8s }
+    other { Opções de Serviço RKE K8s }
     }
   management.cattle.io.rkek8ssystemimage: |-
     {count, plural,
-      one { RkeK8sSystemImage }
-      other { RkeK8sSystemImages }
+    one { Imagem de Sistema RKE K8s }
+    other { Imagens de Sistema RKE K8s }
     }
   rbac.authorization.k8s.io.clusterrolebinding: |-
     {count, plural,
-      one { ClusterRoleBinding }
-      other { ClusterRoleBindings }
+    one { Vinculação de Papel de Cluster }
+    other { Vinculações de Papel de Cluster }
     }
   rbac.authorization.k8s.io.clusterrole: |-
     {count, plural,
-      one { ClusterRole }
-      other { ClusterRoles }
+    one { Papel de Cluster }
+    other { Papéis de Cluster }
     }
   rbac.authorization.k8s.io.rolebinding: |-
     {count, plural,
-      one { RoleBinding }
-      other { RoleBindings }
+    one { Vinculação de Papel }
+    other { Vinculações de Papel }
     }
   rbac.authorization.k8s.io.role: |-
     {count, plural,
-      one { Role }
-      other { Roles }
+    one { Papel }
+    other { Papéis }
     }
   replicationcontroller: |-
     {count, plural,
-      one { Replication Controller }
-      other { Replication Controllers }
+    one { Controlador de Replicação }
+    other { Controladores de Replicação }
     }
   scheduling.k8s.io.priorityclass: |-
     {count, plural,
-      one { PriorityClass }
-      other { PriorityClasses }
+    one { Classe de Prioridade }
+    other { Classes de Prioridade }
     }
   storage.k8s.io.csinode: |-
     {count, plural,
-      one { CSINode }
-      other { CSINodes }
+    one { Nó CSI }
+    other { Nós CSI }
     }
   cluster.x-k8s.io.machinedeployment: |-
     {count, plural,
-      one { MachineDeployment }
-      other { MachineDeployments }
+    one { Implantação de Máquina }
+    other { Implantações de Máquina }
     }
   cluster.x-k8s.io.machineset: |-
     {count, plural,
-      one { MachineSet }
-      other { MachineSets }
+    one { Conjunto de Máquinas }
+    other { Conjuntos de Máquinas }
     }
   cluster.x-k8s.io.machine: |-
     {count, plural,
-      one { Machine }
-      other { Machines }
+    one { Máquina }
+    other { Máquinas }
     }
   fleet.cattle.io.clusterregistrationtoken: |-
     {count, plural,
-      one { Token de Registro de Cluster }
-      other { Tokens de Registro de Cluster }
+    one { Token de Registro de Cluster }
+    other { Tokens de Registro de Cluster }
     }
-
 oidcclient:
   a11y:
     copyText:
@@ -9058,16 +9057,16 @@ resourceQuota:
   resourceIdentifier:
     placeholder: "ex.: configmaps"
     tooltip: "Selecione 'Personalizado' na lista 'Tipo de Recurso' e insira o identificador do recurso (ex.: requests.nvidia.com/gpu) para adicionar cotas de recursos personalizadas."
-  configMaps: Config Maps
+  configMaps: Mapas de Configuração
   limitsCpu: Limite de CPU
   limitsMemory: Limite de Memória
-  persistentVolumeClaims: Persistent Volume Claims
+  persistentVolumeClaims: Reivindicações de Volume Persistente
   pods: Pods
-  replicationControllers: Replication Controllers
+  replicationControllers: Controladores de Replicação
   requestsCpu: Reserva de CPU
   requestsMemory: Reserva de Memória
   requestsStorage: Reserva de Armazenamento
-  secrets: Secrets
+  secrets: Segredos
   services: Serviços
   servicesLoadBalancers: Balanceadores de Carga de Serviços
   servicesNodePorts: Node Ports de Serviço
@@ -9117,7 +9116,7 @@ customLinks:
   defaults:
     docs:       Documentação
     forums:     Fóruns
-    slack:      Slack
+    slack: Slack
     issues:     Reportar um Problema
     getStarted: Primeiros Passos
     commercialSupport: Suporte Comercial
@@ -9149,7 +9148,7 @@ support:
     access:
       title: Obter Suporte
       text: Faça login no SUSE Customer Center para acessar o suporte para sua assinatura
-      action: SUSE Customer Center
+      action: Centro de Atendimento ao Cliente SUSE
       aws:
         generateConfig: Gerar Configuração de Suporte
         text: 'Faça login no SUSE Customer Center para acessar o suporte para sua assinatura. Precisa abrir um novo caso de suporte? Baixe um arquivo de configuração de suporte abaixo.'
@@ -9481,7 +9480,7 @@ component:
 
 autoscaler:
   card:
-    title: Autoscaler
+    title: Autoescalador
     pause: Pausar
     resume: Retomar
     loadingError: Houve um problema ao carregar os detalhes
@@ -9491,7 +9490,7 @@ autoscaler:
       health: Saúde
       scaleDown: Reduzir Escala
       scaleUp: Aumentar Escala
-      nodes: Nodes
+      nodes: Nós
       ready: Pronto
       notStarted: Não Iniciado
       inTotal: No Total
@@ -9499,7 +9498,7 @@ autoscaler:
       paused: Pausado
       unavailable: Indisponível
   tab:
-    title: Autoscaler
+    title: Autoescalador
 
 ext.cattle.io.kubeconfig:
   deleted: "{name} (excluído)"
