@@ -16,7 +16,6 @@ permissions:
   contents: read
   issues: read
   pull-requests: read
-  discussions: read
 
 network: defaults
 
@@ -25,16 +24,15 @@ timeout-minutes: 60
 tools:
   github:
     lockdown: false
-    toolsets: [default, discussions]
+  repo-memory:
+    max-file-size: 32768
+    file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
   add-comment:
     hide-older-comments: true
   add-labels:
-  update-discussion:
-    body:
-    target: "*"
 
 ---
 
@@ -50,14 +48,11 @@ This workflow is strictly read-only. You must **never** push changes, edit files
 
 Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
 
-## Learnings discussion
+## Learnings (repo-memory)
 
-Before doing anything else, search for discussions in this repository with the title `[learnings] Add New Language Translation`. There should be **at most one** such discussion — it accumulates knowledge from all previous runs.
+Before doing anything else, read the file `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md` if it exists. This file accumulates knowledge from all previous translation runs — chunking strategies, known structural pitfalls, duplicate key patterns, and tips. Apply this knowledge throughout your work.
 
-- If you find one (or more), open the **most recent** one, **read it carefully**, and **save its discussion number** — you will need it later to call `update_discussion`. It contains chunking strategies, known structural pitfalls, duplicate key patterns, and tips from previous runs. Apply this knowledge throughout your work.
-- If none exists, skip the learnings step — only the `add-language` workflow creates this discussion.
-
-**Critical**: This workflow can only update existing discussions, not create new ones. Always use `update_discussion`.
+If the file does not exist, skip this step.
 
 ## 1. Read the PR and previous comments
 
@@ -220,14 +215,13 @@ If **all** structural checks passed (valid YAML, key parity, key ordering, struc
 
 If the coverage is below 100% or any structural check failed, do **not** add the label.
 
-## 7. Update learnings discussion
+## 7. Update learnings
 
-After completing the verification and labeling, update the learnings discussion with what you learned during this run.
+After completing the verification and labeling, update the learnings file at `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md`.
 
-- **If you saved a discussion number earlier** (from the pre-work step): use `update_discussion` with that discussion number, merging your new observations into the existing content — do not discard previous learnings.
-- **If no discussion was found earlier**: skip this step. The learnings discussion is created by the `add-language` workflow.
+If the file already exists, **merge** your new observations into the existing content — do not discard previous learnings. If it does not exist, create it.
 
-Add or update these sections in the discussion:
+Add or update these sections:
 
 - **Common structural issues**: duplicate keys found (which ones, why they occur), invented keys, missing sections
 - **Chunking strategy**: what chunk sizes work for the ~9500-line en-us.yaml, which top-level sections are largest
@@ -236,4 +230,4 @@ Add or update these sections in the discussion:
 - **Validation approach**: how to efficiently validate the file (tools, scripts, strategies)
 - **Anything that caused errors** and how to avoid them next time
 
-Keep the discussion concise and actionable — it is read at the start of every future add-language and verify-translation run.
+Keep the file concise and actionable. It auto-commits to the `memory/default` branch when the workflow finishes.
