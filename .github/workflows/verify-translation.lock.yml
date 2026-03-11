@@ -28,7 +28,7 @@
 # ordering. It does NOT modify any files — it only reports findings. When issues
 # are found it recommends running '/improve-translation' to apply fixes.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"77945de15145dc112814cdde64e87e3dd32cd1b1607077f27fa854777bf73572","compiler_version":"v0.56.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"fcfd06e16c5d1c77c0cd87136cc333d8ac85d08881374d42a68c6e269b7ba3f5","compiler_version":"v0.56.2","strict":true}
 
 name: "Verify Translation"
 "on":
@@ -1313,7 +1313,7 @@ jobs:
           GH_AW_ALLOWED_DOMAINS: "api.business.githubcopilot.com,api.enterprise.githubcopilot.com,api.github.com,api.githubcopilot.com,api.individual.githubcopilot.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,github.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,ppa.launchpad.net,raw.githubusercontent.com,registry.npmjs.org,s.symcb.com,s.symcd.com,security.ubuntu.com,telemetry.enterprise.githubcopilot.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com"
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"add_comment\":{\"max\":1},\"create_discussion\":{\"category\":\"general\",\"expires\":168,\"fallback_to_issue\":true,\"labels\":[\"translations\",\"automated\"],\"max\":1,\"title_prefix\":\"[learnings] \"},\"missing_data\":{},\"missing_tool\":{},\"update_discussion\":{\"allow_body\":true,\"max\":1,\"target\":\"*\"}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"add_comment\":{\"hide_older_comments\":true,\"max\":1},\"create_discussion\":{\"category\":\"general\",\"expires\":168,\"fallback_to_issue\":true,\"labels\":[\"translations\",\"automated\"],\"max\":1,\"title_prefix\":\"[learnings] \"},\"missing_data\":{},\"missing_tool\":{},\"update_discussion\":{\"allow_body\":true,\"max\":1,\"target\":\"*\"}}"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |

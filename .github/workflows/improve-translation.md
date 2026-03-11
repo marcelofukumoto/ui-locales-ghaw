@@ -28,7 +28,8 @@ tools:
 
 safe-outputs:
   push-to-pull-request-branch:
-  add-comment: {}
+  add-comment:
+    hide-older-comments: true
   create-discussion:
     title-prefix: "[learnings] "
     category: general

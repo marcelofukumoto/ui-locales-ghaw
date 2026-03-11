@@ -28,7 +28,8 @@ tools:
   bash: true
 
 safe-outputs:
-  add-comment: {}
+  add-comment:
+    hide-older-comments: true
   create-discussion:
     title-prefix: "[learnings] "
     category: general
