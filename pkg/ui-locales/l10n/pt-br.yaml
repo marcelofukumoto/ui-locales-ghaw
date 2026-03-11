@@ -246,7 +246,7 @@ nav:
     apps: Aplicativos
     clusterProvisioning: Provisionamento de Cluster
     jwt.authentication: Autenticação JWT
-    core: Core
+    core: Núcleo
     legacy: Legado
     API: API
     Coordination: Coordenação
@@ -2331,7 +2331,7 @@ cluster:
       label:
         controlPlane: '{count} Plano de Controle'
         etcd: '{count} etcd'
-        worker: '{count} Worker'
+        worker: '{count} Trabalhador'
       tooltip:
         controlPlane: |-
           {count, plural,
@@ -3339,7 +3339,7 @@ fleet:
           subtext: 'Definir detalhes de metadados'
           description: Informações básicas do Helm Op
         chart:
-          label: Chart
+          label: Gráfico
           title: Gráfico
           subtext: 'Definir detalhes da fonte do Chart Helm'
           description: Gráfico
@@ -3374,7 +3374,7 @@ fleet:
           label: URL do Repositório
           placeholder: 'ex.: https://foo.bar/baz'
         chart:
-          label: Chart
+          label: Gráfico
           placeholder: O caminho para o nome do chart no repositório
       oci:
         chart:
