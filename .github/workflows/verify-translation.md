@@ -25,15 +25,18 @@ tools:
   github:
     lockdown: false
   repo-memory:
+    branch-name: memory/default
     max-file-size: 32768
     file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
+  max-patch-size: 32
   add-comment:
     hide-older-comments: true
   add-labels:
   submit-pull-request-review:
+    target: ${{ github.event.issue.number }}
     footer: "if-body"
 
 ---

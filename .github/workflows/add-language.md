@@ -23,11 +23,13 @@ tools:
   github:
     lockdown: false
   repo-memory:
+    branch-name: memory/default
     max-file-size: 32768
     file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
+  max-patch-size: 32
   create-pull-request:
     title-prefix: "feat: "
     labels: [translations, new-language, automated]
