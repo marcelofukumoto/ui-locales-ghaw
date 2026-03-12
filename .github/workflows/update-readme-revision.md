@@ -22,6 +22,10 @@ timeout-minutes: 60
 tools:
   github:
     lockdown: false
+  repo-memory:
+    branch-name: memory/default
+    max-file-size: 32768
+    file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
@@ -39,6 +43,16 @@ You are an AI assistant that revises the README.md documentation for the Rancher
 ## Scripting constraint
 
 Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs.
+
+## Review state (repo-memory)
+
+Read the file `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md` if it exists. This file tracks the review state written by the verify-readme workflow:
+
+- **Round counter** — what verification round we're on
+- **Previous findings** — what issues were found
+- **Decision log** — history of what was flagged and fixed
+
+Use this to understand the full history of feedback, not just the latest comment. If the file does not exist, rely on PR comments instead.
 
 ## 1. Read the PR and feedback
 

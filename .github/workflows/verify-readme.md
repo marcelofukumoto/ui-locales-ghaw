@@ -24,9 +24,14 @@ timeout-minutes: 60
 tools:
   github:
     lockdown: false
+  repo-memory:
+    branch-name: memory/default
+    max-file-size: 32768
+    file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
+  max-patch-size: 32
   add-comment:
     hide-older-comments: true
   add-labels:
@@ -41,11 +46,22 @@ You are an AI assistant that validates README documentation for the Rancher UI l
 
 Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs.
 
+## Review state (repo-memory)
+
+Read the file `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md` if it exists. This file tracks the review state for README documentation PRs across rounds:
+
+- **Round counter** — how many verification rounds have occurred for the current PR
+- **Previous findings** — what issues were found in prior rounds
+- **Addressed items** — what was fixed so you don't re-flag resolved items
+- **Decision log** — why the verifier was not confident in each round
+
+Use this information to avoid repeating feedback that was already addressed, and to maintain an accurate round count. If the file does not exist, this is the first round — start fresh.
+
 ## 1. Read the PR and count previous verification rounds
 
 Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
 
-**Critical**: Count how many times `/verify-readme` has already been invoked on this PR by counting comments that contain the text `/verify-readme` (including the current one). This is your **round number**.
+**Critical**: Determine the current round number from the repo-memory file (`readme-review.md`). If the file exists and has a round counter for PR #${{ github.event.issue.number }}, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on this PR as a fallback.
 
 - If this is round 10 or higher, **stop immediately**. Post a comment saying:
   > ⚠️ **Verification limit reached** — this PR has been through {round_number} verification rounds (maximum is 10). Please review manually and merge or close as appropriate.
@@ -143,3 +159,28 @@ Post a comment with specific feedback and request improvements. The comment MUST
 The `/update-readme` trigger line at the end is critical — it activates the update-readme workflow to address your feedback. Always include it when improvements are needed.
 
 Be specific and actionable in your feedback. Do not give vague instructions like "improve the docs" — say exactly what is wrong and what the fix should be.
+
+## 6. Update review state (repo-memory)
+
+After posting your comment, update `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md`. The file should contain:
+
+```markdown
+# README Review State
+
+## Current PR: #{pr_number}
+
+### Round: {round_number}
+### Status: {confident|needs-improvement|limit-reached}
+### Date: {current date}
+
+## Decision Log
+
+### Round {N}
+- **Status**: {confident / needs-improvement}
+- **Findings**: {brief list of issues found, or "all checks passed"}
+- **Addressed from previous round**: {list of items that were fixed since last round, if applicable}
+```
+
+If the file already exists with entries for a **different** PR, replace the content entirely — only the current PR's state matters. Keep the file concise and under 8KB.
+
+The file auto-commits to the `memory/default` branch when the workflow finishes.
