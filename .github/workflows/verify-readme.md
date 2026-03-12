@@ -4,8 +4,9 @@ description: |
   workflow. Triggered via the '/verify-readme' slash command on a PR. It checks
   that all workflows are documented accurately, the formatting is correct, and
   the content is high quality. If confident, it adds 'ready-to-merge'. If not,
-  it requests improvements by commenting '/update-readme' with feedback. It will
-  not trigger more than 5 verification rounds per PR.
+  it requests improvements with specific feedback. A separate workflow_run
+  trigger handles posting '/update-readme' to start the revision. It will not
+  trigger more than 5 verification rounds per PR.
 
 on:
   slash_command:
@@ -153,11 +154,9 @@ Post a comment with specific feedback and request improvements. The comment MUST
 2. {Another specific improvement}
 
 **Verification round: {round_number} of 5**
-
-/update-readme
 ```
 
-The `/update-readme` trigger line at the end is critical — it activates the update-readme workflow to address your feedback. Always include it when improvements are needed.
+Do **NOT** include `/update-readme` in your comment — a separate workflow handles triggering the revision automatically.
 
 Be specific and actionable in your feedback. Do not give vague instructions like "improve the docs" — say exactly what is wrong and what the fix should be.
 

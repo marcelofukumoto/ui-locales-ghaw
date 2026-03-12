@@ -25,10 +25,11 @@
 # workflow. Triggered via the '/verify-readme' slash command on a PR. It checks
 # that all workflows are documented accurately, the formatting is correct, and
 # the content is high quality. If confident, it adds 'ready-to-merge'. If not,
-# it requests improvements by commenting '/update-readme' with feedback. It will
-# not trigger more than 10 verification rounds per PR.
+# it requests improvements with specific feedback. A separate workflow_run
+# trigger handles posting '/update-readme' to start the revision. It will not
+# trigger more than 5 verification rounds per PR.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"df92933ac8b910b84058e582501b936fb72a866af8ca72e2253c5398981391a6","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"68959887f5a4f2352efe4dfd1f11f1602254042a3fd383df0286986bd7f551fa","compiler_version":"v0.57.2","strict":true}
 
 name: "Verify README Documentation"
 "on":
@@ -1005,7 +1006,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           WORKFLOW_NAME: "Verify README Documentation"
-          WORKFLOW_DESCRIPTION: "This workflow validates README documentation PRs created by the update-readme\nworkflow. Triggered via the '/verify-readme' slash command on a PR. It checks\nthat all workflows are documented accurately, the formatting is correct, and\nthe content is high quality. If confident, it adds 'ready-to-merge'. If not,\nit requests improvements by commenting '/update-readme' with feedback. It will\nnot trigger more than 10 verification rounds per PR."
+          WORKFLOW_DESCRIPTION: "This workflow validates README documentation PRs created by the update-readme\nworkflow. Triggered via the '/verify-readme' slash command on a PR. It checks\nthat all workflows are documented accurately, the formatting is correct, and\nthe content is high quality. If confident, it adds 'ready-to-merge'. If not,\nit requests improvements with specific feedback. A separate workflow_run\ntrigger handles posting '/update-readme' to start the revision. It will not\ntrigger more than 5 verification rounds per PR."
           HAS_PATCH: ${{ steps.collect_output.outputs.has_patch }}
         with:
           script: |

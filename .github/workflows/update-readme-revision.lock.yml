@@ -23,10 +23,11 @@
 #
 # This workflow is triggered by the '/update-readme' slash command on a PR. It
 # addresses feedback from the verify-readme workflow by reading improvement
-# requests, updating the README documentation accordingly, pushing the changes
-# to the PR branch, and commenting '/verify-readme' to re-trigger validation.
+# requests, updating the README documentation accordingly, and pushing the
+# changes to the PR branch. A separate workflow_run trigger handles re-triggering
+# validation.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"e387427b338e86adfcc8bc98931829e6421a40ff2d506b464da0c9900451829f","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"ba2850a30e925822ffaa8a676ad7c771c2929bdca95cbf1ea649d298ff342e70","compiler_version":"v0.57.2","strict":true}
 
 name: "Update README — Revision"
 "on":
@@ -1019,7 +1020,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           WORKFLOW_NAME: "Update README — Revision"
-          WORKFLOW_DESCRIPTION: "This workflow is triggered by the '/update-readme' slash command on a PR. It\naddresses feedback from the verify-readme workflow by reading improvement\nrequests, updating the README documentation accordingly, pushing the changes\nto the PR branch, and commenting '/verify-readme' to re-trigger validation."
+          WORKFLOW_DESCRIPTION: "This workflow is triggered by the '/update-readme' slash command on a PR. It\naddresses feedback from the verify-readme workflow by reading improvement\nrequests, updating the README documentation accordingly, and pushing the\nchanges to the PR branch. A separate workflow_run trigger handles re-triggering\nvalidation."
           HAS_PATCH: ${{ steps.collect_output.outputs.has_patch }}
         with:
           script: |

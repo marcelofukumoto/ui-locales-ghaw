@@ -2,8 +2,9 @@
 description: |
   This workflow is triggered by the '/update-readme' slash command on a PR. It
   addresses feedback from the verify-readme workflow by reading improvement
-  requests, updating the README documentation accordingly, pushing the changes
-  to the PR branch, and commenting '/verify-readme' to re-trigger validation.
+  requests, updating the README documentation accordingly, and pushing the
+  changes to the PR branch. A separate workflow_run trigger handles re-triggering
+  validation.
 
 on:
   slash_command:
@@ -99,8 +100,6 @@ Use bash to verify:
 
 Push the updated README.md to the PR branch.
 
-Then add a comment to the PR with:
-- A summary of what improvements were made, referencing the specific feedback items addressed
-- The text `/verify-readme` on its own line at the end of the comment to trigger re-validation
+Then add a comment to the PR with a summary of what improvements were made, referencing the specific feedback items addressed.
 
-The `/verify-readme` trigger line is critical — it activates the verify-readme workflow to review your revised work. Always include it.
+Do **NOT** include `/verify-readme` in your comment — a separate workflow handles triggering re-validation automatically.
