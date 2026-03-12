@@ -32,7 +32,7 @@ This repository uses [GitHub Agentic Workflows](https://docs.github.com/en/copil
 **Usage:**
 1. Open an issue with `[FIX]` in the title.
 2. In the body, describe the wrong word/phrase, the language, and ideally the correct replacement.
-3. Add `--no-similar` in the body to skip scanning for similar cases.
+3. Optionally add control flags in the body: `--no-similar` to skip scanning for similar cases in the same file, `--no-other-languages` to skip checking other language files, or `--simple` as a shorthand for both.
 4. The workflow opens one or more PRs labelled `translations`, `fix`, `automated`.
 
 ---
