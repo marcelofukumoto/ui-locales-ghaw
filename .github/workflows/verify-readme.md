@@ -154,7 +154,7 @@ Post a comment with specific feedback and request improvements. The comment MUST
 1. {Specific, actionable improvement request}
 2. {Another specific improvement}
 
-**Verification round: {round_number} of 10**
+**Verification round: {round_number} of 3**
 
 /update-readme
 ```
