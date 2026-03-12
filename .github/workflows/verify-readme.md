@@ -135,8 +135,6 @@ The README documentation is accurate and complete. Ready for human review.
 **Total verification runs on this PR: {round_number}**
 ```
 
-Do **NOT** include `/verify-readme` or `/update-readme` in the comment — the PR is done.
-
 ### If not confident (any check fails):
 
 Post a comment with specific feedback and request improvements. The comment MUST follow this exact structure:
@@ -155,8 +153,6 @@ Post a comment with specific feedback and request improvements. The comment MUST
 
 **Verification round: {round_number} of 5**
 ```
-
-Do **NOT** include `/update-readme` in your comment — a separate workflow handles triggering the revision automatically.
 
 Be specific and actionable in your feedback. Do not give vague instructions like "improve the docs" — say exactly what is wrong and what the fix should be.
 

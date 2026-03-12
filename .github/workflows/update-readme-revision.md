@@ -101,5 +101,3 @@ Use bash to verify:
 Push the updated README.md to the PR branch.
 
 Then add a comment to the PR with a summary of what improvements were made, referencing the specific feedback items addressed.
-
-Do **NOT** include `/verify-readme` in your comment — a separate workflow handles triggering re-validation automatically.
