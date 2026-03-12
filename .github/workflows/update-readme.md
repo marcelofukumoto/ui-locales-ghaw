@@ -34,7 +34,7 @@ safe-outputs:
     labels: [documentation, automated]
   add-comment:
     target: "*"
-    max: 2
+    max: 5
 
 ---
 

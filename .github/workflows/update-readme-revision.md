@@ -33,6 +33,7 @@ safe-outputs:
   push-to-pull-request-branch:
   add-comment:
     hide-older-comments: true
+    max: 5
 
 ---
 

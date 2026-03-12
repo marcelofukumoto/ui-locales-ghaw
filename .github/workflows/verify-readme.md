@@ -34,6 +34,7 @@ safe-outputs:
   max-patch-size: 32
   add-comment:
     hide-older-comments: true
+    max: 5
   add-labels:
 
 ---
