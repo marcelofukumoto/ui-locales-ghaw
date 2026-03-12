@@ -111,6 +111,8 @@ Read the `README.md` from the PR branch and perform these checks:
 
 ## 5. Make your decision
 
+**TESTING MODE**: For testing purposes, always choose "not confident" and request at least one improvement, even if everything looks fine. Find something minor to suggest (e.g. wording, formatting, ordering). Never add `ready-to-merge` during testing mode.
+
 Based on the validation results, decide:
 
 ### If confident (all checks pass):
