@@ -58,11 +58,20 @@ Read the file `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md` i
 
 Use this information to avoid repeating feedback that was already addressed, and to maintain an accurate round count. If the file does not exist, this is the first round — start fresh.
 
-## 1. Read the PR and count previous verification rounds
+## 1. Find the PR and count previous verification rounds
 
-Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
+Determine the pull request to verify. This workflow can be triggered from either a PR comment or an issue comment:
 
-**Critical**: Determine the current round number from the repo-memory file (`readme-review.md`). If the file exists and has a round counter for PR #${{ github.event.issue.number }}, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on this PR as a fallback.
+1. First, try to read PR #${{ github.event.issue.number }} directly (e.g. using `gh pr view ${{ github.event.issue.number }}`).
+2. If that fails (because the number refers to an issue, not a PR), search for the linked PR by running:
+   ```bash
+   gh pr list --state open --label documentation --json number,title --jq '.[0].number'
+   ```
+   Or look for a PR URL in the comments of issue #${{ github.event.issue.number }}.
+
+Once you have the PR number, read the pull request — its description, all comments, and the list of changed files.
+
+**Critical**: Determine the current round number from the repo-memory file (`readme-review.md`). If the file exists and has a round counter for the PR, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on the PR as a fallback.
 
 - If this is round 10 or higher, **stop immediately**. Post a comment saying:
   > ⚠️ **Verification limit reached** — this PR has been through {round_number} verification rounds (maximum is 10). Please review manually and merge or close as appropriate.
@@ -73,7 +82,7 @@ Read pull request #${{ github.event.issue.number }} — its description, all com
 
 ## 2. Check out the PR branch
 
-Check out the branch for pull request #${{ github.event.issue.number }} to access the modified README.
+Check out the branch for the pull request you identified in step 1 to access the modified README.
 
 ## 3. Read all workflow source files
 

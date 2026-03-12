@@ -95,10 +95,13 @@ Open a Pull Request that:
 - Has a body that references the issue number and lists which workflows were documented
 - References and closes the original issue
 
-## 7. Comment on the PR to trigger validation
+## 7. Comment on the issue to trigger validation
 
-After the PR is created, add a comment **on the newly created PR** (not on the issue) with:
+After the PR is created, add a comment **on the source issue** (#${{ github.event.issue.number }}) — NOT on the PR — with:
 - A summary of what was documented (list of workflows covered)
+- A link to the newly created PR
 - The text `/verify-readme` on its own line at the end of the comment to trigger validation
+
+**Important**: You MUST target the comment at issue #${{ github.event.issue.number }}. Do NOT try to comment on the PR using a temporary or placeholder ID — that will fail. The verify-readme workflow knows how to find the linked PR from the issue.
 
 The `/verify-readme` trigger line is critical — it activates the verify-readme workflow to review your work. Always include it.
