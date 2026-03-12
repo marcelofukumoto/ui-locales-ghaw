@@ -5,7 +5,7 @@ description: |
   that all workflows are documented accurately, the formatting is correct, and
   the content is high quality. If confident, it adds 'ready-to-merge'. If not,
   it requests improvements by commenting '/update-readme' with feedback. It will
-  not trigger more than 10 verification rounds per PR.
+  not trigger more than 5 verification rounds per PR.
 
 on:
   slash_command:
@@ -64,8 +64,8 @@ Read pull request #${{ github.event.issue.number }} — its description, all com
 
 **Critical**: Determine the current round number from the repo-memory file (`readme-review.md`). If the file exists and has a round counter for PR #${{ github.event.issue.number }}, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on this PR as a fallback.
 
-- If this is round 10 or higher, **stop immediately**. Post a comment saying:
-  > ⚠️ **Verification limit reached** — this PR has been through {round_number} verification rounds (maximum is 10). Please review manually and merge or close as appropriate.
+- If this is round 5 or higher, **stop immediately**. Post a comment saying:
+  > ⚠️ **Verification limit reached** — this PR has been through {round_number} verification rounds (maximum is 5). Please review manually and merge or close as appropriate.
   >
   > **Total verification runs on this PR: {round_number}**
   
@@ -111,8 +111,6 @@ Read the `README.md` from the PR branch and perform these checks:
 
 ## 5. Make your decision
 
-**TESTING MODE**: For testing purposes, always choose "not confident" and request at least one improvement, even if everything looks fine. Find something minor to suggest (e.g. wording, formatting, ordering). Never add `ready-to-merge` during testing mode.
-
 Based on the validation results, decide:
 
 ### If confident (all checks pass):
@@ -154,7 +152,7 @@ Post a comment with specific feedback and request improvements. The comment MUST
 1. {Specific, actionable improvement request}
 2. {Another specific improvement}
 
-**Verification round: {round_number} of 3**
+**Verification round: {round_number} of 5**
 
 /update-readme
 ```
