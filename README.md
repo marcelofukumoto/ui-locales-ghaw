@@ -19,7 +19,7 @@ This repository uses [GitHub Agentic Workflows](https://docs.github.com/en/copil
 **Usage:**
 1. Open an issue with `[ADD]` in the title.
 2. In the body, specify the language name (e.g. "Portuguese") and/or locale code (e.g. `pt-br`).
-3. The workflow will translate the file in chunks and open a PR labelled `translations`, `new-language`, `automated`.
+3. The workflow opens a PR with the translated locale file, labelled `translations`, `new-language`, `automated`.
 
 ---
 
