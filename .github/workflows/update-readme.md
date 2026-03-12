@@ -3,8 +3,8 @@ description: |
   This workflow is triggered when a GitHub issue with [README] in the title
   requests documentation updates. It reads all workflow .md files in the repo,
   generates clear documentation describing each workflow, updates the README.md
-  with that documentation, and opens a Pull Request. After creating the PR it
-  comments '/verify-readme' on the PR to trigger automated validation.
+  with that documentation, and opens a Pull Request. A separate lightweight
+  workflow (trigger-verify-readme) handles posting the /verify-readme comment.
 
 on:
   issues:
@@ -32,9 +32,6 @@ safe-outputs:
   create-pull-request:
     title-prefix: "docs: "
     labels: [documentation, automated]
-  add-comment:
-    target: "*"
-    max: 5
 
 ---
 
@@ -95,13 +92,4 @@ Open a Pull Request that:
 - Has a body that references the issue number and lists which workflows were documented
 - References and closes the original issue
 
-## 7. Comment on the issue to trigger validation
 
-After the PR is created, add a comment **on the source issue** (#${{ github.event.issue.number }}) — NOT on the PR — with:
-- A summary of what was documented (list of workflows covered)
-- A link to the newly created PR
-- The text `/verify-readme` on its own line at the end of the comment to trigger validation
-
-**Important**: You MUST target the comment at issue #${{ github.event.issue.number }}. Do NOT try to comment on the PR using a temporary or placeholder ID — that will fail. The verify-readme workflow knows how to find the linked PR from the issue.
-
-The `/verify-readme` trigger line is critical — it activates the verify-readme workflow to review your work. Always include it.
