@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Find and comment on documentation PR
         env:
-          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.MAINTAINER_PAT }}
         run: |
           # Find the most recent open PR with the 'documentation' label
           PR_NUMBER=$(gh pr list \
