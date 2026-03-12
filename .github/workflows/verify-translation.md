@@ -33,6 +33,8 @@ safe-outputs:
   add-comment:
     hide-older-comments: true
   add-labels:
+  submit-pull-request-review:
+    footer: "if-body"
 
 ---
 
@@ -142,6 +144,17 @@ Use bash to write and run a script that calculates translation coverage:
    - **Overall coverage**: (translated + kept in English) / (total - skipped) as a percentage
 4. Break down coverage by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.) — for each section report translated, kept-in-english, and untranslated counts.
 
+### 4a. Agent review of untranslated strings
+
+The bash script cannot perfectly distinguish technical terms from genuinely untranslated strings. After the script runs, **you must manually review** every string the script classified as "untranslated":
+
+- For each "untranslated" value, check whether it is a product name, Kubernetes resource type, provider name, CLI command, protocol, acronym, storage driver, authentication provider, cloud service, icon identifier, or any other term that is universally kept in English in localized software.
+- **Reclassify** any such terms from "untranslated" to "kept in English" in the final counts.
+- Only strings that contain **actual human-readable English words or phrases that should be localized** (e.g. button labels like "Save", "Delete", descriptions, error messages, help text) should remain as "untranslated".
+- Update the coverage calculation accordingly: coverage = (translated + kept in English) / (total - skipped).
+
+This agent review step is critical — the script's known-terms list will never be exhaustive. You are the final arbiter of whether a string genuinely needs translation.
+
 ## 5. Post the report as a PR comment
 
 Add a single, detailed comment to the PR with the full verification report. Use this structure:
@@ -209,11 +222,15 @@ The file is structurally sound and fully translated. Ready for native speaker re
 Run `/improve-translation` to fix structural issues and translate remaining strings.
 ```
 
-## 6. Add label on 100% coverage
+## 6. Label and approve on 100% coverage
 
-If **all** structural checks passed (valid YAML, key parity, key ordering, structure parity, placeholders, empty/special values) **and** overall translation coverage is **100%** (i.e. zero untranslated strings), then add the label `ready-to-merge` to pull request #${{ github.event.issue.number }}.
+If **all** structural checks passed (valid YAML, key parity, key ordering, structure parity, placeholders, empty/special values) **and** overall translation coverage is **100%** after the agent review (i.e. zero genuinely untranslated strings), then:
 
-If the coverage is below 100% or any structural check failed, do **not** add the label.
+1. Add the label `ready-to-merge` to pull request #${{ github.event.issue.number }}.
+2. Submit an **approving PR review** using `submit_pull_request_review` with event `APPROVE` and a body like:
+   > ✅ AI verification passed — all structural checks clean, 100% translation coverage. Ready for native speaker review of translation quality.
+
+If the coverage is below 100% or any structural check failed, do **not** add the label or approve the PR.
 
 ## 7. Update learnings
 
