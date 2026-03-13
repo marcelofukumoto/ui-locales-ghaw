@@ -98,8 +98,19 @@ Translate the untranslated strings, working in chunks to stay within output limi
 
 - Work by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.)
 - Within each section, translate all untranslated leaf values
-- After each chunk, write the updated content back to the file
+- After each chunk, write the updated content **directly to the locale file in the repo working tree** (e.g. `pkg/ui-locales/l10n/pt-br.yaml`) — NOT to a temp/JSON file
+- Verify each chunk was written by running `git diff --stat` — you must see changes to the locale file
 - Track progress: log how many strings were translated per chunk
+- **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
+
+### ⚠️ Bash script size limit — CRITICAL
+
+Each individual bash tool call must be **small**. Never try to write all translations in a single script.
+
+- **Maximum ~50 key-value pairs per bash call** — split into multiple calls if needed
+- Write translations as a Python `dict` patch and apply it with a small helper; do not embed thousands of lines of YAML in one heredoc
+- If a script would be longer than ~100 lines, split it into smaller scripts
+- Large tool call payloads will be silently rejected — you will see repeated `bash` validation errors if this happens. Stop immediately, make the scripts smaller, and retry.
 
 ### Maximizing coverage
 

@@ -29,7 +29,6 @@ tools:
   bash: true
 
 safe-outputs:
-  max-patch-size: 32
   create-pull-request:
     title-prefix: "feat: "
     labels: [translations, new-language, automated]
