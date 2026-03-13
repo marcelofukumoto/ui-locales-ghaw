@@ -28,7 +28,7 @@
 # ordering. It does NOT modify any files — it only reports findings. When issues
 # are found it recommends running '/improve-translation' to apply fixes.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"b0a957a3a90a766b7866d8d7cc1369e3e53f9d6813e76b423b375a8192f07e85","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"27abf0f945dc462fbcc66f651af2d16a7a02e6106a1650a22e663c2696690665","compiler_version":"v0.57.2","strict":true}
 
 name: "Verify Translation"
 "on":
