@@ -3,8 +3,8 @@ description: |
   This workflow makes fixes to pull requests on-demand by the '/pr-fix' command.
   Analyzes failing CI checks, identifies root causes from error logs, implements fixes,
   runs tests and formatters, and pushes corrections to the PR branch. For fork PRs
-  where pushing is not possible, it generates a patch and posts it as a comment so
-  the author can apply it locally. Helps rapidly resolve PR blockers and keep
+  where pushing is not possible, it saves the patch to repo-memory so a trigger
+  workflow can apply it automatically. Helps rapidly resolve PR blockers and keep
   development flowing.
 
 on:
@@ -25,6 +25,10 @@ safe-outputs:
 
 tools:
   web-fetch:
+  repo-memory:
+    branch-name: memory/default
+    max-file-size: 65536
+    file-glob: ["memory/default/patches/*.patch"]
   bash: true
 
 timeout-minutes: 20
@@ -59,16 +63,14 @@ You are an AI assistant specialized in fixing pull requests with failing CI chec
 
    a. Generate a patch of your changes using bash:
       ```
-      git diff > /tmp/pr-fix.patch
+      git diff > /tmp/gh-aw/repo-memory-default/memory/default/patches/pr-${{ github.event.issue.number }}.patch
       ```
-   b. Read the patch file content.
-   c. Post a **single comment** to the PR with:
-      - A heading: `🔧 **PR Fix — Patch Available**`
+      This saves the patch to repo-memory. It will be auto-committed to the `memory/default` branch when the workflow finishes, and a separate trigger workflow will pick it up and apply it to the fork branch.
+
+   b. Post a comment to the PR with:
+      - A heading: `🔧 **PR Fix — Patch Saved**`
       - A summary of what was fixed and why
-      - The full patch inside a ` ```diff ` code block so it can be extracted automatically
-      - Instructions for the author: save the patch to a file and run `git apply fix.patch && git add -A && git commit -m "fix: apply pr-fix patch" && git push`
-      - A note that a separate workflow will attempt to apply the patch automatically
+      - A note that the patch has been saved and a separate workflow will attempt to apply it automatically
+      - If the auto-apply fails, the author can retrieve the patch from the `memory/default` branch at `memory/default/patches/pr-${{ github.event.issue.number }}.patch`
 
-      The ` ```diff ` code block is critical — an automated workflow extracts the patch from it.
-
-9. Add a comment to the pull request summarizing the changes you made (if pushed directly) and the reason for the fix. If a patch was posted instead, the patch comment in step 8 serves as the summary — no additional comment is needed.
+9. If you pushed directly, add a comment to the pull request summarizing the changes and the reason for the fix.
