@@ -1,9 +1,12 @@
 # pt-br Translation
 
-Coverage: 60.4% (3,781/6,264). Remaining: 2,483.
-Next: cluster(152), logging(150), plugins(141), monitoring(135), istio(118), typeLabel(116), workload(114).
+Coverage run 4: 74.1% (4,669/6,297). Remaining: 1,628.
+Next: cluster(145), typeLabel(116), catalog(44), logging(42), fleet(39), workload(38), authConfig(34).
 
-Pitfalls: `|-` block scalars skip in patcher. Values with `: ` need quoting. ICU plural keys skip.
-Chunk: 50 keys/call max. Patch by line number (0-indexed ptLine).
-Patcher: patcher.js takes {ptLine, newValue} JSON array, patches in-place.
+Tools: patcher3.js (quoted keys, block scalar aware) + coverage2.js (js-yaml).
+Chunk: 50 keys/call max. npm install js-yaml each run.
+
+typeLabel: all 116 are `|-` block scalars with ICU plurals - need block replacer.
+cluster: many product names (skip), translate only descriptive text.
+Pitfalls: Values with `: ` need quoting. ICU plural keys in block scalars.
 Notes: Add-on→Complemento, Workload→Carga de trabalho, e.g.→ex.
