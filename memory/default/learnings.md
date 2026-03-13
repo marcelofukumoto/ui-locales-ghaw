@@ -1,21 +1,8 @@
-# Translation Learnings — pt-br
+# pt-br Translation
 
-## Setup
-- Locale: `pkg/ui-locales/l10n/pt-br.yaml` (9514 lines fixed)
-- Node.js only (no pip). Patcher: `/tmp/gh-aw/agent/patch.js`
-- Call: `node patch.js file.yaml '{"key":"value",...}'` (max 50/call)
-- Analyzer: `/tmp/gh-aw/agent/analyze.js` → untranslated.json
+Coverage: 46.5% (2,871/6,180). Remaining: 3,309.
+Next: logging(159), tableHeaders(157), cluster(147), monitoring(142), plugins(141).
 
-## Pitfalls
-- Keys with `'true'` in path may not be found by patcher
-- ICU plurals: translate text only, preserve syntax
-- Auto-quoting handles special chars in values
-
-## Coverage
-- Initial: 16% (985). Run 1: 32% (1983, +998). Remaining: ~4135
-
-## Priority next run
-cluster(312), fleet(226), persistentVolume(206), storageClass(198), workload(173), catalog(168), tableHeaders(157), logging(155), plugins(141)
-
-## Run 1 coverage
-authConfig(complete), cluster(credentials/machineConfig/rke2/k3s/providers/tabs), workload(security/scheduling/networking/jobs), fleet(settings/dashboard/gitRepo), logging(flows/elasticsearch), generic/about/nav
+Pitfalls: Line 3492 multiline ICU valid. Product names stay English.
+Chunk: 50 keys/call max. Patch by line number.
+Notes: Add-on→Complemento, Workload→Carga de trabalho, e.g.→ex.:
