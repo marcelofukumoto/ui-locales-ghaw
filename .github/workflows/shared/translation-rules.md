@@ -56,16 +56,46 @@ Each individual bash tool call must be **small**. Never try to write all transla
 - **Maximum ~50 key-value pairs per bash call** — split into multiple calls if needed
 - Do not embed thousands of lines of YAML in one heredoc
 - If a script would be longer than ~100 lines, split it into smaller scripts
-- Large tool call payloads will be silently rejected — you will see repeated `bash` validation errors if this happens. Stop immediately, make the scripts smaller, and retry.
+- Large tool call payloads will be silently rejected — you will see repeated `bash` validation errors if this happens. **Stop immediately**, make the scripts smaller, and retry.
+- Never try to output the entire translated file in a single tool call — always build it incrementally
 
 ## Chunking strategy
 
 When translating large files, use chunking to stay within output limits:
 
+### How to chunk
+
 - Work by **top-level YAML section** (e.g. `generic`, `nav`, `cluster`, `workload`, etc.)
-- Within each section, translate all untranslated leaf values
-- After each chunk, write the updated content directly to the locale file in the repo working tree — NOT to a temp/JSON file
+- Within each section, translate all leaf values that need translation
+- **Maximum ~50 key-value pairs per chunk** — if a top-level section has more, split it into sub-chunks
+- After each chunk, write the updated content **directly to the locale file in the repo working tree** (e.g. `pkg/ui-locales/l10n/pt-br.yaml`) — **NOT** to a temp file, JSON file, or variable
+- Verify each chunk was written by running `git diff --stat` — you must see changes to the locale file
 - Track progress: log how many strings were translated per chunk
+
+### How to write translations to the file
+
+Use `sed`, `awk`, or a small Node.js script to **patch individual values in-place** in the YAML file. Do NOT:
+- Regenerate the entire file from scratch
+- Write the whole file content in a heredoc
+- Use a temp file and then move it
+
+Instead:
+- For each key-value pair, use `sed` or a targeted script to find the exact line and replace the value
+- Or use a small Node.js script that reads the file, updates specific keys, and writes it back
+- Process one chunk at a time (max ~50 keys per bash call)
+
+### Priority order
+
+When translating, prioritize:
+1. **User-facing UI text first**: buttons, labels, messages, descriptions, tooltips, error messages
+2. **Long-form text next**: paragraphs, help text, descriptions
+3. **Technical/edge-case strings last**: rarely-seen messages, debug text
+
+### Maximizing coverage
+
+- **Do NOT skip strings** because they seem hard — attempt every string
+- **Do NOT leave placeholder English translations** — make your best attempt and note uncertainty
+- If running low on time, prioritize the sections with the most untranslated strings
 - Use chunking sizes and strategies noted in the learnings file (if available)
 
 ## Learnings (repo-memory)

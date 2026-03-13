@@ -78,19 +78,11 @@ Translate the untranslated strings, working in chunks to stay within output limi
 2. **Long-form text next**: paragraphs, help text, descriptions
 3. **Technical/edge-case strings last**: rarely-seen messages, debug text
 
-### Translation rules
+### Workflow-specific limits
 
-Follow all translation rules from the shared rules file. Additionally for this workflow:
-
-### Chunking strategy
-
-Follow the chunking strategy from the shared rules file. Additionally for this workflow:
+Follow all translation rules, chunking strategy, and bash script size limits from the shared rules file. Additionally for this workflow:
 
 - **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
-
-### ⚠️ Bash script size limit
-
-Follow the bash script size limit from the shared rules file.
 
 ### Maximizing coverage
 

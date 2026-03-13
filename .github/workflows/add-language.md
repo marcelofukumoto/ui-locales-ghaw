@@ -47,17 +47,21 @@ When a GitHub issue requests a new language to be added to the UI locales extens
 
 Only act if the issue title starts with `[ADD]` and the body clearly requests a new language translation mentioning a specific language name (e.g. "Portuguese", "Japanese", "French") and/or a locale code (e.g. `pt-br`, `ja-jp`, `fr-fr`).
 
-If the issue does not meet these criteria, do nothing and stop.
+If the issue does not meet these criteria, call the `noop` tool and stop.
 
 ## What to do
 
 1. **Identify the language** requested in the issue — extract both the language name and the correct BCP 47 locale code (e.g. Portuguese Brazil → `pt-br`, Japanese → `ja-jp`, Simplified Chinese → `zh-hans`, French → `fr-fr`).
 
-2. **Check if the locale file already exists** by looking for `pkg/ui-locales/l10n/<locale-code>.yaml` in the repository. If it already exists, add a comment to the issue saying the language is already supported and stop.
+2. **Check if the locale file already exists** by looking for `pkg/ui-locales/l10n/<locale-code>.yaml` in the repository. If it already exists, add a comment to the issue saying the language is already supported, suggest using `[UPDATE]` instead, and call the `noop` tool to end the workflow. Do NOT proceed further.
 
 3. **Read the full contents** of `pkg/ui-locales/l10n/en-us.yaml` from this repository.
 
-4. **Translate all string values** in chunks following the translation rules and chunking strategy from the shared rules file.
+4. **Translate all string values** in chunks following the translation rules, chunking strategy, and bash script size limits from the shared rules file.
+
+   **Critical for new files**: Since you are building the file from scratch, start by copying `en-us.yaml` to the new locale file path, then translate in-place using the chunking approach (patch values using `sed`/`awk`/Node.js, max ~50 keys per bash call). Do NOT try to generate the entire translated file in one shot — it will exceed tool call size limits and fail silently.
+
+   **Stop after translating 1000 strings total** if the file has more. Open the PR with what you have — `/improve-translation` can be run on the PR to continue.
 
 5. **Self-validate before opening the PR** using the YAML validation procedure from the shared rules file. If any issues are found, follow the YAML parse error fix procedure and re-validate until clean.
 
