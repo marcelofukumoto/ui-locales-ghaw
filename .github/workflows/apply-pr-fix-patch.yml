@@ -1,0 +1,122 @@
+name: Apply pr-fix patch to fork PRs
+
+on:
+  workflow_run:
+    workflows: ["PR Fix"]
+    types: [completed]
+
+jobs:
+  apply-patch:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Find PR with patch comment and apply it
+        env:
+          GH_TOKEN: ${{ secrets.MAINTAINER_PAT }}
+        run: |
+          REPO="${{ github.repository }}"
+
+          # Find the most recent open PR with a pr-fix patch comment
+          # Look at PRs that were recently commented on
+          PRS=$(gh pr list --repo "$REPO" --state open --json number,headRepositoryOwner,headRefName --jq '.[]')
+
+          if [ -z "$PRS" ]; then
+            echo "No open PRs found, skipping."
+            exit 0
+          fi
+
+          # Check each open PR for a patch comment with our markers
+          FOUND_PR=""
+          PATCH_BODY=""
+
+          for PR_NUMBER in $(gh pr list --repo "$REPO" --state open --json number --jq '.[].number'); do
+            echo "Checking PR #$PR_NUMBER for patch comments..."
+
+            # Get the most recent comment containing our patch markers
+            COMMENT=$(gh api \
+              "repos/$REPO/issues/$PR_NUMBER/comments" \
+              --jq '[.[] | select(.body | contains("<!-- pr-fix-patch-start -->"))] | last | .body // empty')
+
+            if [ -n "$COMMENT" ]; then
+              FOUND_PR="$PR_NUMBER"
+              PATCH_BODY="$COMMENT"
+              echo "Found patch comment on PR #$PR_NUMBER"
+              break
+            fi
+          done
+
+          if [ -z "$FOUND_PR" ]; then
+            echo "No PR found with a pr-fix patch comment, skipping."
+            echo "This likely means pr-fix pushed directly (same-repo PR)."
+            exit 0
+          fi
+
+          # Extract the patch content between the markers
+          PATCH=$(echo "$PATCH_BODY" | sed -n '/<!-- pr-fix-patch-start -->/,/<!-- pr-fix-patch-end -->/p' | sed '1d;$d' | sed '1d;$d')
+
+          if [ -z "$PATCH" ]; then
+            echo "Could not extract patch content from comment, skipping."
+            exit 0
+          fi
+
+          echo "Extracted patch (${#PATCH} bytes)"
+
+          # Get PR details to find the fork branch
+          PR_DATA=$(gh pr view "$FOUND_PR" --repo "$REPO" --json headRefName,headRepository,headRepositoryOwner,maintainerCanModify)
+          HEAD_REF=$(echo "$PR_DATA" | jq -r '.headRefName')
+          HEAD_OWNER=$(echo "$PR_DATA" | jq -r '.headRepositoryOwner.login')
+          HEAD_REPO_NAME=$(echo "$PR_DATA" | jq -r '.headRepository.name')
+          CAN_MODIFY=$(echo "$PR_DATA" | jq -r '.maintainerCanModify')
+
+          REPO_OWNER=$(echo "$REPO" | cut -d'/' -f1)
+
+          # Check if this is a fork PR
+          if [ "$HEAD_OWNER" = "$REPO_OWNER" ]; then
+            echo "PR #$FOUND_PR is from the same repo, not a fork. The agent should have pushed directly."
+            echo "Skipping patch apply — the agent may have already pushed."
+            exit 0
+          fi
+
+          echo "PR #$FOUND_PR is from fork $HEAD_OWNER/$HEAD_REPO_NAME, branch $HEAD_REF"
+          echo "Maintainer can modify: $CAN_MODIFY"
+
+          if [ "$CAN_MODIFY" != "true" ]; then
+            echo "Maintainer edits not allowed on this PR. Cannot push to fork."
+            echo "The patch comment remains for the author to apply manually."
+            gh pr comment "$FOUND_PR" --repo "$REPO" --body "⚠️ **Auto-apply failed**: This PR does not allow maintainer edits, so the patch cannot be pushed automatically. Please apply it manually using the instructions above."
+            exit 0
+          fi
+
+          # Clone the fork, apply the patch, and push
+          FORK_URL="https://github.com/$HEAD_OWNER/$HEAD_REPO_NAME.git"
+          git clone --depth 1 --branch "$HEAD_REF" "$FORK_URL" /tmp/fork-repo
+          cd /tmp/fork-repo
+
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Apply the patch
+          echo "$PATCH" > /tmp/pr-fix.patch
+          if git apply /tmp/pr-fix.patch; then
+            echo "Patch applied successfully"
+            git add -A
+            git commit -m "fix: apply pr-fix patch
+
+          Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+            # Push using MAINTAINER_PAT (works if maintainer edits allowed)
+            git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/$HEAD_OWNER/$HEAD_REPO_NAME.git"
+            if git push origin "$HEAD_REF"; then
+              echo "Patch pushed successfully to fork branch"
+              gh pr comment "$FOUND_PR" --repo "$REPO" --body "✅ **Patch applied automatically** — the fix from pr-fix has been pushed to the PR branch."
+            else
+              echo "Push to fork failed"
+              gh pr comment "$FOUND_PR" --repo "$REPO" --body "⚠️ **Auto-apply failed**: Could not push to the fork branch. Please apply the patch manually using the instructions above."
+            fi
+          else
+            echo "Patch apply failed"
+            gh pr comment "$FOUND_PR" --repo "$REPO" --body "⚠️ **Auto-apply failed**: The patch could not be applied cleanly (possible merge conflicts). Please apply it manually using the instructions above."
+          fi
