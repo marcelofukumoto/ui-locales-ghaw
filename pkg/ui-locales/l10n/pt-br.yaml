@@ -634,7 +634,7 @@ authConfig:
     groupMemberUserAttribute: Atributo de Usuário Membro do Grupo
     groupSearchBase:
       label: Base de Pesquisa de Grupos
-      placeholder: 'ou=groups,dc=mycompany,dc=com'
+      placeholder: ou=groups,dc=minhaempresa,dc=com
     hostname:
       label: Nome do Host/IP
       placeholder: 'ex: servidor1,servidor2'
@@ -646,7 +646,7 @@ authConfig:
       options:
         direct: Pesquisar apenas associações diretas a grupos
         nested: Pesquisar associações diretas e aninhadas a grupos
-    objectClass: Object Class
+    objectClass: Classe de Objeto
     password: Senha
     port: Porta
     protocol: Protocolo
@@ -1489,9 +1489,9 @@ compliance:
   benchmarkVersion: Versão de Benchmark
   clusterProvider: Provedor de Cluster
   cronSchedule:
-    label: Schedule
-    placeholder: "e.g. 0 * * * *"
-  customConfigMap: Custom Benchmark ConfigMap
+    label: Agendamento
+    placeholder: 'ex.: 0 * * * *'
+  customConfigMap: ConfigMap do Benchmark Personalizado
   deleteBenchmarkWarning: |-
     {count, plural,
       =1 { Any profiles using this benchmark version will no longer work. }
@@ -1502,43 +1502,43 @@ compliance:
       =1 { Any scheduled scans using this profile will no longer work. }
       other { Any scheduled scans using either of these profiles will no longer work. }
     }
-  downloadAllReports: Download All Saved Reports
-  downloadLatestReport: Download Latest Report
-  downloadReport: Download Report
-  maxKubernetesVersion: Maximum allowed Kubernetes version
-  minKubernetesVersion: Minimum required Kubernetes version
-  noProfiles: There are no valid ClusterScanProfiles for this cluster type to select.
-  noReportFound: No scan report found
-  profile: Profile
-  reports: Reports
-  retention: Retention Count
+  downloadAllReports: Baixar Todos os Relatórios Salvos
+  downloadLatestReport: Baixar Último Relatório
+  downloadReport: Baixar Relatório
+  maxKubernetesVersion: Versão máxima permitida do Kubernetes
+  minKubernetesVersion: Versão mínima requerida do Kubernetes
+  noProfiles: Não há ClusterScanProfiles válidos para este tipo de cluster.
+  noReportFound: Nenhum relatório de varredura encontrado
+  profile: Perfil
+  reports: Relatórios
+  retention: Contagem de Retenção
   scan:
     description: Descrição
-    fail: Fail
-    lastScanTime: Last Scan Time
+    fail: Falha
+    lastScanTime: Última Varredura
     notApplicable: N/A
-    number: Number
-    pass: Pass
-    remediation: Remediation
-    scanDate: Scan Date
-    scanReport: Scan Report
+    number: Número
+    pass: Passou
+    remediation: Remediação
+    scanDate: Data da Varredura
+    scanReport: Relatório de Varredura
     skip: Pular
     total: Total
-    warn: Warn
+    warn: Aviso
   scheduling:
-    title: Scheduling
-    disable: Run scan once
-    enable: Run scan on a schedule
+    title: Agendamento
+    disable: Executar varredura uma vez
+    enable: Executar varredura em um agendamento
   scoreWarning:
-    label: Scan state for "warn" results
+    label: Estado da varredura para resultados com "aviso"
     protip: Scans with no failures will be marked "Pass" by default even if some of the tests generate "warn" output. This behavior can be changed by selecting the "fail" option from this section.
-  testID: Test ID
-  testsSkipped: Tests Skipped
-  testsToSkip: Tests to Skip
-  alerting: Alerting
+  testID: ID do Teste
+  testsSkipped: Testes Ignorados
+  testsToSkip: Testes a Ignorar
+  alerting: Alertas
   detail:
     subRow:
-      noNodes: No Additional Information
+      noNodes: Sem Informações Adicionais
 
 cluster:
   jwtAuthentication:
@@ -3446,26 +3446,26 @@ fleet:
       correctDriftTooltip: When enabled, Fleet will ensure that the cluster resources are kept in sync with the HelmOp. All resource changes made on the cluster will be lost.
     polling:
       label: Polling
-      enable: Enable Polling
+      enable: Habilitar Polling
       pollingInterval:
-        label: Polling Interval
+        label: Intervalo de Polling
         tooltip: Polling Interval is the time between a push to the Repository and Fleet's reaction to it.
         minimumValueWarning: The recommended minimum Polling Interval is 15 seconds. To avoid performance issues with HelmOps that contain a large amount of resources please consider increasing this value.
         versionTooltip: Polling can be enabled only if version is a valid semantic versioning constraint (e.g. 2.x.x, < 1.0).
     tls:
-      insecure: Accept any certificate (insecure)
+      insecure: Aceitar qualquer certificado (inseguro)
     auth:
-      title: Authentication
-      label: Authentication
-      helm: Helm Authentication
+      title: Autenticação
+      label: Autenticação
+      helm: Autenticação Helm
     caBundle:
-      label: Certificates
-      placeholder: "Paste in one or more certificates, starting with -----BEGIN CERTIFICATE----"
+      label: Certificados
+      placeholder: Cole um ou mais certificados, começando com -----BEGIN CERTIFICATE----
   clusterGroup:
     selector:
-      label: Cluster Selectors
-      matchesAll: Matches all {total, number} existing clusters
-      matchesNone: Matches no existing clusters
+      label: Seletores de Cluster
+      matchesAll: Corresponde a todos os {total, number} clusters existentes
+      matchesNone: Não corresponde a nenhum cluster existente
       matchesSome: |-
         {matched, plural,
           =1 {Matches 1 of {total, number} existing clusters: "{sample}"}
@@ -3473,22 +3473,22 @@ fleet:
         }
   fdc:
     id: ID
-    type: Type
-    state: State
+    type: Tipo
+    state: Estado
     cluster: Cluster
-    error: Error
-    ready: Ready
-    errors: Errors
+    error: Erro
+    ready: Pronto
+    errors: Erros
   workspaces:
     tabs:
-      restrictions: Allowed Target Namespaces
-      ociRegistry: Default OCI Registry
+      restrictions: Namespaces de Destino Permitidos
+      ociRegistry: Registro OCI Padrão
     timeout: Workspace creation timeout. It's possible the workspace was created. We suggest checking the workspace page before trying to create another.
     remove:
       warning: "Deleting a Workspace also deletes all resources in the Workspace. This includes GitRepos but also Clusters.<br><br>Deleted Clusters will be removed from {vendor}, and if {vendor} manages the life-cycle of the Cluster it's underlying infrastructure will also be deleted."
   restrictions:
-    addTitle: 'allowedTargetNamespaces'
-    addLabel: Add
+    addTitle: allowedTargetNamespaces
+    addLabel: Adicionar
     banner: "{count, plural,
           =0 { Adding namespaces here will create a GitRepoRestriction. }
           other { Only the Git Repo Restriction's <code>allowedTargetNamespaces</code> is managed here. You can make additional changes to the Git Repo Restriction}
@@ -3726,67 +3726,67 @@ import:
     }
 
 auditPolicy:
-  active: Active
-  inactive: Inactive
+  active: Ativo
+  inactive: Inativo
   reasons:
-    PolicyNotYetActivated: Not yet activated
-    PolicyIsActive: Active
-    PolicyIsInvalid: Invalid
-    PolicyWasDisabled: Disabled
+    PolicyNotYetActivated: Ainda não ativado
+    PolicyIsActive: Ativo
+    PolicyIsInvalid: Inválido
+    PolicyWasDisabled: Desabilitado
   general:
-    title: General
+    title: Geral
     enabled:
-      label: Enabled
-      title: Enabled
-      checkbox: Enables this audit policy
+      label: Habilitado
+      title: Habilitado
+      checkbox: Habilita esta política de auditoria
     verbosity:
-      label: Log Verbosity
-      title: Log Verbosity
-      banner: Audit Log Verbosity and install time Audit Log settings are additive.
+      label: Verbosidade do Log
+      title: Verbosidade do Log
+      banner: Verbosidade do Log de Auditoria e configurações de Log de Auditoria de instalação são aditivas.
       level:
-        0: 0 - Log request and response metadata
-        1: 1 - Log request and response headers
-        2: 2 - Log request body
-        3: 3 - Log response body
-        title: Log Levels
-        label: Level
+        0: 0 - Registrar metadados de requisição e resposta
+        1: 1 - Registrar cabeçalhos de requisição e resposta
+        2: 2 - Registrar corpo da requisição
+        3: 3 - Registrar corpo da resposta
+        title: Níveis de Log
+        label: Nível
         tooltip: Each log level is cumulative, higher log levels include the data from lower levels. Each log entry contains both request and response information.
       requestResponse:
         tooltip: Override the Log Level and explicitly include Headers / Body
       request:
-        title: Request
-        requestHeaders: Request Headers
-        requestBody: Request Body
+        title: Requisição
+        requestHeaders: Cabeçalhos da Requisição
+        requestBody: Corpo da Requisição
       response:
-        title: Response
-        responseHeaders: Response Headers
-        responseBody: Response Body
+        title: Resposta
+        responseHeaders: Cabeçalhos da Resposta
+        responseBody: Corpo da Resposta
   filters:
-    add: Add Filter
-    title: Filters
+    add: Adicionar Filtro
+    title: Filtros
     action: 
-      title: Action
-      label: Action
-      allow: Allow
-      deny: Deny
-      placeholder: Allow/Deny
+      title: Ação
+      label: Ação
+      allow: Permitir
+      deny: Negar
+      placeholder: Permitir/Negar
     requestURI:
-      title: Request URI
-      label: Request URI
-      placeholder: e.g. /foo/.*
+      title: URI da Requisição
+      label: URI da Requisição
+      placeholder: 'ex.: /foo/.*'
   additionalRedactions:
-    title: Additional Redactions
+    title: Redações Adicionais
     headers:
-      title: Headers
-      label: Headers
-      placeholder: e.g. Cache.*
-      add: Add Header
+      title: Cabeçalhos
+      label: Cabeçalhos
+      placeholder: 'ex.: Cache.*'
+      add: Adicionar Cabeçalho
     paths:
-      title: Paths
-      label: Paths
+      title: Caminhos
+      label: Caminhos
       tooltip: Paths redacts information from request and response bodies based on json path expressions
-      placeholder: e.g. $.gitCommit
-      add: Add Path
+      placeholder: 'ex.: $.gitCommit'
+      add: Adicionar Caminho
   error:
       enableOrDisable: "{flag, select, enable {Error when enabling - {id}} disable {Error when disabling - {id}} other {Error - {id}}}"
       
@@ -3864,177 +3864,177 @@ istio:
   links:
     kiali:
       label: Kiali
-      description: 'Visualization of services within a service mesh and how they are connected. For Kiali to display data, you need Prometheus installed. If you need a monitoring solution, install <a tabindex="0" href="{link}">{vendor} monitoring</a>.'
+      description: Visualização de serviços dentro de uma malha de serviços e como eles estão conectados. Para que o Kiali exiba dados, você precisa do Prometheus instalado. Se precisar de uma solução de monitoramento, instale o <a tabindex="0" href="{link}">{vendor} monitoring</a>.
     jaeger:
       label: Jaeger
-      description: Monitor and Troubleshoot microservices-based distributed systems.
-    disabled: '{app} is not installed'
-  cni: Enable CNI
+      description: Monitore e solucione problemas em sistemas distribuídos baseados em microsserviços.
+    disabled: '{app} não está instalado'
+  cni: Habilitar CNI
   customOverlayFile:
-    label: Custom Overlay File
+    label: Arquivo de Overlay Personalizado
     tip: 'The <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">overlay file</a> allows for additional configuration on top of the base {vendor} Istio installation. You can utilize the <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >IstioOperator API</a> to make changes and additions for all components and apply those changes via this overlay YAML file.'
   description: '{vendor} Istio helm chart installs a minimal Istio configuration for you to get started integrating with your applications. If you would like to get additional information about Istio, visit <a target="_blank" href="https://istio.io/latest/docs/concepts/what-is-istio" rel="noopener noreferrer nofollow">https://istio.io/latest/docs/concepts/what-is-istio/</a>'
   destinationRule:
     title:
-      new: Add Destination Rule
-      edit: Edit Destination Rule
-      view: "Destination Rule: {name}"
+      new: Adicionar Regra de Destino
+      edit: Editar Regra de Destino
+      view: 'Regra de Destino: {name}'
     port:
-      label: Port
-      placeholder: e.g. 8080 or myport
+      label: Porta
+      placeholder: 'ex.: 8080 ou minhaporta'
     host:
-      label: Input a host
-      error: Host is required.
+      label: Informe um host
+      error: Host é obrigatório.
     name:
-      placeholder: e.g. myrule
+      placeholder: 'ex.: minharegra'
     loadBalancer:
-      title: Load Balancer
-      label: Algorithm
-      detail: Configure the load balancer algorithms
+      title: Balanceador de Carga
+      label: Algoritmo
+      detail: Configurar os algoritmos de balanceamento de carga
       simple:
-        label: Use standard load balancing algorithms
+        label: Usar algoritmos padrão de balanceamento de carga
         roundRobin:
-          label: Round Robin Policy
+          label: Política Round Robin
         leastConn:
-          label: Least Request Load Balancer
+          label: Balanceador de Menor Requisição
         random:
-          label: Random Load Balancer
+          label: Balanceador Aleatório
         passthrough:
           label: Passthrough
       consistentHash:
-        label: Use consistent hash-based load balancing for soft session affinity
+        label: Usar balanceamento de carga baseado em hash consistente para afinidade de sessão suave
         httpHeaderName:
-          label: HTTP Header Name
-          placeholder: e.g. end-user
-          error: HTTP Header Name is required.
+          label: Nome do Cabeçalho HTTP
+          placeholder: 'ex.: end-user'
+          error: Nome do Cabeçalho HTTP é obrigatório.
         minimumRingSize:
-          label: Minimum Ring Size
-          placeholder: e.g. 1024
+          label: Tamanho Mínimo do Anel
+          placeholder: 'ex.: 1024'
         httpCookie:
           name:
-            label: Cookie Name
-            placeholder: e.g. username
-            error: Cookie Name is required.
+            label: Nome do Cookie
+            placeholder: 'ex.: usuario'
+            error: Nome do Cookie é obrigatório.
           path:
-            label: Cookie Path
-            placeholder: e.g. /
+            label: Caminho do Cookie
+            placeholder: 'ex.: /'
           ttl:
             label: TTL
-            placeholder: e.g. 0s
-            error: TTL is required.
+            placeholder: 'ex.: 0s'
+            error: TTL é obrigatório.
         mode:
-          label: Hash Mode
+          label: Modo de Hash
           header:
-            label: Hash based on a specific HTTP header
+            label: Hash baseado em um cabeçalho HTTP específico
           cookie:
-            label: Hash based on HTTP cookie
+            label: Hash baseado em cookie HTTP
           sourceIp:
-            label: Hash based on the source IP address
+            label: Hash baseado no endereço IP de origem
     connectionPool:
-      label: Connection Pool
-      detail: Configure the volume of connections to an upstream service
+      label: Pool de Conexão
+      detail: Configurar o volume de conexões para um serviço upstream
       http1MaxPendingRequests:
-        label: HTTP1 Max Pending Requests
-        placeholder: e.g. 1024
-        help: Maximum number of pending HTTP requests to a destination.
+        label: Máximo de Requisições HTTP1 Pendentes
+        placeholder: 'ex.: 1024'
+        help: Número máximo de requisições HTTP pendentes a um destino.
       http2MaxRequests:
-        label: HTTP2 Max Requests
-        placeholder: e.g. 1024
-        help: Maximum number of requests to a backend.
+        label: Máximo de Requisições HTTP2
+        placeholder: 'ex.: 1024'
+        help: Número máximo de requisições a um backend.
       maxRequestsPerConnection:
-        label: HTTP Max Requests Per Connection
-        placeholder: e.g. 10
-        help: Maximum number of requests per connection to a backend. Setting this parameter to 1 disables keep alive.
+        label: Máximo de Requisições HTTP por Conexão
+        placeholder: 'ex.: 10'
+        help: Número máximo de requisições por conexão a um backend. Definir este parâmetro como 1 desabilita keep alive.
       maxRetries:
-        label: HTTP Max Retries
-        placeholder: e.g. 1024
-        help: Maximum number of retries that can be outstanding to all hosts in a cluster at a given time.
+        label: Máximo de Tentativas HTTP
+        placeholder: 'ex.: 1024'
+        help: Número máximo de tentativas pendentes para todos os hosts em um cluster a qualquer momento.
       connectTimeout:
-        label: TCP Connection Timeout
-        placeholder: e.g. 30ms
-        help: TCP connection timeout.
+        label: Timeout de Conexão TCP
+        placeholder: 'ex.: 30ms'
+        help: Timeout de conexão TCP.
       maxConnections:
-        label: TCP Max Connections
-        placeholder: e.g. 1024
-        help: Maximum number of HTTP1 /TCP connections to a destination host.
+        label: Máximo de Conexões TCP
+        placeholder: 'ex.: 1024'
+        help: Número máximo de conexões HTTP1/TCP a um host de destino.
     outlierDetection:
-      label: Outlier Detection
-      detail: Configure eviction of unhealthy hosts from the load balancing pool
+      label: Detecção de Anomalias
+      detail: Configurar a remoção de hosts não saudáveis do pool de balanceamento de carga
       baseEjectionTime:
-        label: Base Ejection Time
-        placeholder: e.g. 30s
-        help: Minimum ejection duration. A host will remain ejected for a period equal to the product of minimum ejection duration and the number of times the host has been ejected.
+        label: Tempo Base de Ejeção
+        placeholder: 'ex.: 30s'
+        help: Duração mínima de ejeção. Um host permanecerá ejetado por um período igual ao produto da duração mínima de ejeção e o número de vezes que foi ejetado.
       consecutiveErrors:
-        label: Consecutive Errors
-        placeholder: e.g. 5
-        help: Number of errors before a host is ejected from the connection pool.
+        label: Erros Consecutivos
+        placeholder: 'ex.: 5'
+        help: Número de erros antes de um host ser ejetado do pool de conexão.
       interval:
-        label: Interval
-        placeholder: e.g. 10s
-        help: Time interval between ejection sweep analysis.
+        label: Intervalo
+        placeholder: 'ex.: 10s'
+        help: Intervalo de tempo entre análises de varredura de ejeção.
       maxEjectionPercent:
-        label: Max Ejection Percent
-        placeholder: e.g. 10
-        help: Maximum % of hosts in the load balancing pool for the upstream service that can be ejected.
+        label: Percentual Máximo de Ejeção
+        placeholder: 'ex.: 10'
+        help: Percentual máximo de hosts no pool de balanceamento de carga que podem ser ejetados.
     subsets:
-      label: Subsets
-      noSubsets: No Subsets
-      addSubsetLabel: Add Subset
-      removeSubsetLabel: Remove Subset
+      label: Subconjuntos
+      noSubsets: Sem Subconjuntos
+      addSubsetLabel: Adicionar Subconjunto
+      removeSubsetLabel: Remover Subconjunto
       name:
-        label: Name
-        placeholder: e.g. v1
-        error: Subset Name is required.
+        label: Nome
+        placeholder: 'ex.: v1'
+        error: Nome do Subconjunto é obrigatório.
       labels:
-        error: Please input at least one label for subset.
+        error: Informe pelo menos um label para o subconjunto.
     tls:
       label: TLS
-      detail: Configure TLS related settings for connections to the upstream service
+      detail: Configurar opções TLS para conexões ao serviço upstream
       mode:
-        label: TLS Mode
+        label: Modo TLS
         none:
-          label: NONE
+          label: NENHUM
         istio:
-          label: Istio Mutual - Secure connections to the upstream using mutual TLS by Istio
+          label: Istio Mutual - Proteger conexões ao upstream usando TLS mútuo pelo Istio
         disable:
-          label: Disable - Do not setup a TLS connection to the upstream endpoint
+          label: Desabilitar - Não configurar conexão TLS ao endpoint upstream
         simple:
-          label: Simple - Originate a TLS connection to the upstream endpoint
+          label: Simples - Originar uma conexão TLS ao endpoint upstream
         mutual:
-          label: Mutual - Secure connections to the upstream using mutual TLS by presenting client certificates for authentication
+          label: Mútuo - Proteger conexões ao upstream usando TLS mútuo apresentando certificados do cliente
       clientCertificate:
-        label: Client Certificate
-        placeholder: e.g. /etc/certs/myclientcert.pem
-        error: Client Certificate is required.
+        label: Certificado do Cliente
+        placeholder: 'ex.: /etc/certs/myclientcert.pem'
+        error: Certificado do Cliente é obrigatório.
       privateKey:
-        label: Private Key
-        placeholder: e.g. /etc/certs/client_private_key.pem
-        error: Private Key is required.
+        label: Chave Privada
+        placeholder: 'ex.: /etc/certs/client_private_key.pem'
+        error: Chave Privada é obrigatória.
       caCertificates:
-        label: CA Certificates
-        placeholder: e.g. /etc/certs/rootcacerts.pem
+        label: Certificados CA
+        placeholder: 'ex.: /etc/certs/rootcacerts.pem'
       sni:
         label: SNI
-        placeholder: e.g. nginx.example.com
+        placeholder: 'ex.: nginx.example.com'
       subjectAltNames:
-        label: Subject Alternative Names
-        placeholder: e.g. example.com
-        add: Add Subject Alternative Name
-  egressGateway: Enable Egress Gateway
-  ingressGateway: Enable Ingress Gateway
-  istiodRemote: Enable istiodRemote
-  kiali: Enable Kiali
-  pilot: Enable Pilot
-  policy: Enable Policy
-  pilotRequired: Pilot must be enabled in order to enable Kiali
+        label: Nomes Alternativos do Sujeito
+        placeholder: 'ex.: example.com'
+        add: Adicionar Nome Alternativo do Sujeito
+  egressGateway: Habilitar Gateway de Saída
+  ingressGateway: Habilitar Gateway de Entrada
+  istiodRemote: Habilitar istiodRemote
+  kiali: Habilitar Kiali
+  pilot: Habilitar Pilot
+  policy: Habilitar Policy
+  pilotRequired: O Pilot deve estar habilitado para habilitar o Kiali
   poweredBy: Powered by <a target="_blank" rel="noopener noreferrer nofollow" href='https://istio.io/latest/'>Istio</a>
-  telemetry: Enable Telemetry
+  telemetry: Habilitar Telemetria
   titles:
-    components: Components
-    customAnswers: Custom Answers
-    advanced: Advanced Settings
-    description: Description
-  tracing: Enable Jaeger Tracing (limited)
+    components: Componentes
+    customAnswers: Respostas Personalizadas
+    advanced: Configurações Avançadas
+    description: Descrição
+  tracing: Habilitar Rastreamento Jaeger (limitado)
   v1Warning: Please uninstall the current Istio version in the <code>istio-system</code> namespace before attempting to install this version.
 
 itemCard:
@@ -4178,7 +4178,7 @@ logging:
     dockerRootDirectory: Diretório Raiz do Docker
     systemdLogPath: Caminho do Log systemd
     tooltip: 'Algumas distribuições Kubernetes fazem log em <code>journald</code>. Para coletar esses logs, é necessário configurar o caminho do systemd.'
-    url: '<a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Learn more</a>'
+    url: <a href="{docsBase}/integrations-in-rancher/logging/logging-helm-chart-options" target="_blank" rel="noopener nofollow noreferrer">Saiba mais</a>
     default: /run/log/journal
   elasticsearch:
     host: Host
@@ -4200,8 +4200,8 @@ logging:
     sslVersion: Versão SSL
     suppressTypeName:
       label: Suprimir Nomes de Tipo
-      elasticSearchTips: Suppress type names by default to be compatible with log server. You should enable it for Elasticsearch >= 8.0.0
-      openSearchTips: Suppress type names by default to be compatible with log server. You should enable it for OpenSearch >= 2.0.0
+      elasticSearchTips: Suprime nomes de tipo por padrão para compatibilidade com o servidor de log. Habilite para Elasticsearch >= 8.0.0
+      openSearchTips: Suprime nomes de tipo por padrão para compatibilidade com o servidor de log. Habilite para OpenSearch >= 2.0.0
   redis:
     host: Host
     port: Porta
@@ -4214,135 +4214,135 @@ logging:
   gelf:
     host: Host
     port: Porta
-    protocol: Protocol
-    tls: Enable TLS
+    protocol: Protocolo
+    tls: Habilitar TLS
     tlsOptions:
-      clientCert: Client Cert
-      clientKey: Client Cert Key
-      allCiphers: Allow any ciphers to be used
-      tlsVersion: TLS version
-      noVerify: Skip TLS verification
+      clientCert: Certificado do Cliente
+      clientKey: Chave do Certificado do Cliente
+      allCiphers: Permitir uso de qualquer cifra
+      tlsVersion: Versão TLS
+      noVerify: Ignorar verificação TLS
   kafka:
-    brokers: Brokers
-    defaultTopic: Default Topic
-    saslOverSsl: SASL Over SSL
-    scramMechanism: Scram Mechanism
+    brokers: Corretores
+    defaultTopic: Tópico Padrão
+    saslOverSsl: SASL Sobre SSL
+    scramMechanism: Mecanismo Scram
     username: Nome de usuário from Secret
-    password: Password from Secret
+    password: Senha do Secret
     sslCaCert:
-      label: CA Cert from Secret
-      placeholder: Paste in the CA certificate
+      label: Certificado CA do Secret
+      placeholder: Cole o certificado CA
     sslClientCert:
-      label: Cert from Secret
-      placeholder: Paste in the client cert
+      label: Certificado do Secret
+      placeholder: Cole o certificado do cliente
     sslClientCertChain:
-      label: Cert Chain from Secret
-      placeholder: Paste in the client cert chain
-    sslClientCertKey: Cert Key from Secret
+      label: Cadeia de Certificados do Secret
+      placeholder: Cole a cadeia de certificados do cliente
+    sslClientCertKey: Chave do Certificado do Secret
   loki:
     url: URL
-    urlInvalid: Incorrect URL format. Please  check and correct your URL format before saving.
+    urlInvalid: Formato de URL incorreto. Verifique e corrija o formato da URL antes de salvar.
     tenant: Tenant
-    username: User from Secret
-    password: Password from Secret
-    configureKubernetesLabels: Configure Kubernetes metadata in a Prometheus like format
-    extractKubernetesLabels: Extract Kubernetes labels as Loki labels
-    dropSingleKey: If a record only has 1 key, then just set the log line to the value and discard the key
-    caCert: CA Cert from Secret
-    cert: Cert from Secret
-    key: Key from Secret
+    username: Usuário do Secret
+    password: Senha do Secret
+    configureKubernetesLabels: Configurar metadados do Kubernetes no formato Prometheus
+    extractKubernetesLabels: Extrair labels do Kubernetes como labels do Loki
+    dropSingleKey: Se um registro tiver apenas 1 chave, defina a linha de log como o valor e descarte a chave
+    caCert: Certificado CA do Secret
+    cert: Certificado do Secret
+    key: Chave do Secret
   awsElasticsearch:
     url: URL
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
   azurestorage:
-    storageAccount: Account from Secret
-    accessKey:  Access Key from Secret
-    container: Container
-    path: Path
-    storeAs: Store As
+    storageAccount: Conta do Secret
+    accessKey: Chave de Acesso do Secret
+    container: Contêiner
+    path: Caminho
+    storeAs: Armazenar Como
   cloudwatch:
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
     endpoint: Endpoint
-    region: Region
-    logGroupName: Log Group Name
-    logStreamName: Log Stream Name
+    region: Região
+    logGroupName: Nome do Grupo de Logs
+    logStreamName: Nome do Stream de Logs
   datadog:
-    apiKey: API Key from Secret
-    useSSL: Use SSL
-    useCompression: Use Compression
+    apiKey: Chave de API do Secret
+    useSSL: Usar SSL
+    useCompression: Usar Compressão
     host: Host
   file:
-    path: Path
+    path: Caminho
   gcs:
     project: Projeto
-    credentialsJson: Credentials from Secret
+    credentialsJson: Credenciais do Secret
     bucket: Bucket
-    path: Path
-    overwriteExistingPath: Overwrite Existing Path
+    path: Caminho
+    overwriteExistingPath: Sobrescrever Caminho Existente
   kinesisStream:
-    streamName: Stream Name
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    streamName: Nome do Stream
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
   logdna:
-    apiKey: API Key
+    apiKey: Chave de API
     hostname: Hostname
-    app: App
+    app: Aplicativo
   logz:
     url: URL
-    port: Port
-    token: Api Token from Secret
-    enableCompression: Enable Compression
+    port: Porta
+    token: Token de API do Secret
+    enableCompression: Habilitar Compressão
   newrelic:
-    apiKey: API Key from Secret
-    licenseKey: License Key from Secret
-    baseURI: Base URI
+    apiKey: Chave de API do Secret
+    licenseKey: Chave de Licença do Secret
+    baseURI: URI Base
   sumologic:
-    endpoint: Endpoint from Secret
-    sourceName: Source Name
+    endpoint: Endpoint do Secret
+    sourceName: Nome da Fonte
   syslog:
     host: Host
-    port: Port
-    transport: Transport
-    insecure: insecure
-    trustedCaPath: CA Path from Secret
+    port: Porta
+    transport: Transporte
+    insecure: inseguro
+    trustedCaPath: Caminho CA do Secret
     format:
-      title: Format
-      type: Type
-      addNewLine: Add New Line
-      messageKey: Message Key
+      title: Formato
+      type: Tipo
+      addNewLine: Adicionar Nova Linha
+      messageKey: Chave de Mensagem
     buffer:
       title: Buffer
       tags: Tags
-      chunkLimitSize: Chunk Limit Size
-      chunkLimitRecords: Chunk Limit chunkLimitRecords
-      totalLimitSize: Total Limit Size
-      flushInterval: Flush Interval
+      chunkLimitSize: Tamanho Limite do Chunk
+      chunkLimitRecords: Registros Limite do Chunk
+      totalLimitSize: Tamanho Total Limite
+      flushInterval: Intervalo de Flush
       timekey: Timekey
-      timekeyWait: Timekey Wait
-      timekeyUseUTC: Timekey Use UTC
+      timekeyWait: Espera do Timekey
+      timekeyUseUTC: Usar UTC no Timekey
   s3:
-    keyId: Key Id from Secret
-    secretKey: Secret Key from Secret
+    keyId: ID da Chave do Secret
+    secretKey: Chave Secreta do Secret
     endpoint: Endpoint
     bucket: Bucket
-    path: Path
-    overwriteExistingPath: Overwrite Existing Path
+    path: Caminho
+    overwriteExistingPath: Sobrescrever Caminho Existente
   output:
     buffer:
-      label: Output Buffer
-    selectOutputs: Select Outputs
-    selectBanner: Select to configure an output
+      label: Buffer de Saída
+    selectOutputs: Selecionar Saídas
+    selectBanner: Selecione para configurar uma saída
     sections:
-      target: Target
-      access: Access
-      certificate: Connection
+      target: Destino
+      access: Acesso
+      certificate: Conexão
       labels: Labels
-      configuration: Configuration
+      configuration: Configuração
     tips:
-      singleProvider: This output is configured with multiple providers. We currently only support a single provider per output. You can view or edit the YAML.
-      multipleProviders: This output is configured with providers we do not support yet. You can view or edit the YAML.
+      singleProvider: Esta saída está configurada com múltiplos provedores. Atualmente suportamos apenas um único provedor por saída. Você pode visualizar ou editar o YAML.
+      multipleProviders: Esta saída está configurada com provedores que ainda não suportamos. Você pode visualizar ou editar o YAML.
   outputProviders:
     elasticsearch: Elasticsearch
     opensearch: OpenSearch
@@ -4356,7 +4356,7 @@ logging:
     azurestorage: Azure Storage
     cloudwatch: Cloudwatch
     datadog: Datadog
-    file: File
+    file: Arquivo
     gcs: GCS
     kinesisStream: Kinesis Stream
     logdna: LogDNA
@@ -4365,34 +4365,34 @@ logging:
     sumologic: SumoLogic
     syslog: Syslog
     s3: S3
-    unknown: Unknown
+    unknown: Desconhecido
   overview:
     poweredBy: Banzai Cloud
-    clusterLevel: Cluster-Level
-    namespaceLevel: Namespace-Level
-  provider: Provider
+    clusterLevel: Nível de Cluster
+    namespaceLevel: Nível de Namespace
+  provider: Provedor
   splunk:
     host: Host
-    port: Port
-    protocol: Protocol
-    index: Index
-    token: Token from Secret
-    insecureSsl: Insecure SSL
-    indexName: Index Name
-    source: Source
-    caFile: CA File from Secret
-    caPath: CA Path from Secret
-    clientCert: Client Cert from Secret
-    clientKey: Client Key from Secret
+    port: Porta
+    protocol: Protocolo
+    index: Índice
+    token: Token do Secret
+    insecureSsl: SSL Inseguro
+    indexName: Nome do Índice
+    source: Fonte
+    caFile: Arquivo CA do Secret
+    caPath: Caminho CA do Secret
+    clientCert: Certificado do Cliente do Secret
+    clientKey: Chave do Cliente do Secret
   forward:
     host: Host
-    port: Port
-    sharedKey: Shared Key from Secret
-    username: Username from Secret
-    password: Password from Secret
-    clientCertPath: Client Cert Path from Secret
-    clientPrivateKeyPath: Client Private Key Path from Secret
-    clientPrivateKeyPassphrase: Client Private Key Passphrase from Secret
+    port: Porta
+    sharedKey: Chave Compartilhada do Secret
+    username: Usuário do Secret
+    password: Senha do Secret
+    clientCertPath: Caminho do Certificado do Cliente do Secret
+    clientPrivateKeyPath: Caminho da Chave Privada do Cliente do Secret
+    clientPrivateKeyPassphrase: Passphrase da Chave Privada do Cliente do Secret
 
 longhorn:
   overview:
@@ -4505,263 +4505,263 @@ membershipEditor:
 
 monitoring:
   accessModes:
-    many: ReadWriteMany
-    once: ReadWriteOnce
-    readOnlyMany: ReadOnlyMany
+    many: LeituraEscritaMúltiplos
+    once: LeituraEscritaÚnico
+    readOnlyMany: SomenteLeituraMúltiplos
   aggregateDefaultRoles:
-    label: Aggregate to Default Kubernetes Roles
-    tip: 'Adds labels to the ClusterRoles deployed by the Monitoring chart to <a target="_blank" rel="noopener nofollow noreferrer" href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles"> aggregate to the corresponding default k8s admin, edit, and view ClusterRoles.</a>'
+    label: Agregar a Funções Padrão do Kubernetes
+    tip: Adiciona labels às ClusterRoles implantadas pelo chart de Monitoramento para <a target="_blank" rel="noopener nofollow noreferrer" href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles"> agregar às ClusterRoles admin, edit e view padrão do k8s.</a>
   alerting:
     config:
-      label: Alert Manager Config
+      label: Configuração do Alert Manager
     enable:
-      label: Deploy Alertmanager
+      label: Implantar Alertmanager
     secrets:
       additional:
-        info: Secrets should be mounted at <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>
-        label: Additional Secrets
-      existing: Choose an existing config secret
+        info: Os Secrets devem ser montados em <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>
+        label: Secrets Adicionais
+      existing: Escolher um secret de configuração existente
       info: |
         <span class="text-bold">Create default config</span>:<br>A Secret containing your Alertmanager Config will be created in the <pre class='inline-block m-0'>cattle-monitoring-system</pre> namespace on deploying this chart under the name <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. By default, this Secret will never be modified on an uninstall or upgrade of this chart. <br /><br />
         Once you have deployed this chart, you should edit the Secret via the UI in order to add your custom notification configurations that will be used by Alertmanager to send alerts. <br /> <br />
         <span class="text-bold">Choose an existing config secret</span>:<br>You must specify a Secret that exists in the <pre class='inline-block m-0'>cattle-monitoring-system</pre> namespace. If the namespace does not exist, you will not be able to select an existing secret.
-      label: Alertmanager Secret
-      new: Create default config
+      label: Secret do Alertmanager
+      new: Criar configuração padrão
       radio:
-        label: Config Secret
+        label: Secret de Configuração
     validation:
-      duplicatedReceiverName: A receiver with the name {name} already exists.
+      duplicatedReceiverName: Já existe um receptor com o nome {name}.
     templates:
-      keyLabel: File Name
-      label: Template Files
-      valueLabel: YAML Template
-    title: Configure Alertmanager
+      keyLabel: Nome do Arquivo
+      label: Arquivos de Template
+      valueLabel: Template YAML
+    title: Configurar Alertmanager
   clusterType:
-    label: Cluster Type
-    placeholder: Select cluster type
+    label: Tipo de Cluster
+    placeholder: Selecionar tipo de cluster
   createDefaultRoles:
-    label: Create Default Monitoring Cluster Roles
-    tip: 'Creates <code>monitoring-admin</code>, <code>monitoring-edit</code>, and <code>monitoring-view</code> ClusterRoles that can be assigned to users to provide permissions to CRDs installed by the Monitoring chart.'
+    label: Criar Funções Padrão de Monitoramento do Cluster
+    tip: Cria ClusterRoles <code>monitoring-admin</code>, <code>monitoring-edit</code> e <code>monitoring-view</code> que podem ser atribuídas a usuários para fornecer permissões aos CRDs instalados pelo chart de Monitoramento.
   etcdNodeDirectory:
-    label: etcd Node Certificate Directory
+    label: Diretório de Certificado do Nó etcd
     tooltip: 'For clusters that use RancherOS for the etcd nodes, this option should be set to <pre class=''inline-block m-0''>/opt/rke/etc/kubernetes/ssl</pre>. Hybrid environments that require specifying multiple certificate directories (e.g. an etcd plane composed of both RancherOS and Ubuntu hosts) are not supported.'
   grafana:
     storage:
-      annotations: PVC Annotations
-      className: Storage Class Name
-      existingClaim: Use Existing Claim
-      finalizers: PVC Finalizers
-      label: Grafana Storage
-      mode: Access Mode
-      selector: Selector
-      size: Size
-      subpath: Use Subpath
-      type: Persistent Storage Types
+      annotations: Anotações do PVC
+      className: Nome da Classe de Armazenamento
+      existingClaim: Usar Claim Existente
+      finalizers: Finalizadores do PVC
+      label: Armazenamento do Grafana
+      mode: Modo de Acesso
+      selector: Seletor
+      size: Tamanho
+      subpath: Usar Subcaminho
+      type: Tipos de Armazenamento Persistente
       types:
-        existing: Enable With Existing PVC
-        statefulset: Enable with StatefulSet Template
-        template: Enable with PVC Template
-      volumeName: Volume Name
-    title: Configure Grafana
+        existing: Habilitar com PVC Existente
+        statefulset: Habilitar com Template StatefulSet
+        template: Habilitar com Template PVC
+      volumeName: Nome do Volume
+    title: Configurar Grafana
   hostNetwork:
-    label: Use Host Network For Prometheus Operator
+    label: Usar Rede do Host para o Operador Prometheus
     tip: If you are using a managed Kubernetes cluster with custom CNI (e.g. Calico), you must enable this option to allow a managed control plane to contact the admission webhook exposed by Prometheus Operator to mutate or validate incoming PrometheusRules.
   overview:
     alertsList:
       ends:
-        label: Ends At
-      label: Active Alerts
+        label: Encerra em
+      label: Alertas Ativos
       message:
-        label: Message
+        label: Mensagem
       severity:
-        label: Severity
+        label: Severidade
       start:
-        label: Starts At
+        label: Inicia em
     linkedList:
       alertManager:
-        description: Active Alerts
+        description: Alertas Ativos
         label: Alertmanager
       grafana:
-        description: Metrics Dashboards
+        description: Painéis de Métricas
         label: Grafana
-      na: Resource Unavailable
+      na: Recurso Indisponível
       prometheusPromQl:
-        description: PromQL Graph
-        label: Prometheus Graph
+        description: Gráfico PromQL
+        label: Gráfico Prometheus
       prometheusRules:
-        description: Configured Rules
+        description: Regras Configuradas
         label: PrometheusRules
       prometheusTargets:
-        description: Configured Targets
-        label: Prometheus Targets
+        description: Alvos Configurados
+        label: Alvos do Prometheus
     subtitle: 'Powered By: <a href="https://github.com/coreos/prometheus-operator" target="_blank" rel="noopener noreferrer nofollow">Prometheus</a>'
-    title: Dashboard
+    title: Painel
   prometheus:
     config:
-      adminApi: Admin API
-      evaluation: Evaluation Interval
+      adminApi: API de Administração
+      evaluation: Intervalo de Avaliação
       ignoreNamespaceSelectors:
         help: 'Ignoring Namespace Selectors allows Cluster Admins to limit teams from monitoring resources outside of namespaces they have permissions to but can break the functionality of Apps that rely on setting up Monitors that scrape targets across multiple namespaces, such as Istio.'
-        label: Namespace Selectors
+        label: Seletores de Namespace
         radio:
           enforced: 'Use: Monitors can access resources based on namespaces that match the namespace selector field'
           ignored: 'Ignore: Monitors can only access resources in the namespace they are deployed in'
       limits:
-        cpu: CPU Limit
-        memory: Memory Limit
+        cpu: Limite de CPU
+        memory: Limite de Memória
       requests:
-        cpu: Requested CPU
-        memory: Requested Memory
-      resourceLimits: Resource Limits
-      retention: Retention
-      retentionSize: Retention Size
-      scrape: Scrape Interval
+        cpu: CPU Solicitada
+        memory: Memória Solicitada
+      resourceLimits: Limites de Recursos
+      retention: Retenção
+      retentionSize: Tamanho de Retenção
+      scrape: Intervalo de Coleta
     storage:
-      className: Storage Class Name
-      label: Persistent Storage for Prometheus
-      mode: Access Mode
-      selector: Selector
+      className: Nome da Classe de Armazenamento
+      label: Armazenamento Persistente para Prometheus
+      mode: Modo de Acesso
+      selector: Seletor
       selectorWarning: 'If you are using a dynamic provisioner (e.g. Longhorn), no Selectors should be specified since a PVC with a non-empty selector can''t have a PV dynamically provisioned for it.'
-      size: Size
-      volumeName: Volume Name
-    title: Configure Prometheus
+      size: Tamanho
+      volumeName: Nome do Volume
+    title: Configurar Prometheus
     warningInstalled: |
       Warning: Prometheus Operators are currently deployed. Deploying multiple Prometheus Operators onto one cluster is not currently supported. Please remove all other Prometheus Operator deployments from this cluster before trying to install this chart.
       If you are migrating from an older version of {vendor} with Monitoring enabled, please disable Monitoring on this cluster completely before attempting to install this chart.
   receiver:
-    addReceiver: Add Receiver
+    addReceiver: Adicionar Receptor
     fields:
       name: Nome
     tls:
       label: SSL
       caFilePath:
-        label: CA File Path
-        placeholder: e.g. ./ca-file.csr
+        label: Caminho do Arquivo CA
+        placeholder: 'ex.: ./ca-file.csr'
       certFilePath:
-        label: Cert File Path
-        placeholder: e.g. ./cert-file.crt
+        label: Caminho do Arquivo de Certificado
+        placeholder: 'ex.: ./cert-file.crt'
       keyFilePath:
-        label: Key File Path
-        placeholder: e.g. ./key-file.pfx
+        label: Caminho do Arquivo de Chave
+        placeholder: 'ex.: ./key-file.pfx'
       secretsBanner: The file paths below must be referenced in <pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre> when deploying the Monitoring chart. For more information see our <a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">documentation</a>.
   projectMonitoring:
     detail:
-      error: "Unable to fetch Dashboard values with status: "
+      error: 'Não foi possível buscar valores do Painel com o status: '
     list:
-      banner: Project Monitoring Configuration is stored in ProjectHelmChart resources
+      banner: A Configuração de Monitoramento de Projeto está armazenada em recursos ProjectHelmChart
       empty:
-        message: Project Monitoring has not been configured for any projects
-        canCreate: Get started by clicking Create to add monitoring to a project
-        cannotCreate: Contact the admin to add project monitoring
+        message: O Monitoramento de Projeto não foi configurado para nenhum projeto
+        canCreate: Comece clicando em Criar para adicionar monitoramento a um projeto
+        cannotCreate: Entre em contato com o administrador para adicionar monitoramento de projeto
   route:
-    label: Route
+    label: Rota
     fields:
-      groupBy: Group By
-      groupInterval: Group Interval
-      groupWait: Group Wait
-      receiver: Receiver
-      repeatInterval: Repeat Interval
-  routesAndReceivers: Routes and Receivers (Deprecated)
-  monitors: Monitors
-  projectMonitors: Project Monitoring
+      groupBy: Agrupar Por
+      groupInterval: Intervalo de Agrupamento
+      groupWait: Espera de Agrupamento
+      receiver: Receptor
+      repeatInterval: Intervalo de Repetição
+  routesAndReceivers: Rotas e Receptores (Descontinuado)
+  monitors: Monitores
+  projectMonitors: Monitoramento de Projeto
   alertmanagerConfig:
     description: Routes and receivers for project alerting and cluster alerting are configured within AlertmanagerConfig resources.
-    empty: Alerts have not been configured for any accessible namespaces.
-    getStarted: Get started by clicking Create to configure an alert.
-    receiverTooltip: This route will direct alerts to the selected receiver, which must be defined in the same AlertmanagerConfig.
+    empty: Alertas não foram configurados para nenhum namespace acessível.
+    getStarted: Comece clicando em Criar para configurar um alerta.
+    receiverTooltip: Esta rota direcionará alertas ao receptor selecionado, que deve ser definido no AlertmanagerConfig.
     deprecationWarning: The Route and Receiver resources are deprecated. Going forward, routes and receivers should not be managed as separate Kubernetes resources on this page. They should be configured as YAML fields in an AlertmanagerConfig resource.
     routeInfo: This form supports configuring one route that directs traffic to a receiver. Alerts can be directed to more receiver(s) by configuring child routes in YAML.
     receiverFormNames:
-      create: Create Receiver in AlertmanagerConfig
-      edit: Edit Receiver in AlertmanagerConfig
-      editYaml: Edit AlertmanagerConfig
-      detail: Receiver in AlertmanagerConfig
-    disabledReceiverButton: The receiver form is available after the AlertmanagerConfig is created
-    error: An error occurred saving the AlertmanagerConfig
+      create: Criar Receptor no AlertmanagerConfig
+      edit: Editar Receptor no AlertmanagerConfig
+      editYaml: Editar AlertmanagerConfig
+      detail: Receptor no AlertmanagerConfig
+    disabledReceiverButton: O formulário de receptor está disponível após a criação do AlertmanagerConfig
+    error: Ocorreu um erro ao salvar o AlertmanagerConfig
     email:
-      username: Auth Username
-      password: Secret with Auth Password
+      username: Usuário de Autenticação
+      password: Secret com Senha de Autenticação
     slack:
-      apiUrl: Secret with Slack Webhook URL
+      apiUrl: Secret com URL do Webhook do Slack
     pagerDuty:
-      routingKey: Secret with Routing Key
-      serviceKey: Secret with Service Key
+      routingKey: Secret com Chave de Roteamento
+      serviceKey: Secret com Chave de Serviço
     opsgenie:
-      apiKey: Secret with API Key
+      apiKey: Secret com Chave de API
     webhook:
       url: URL
-      urlSecret: URL Secret
+      urlSecret: Secret de URL
       urlSecretTooltip: 'urlSecret takes precedence over url. One of urlSecret and url should be defined.'
     auth:
-      bearerTokenSecret: Bearer Token Secret
-      basicAuthUsername: Secret with Basic Auth Username
-      basicAuthPassword: Secret with Basic Auth Password
+      bearerTokenSecret: Secret do Token Bearer
+      basicAuthUsername: Secret com Usuário de Autenticação Básica
+      basicAuthPassword: Secret com Senha de Autenticação Básica
   tabs:
-    alerting: Alerting
-    general: General
+    alerting: Alertas
+    general: Geral
     grafana: Grafana
     prometheus: Prometheus
-    projectMetrics: Project Metrics
+    projectMetrics: Métricas do Projeto
   v1Warning: 'Monitoring is currently deployed from Cluster Manager. If you are migrating from an older version of {vendor} with monitoring enabled, please disable monitoring in Cluster Manager before attempting to install the new {vendor} Monitoring chart in Cluster Explorer.'
 
 monitoringReceiver:
-  addButton: Add {type}
+  addButton: Adicionar {type}
   custom:
-    label: Custom
-    title: Custom Config
+    label: Personalizado
+    title: Configuração Personalizada
     info: The YAML provided here will be directly appended to your receiver within the Alertmanager Config Secret.
   email:
-    label: Email
-    title: Email Config
+    label: E-mail
+    title: Configuração de E-mail
   opsgenie:
     label: Opsgenie
-    title: Opsgenie Config
+    title: Configuração do Opsgenie
   pagerduty:
     label: PagerDuty
-    title: PagerDuty Config
+    title: Configuração do PagerDuty
     info: "You can find additional info on creating an Integration Key for PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='noopener nofollow' class='flex-right'>here</a>."
   slack:
     label: Slack
-    title: Slack Config
+    title: Configuração do Slack
     info: "You can find additional info on creating Incoming Webhooks for Slack <a href='https://rancher.slack.com/apps/A0F7XDUAZ-incoming-webhooks' target='_blank' rel='noopener noreferrer nofollow'>here</a> ."
   webhook:
     label: Webhook
-    title: Webhook Config
-    urlTooltip: For some webhooks this a url that points to the service DNS
+    title: Configuração do Webhook
+    urlTooltip: Para alguns webhooks, esta é uma URL que aponta para o DNS do serviço
     modifyNamespace: If <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> default values were changed, please update the url below in the format http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
     banner: To use MS Teams or SMS you will need to have at least one instance of <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> installed first.
     add:
-      selectWebhookType: Select Webhook Type
-      generic: Generic
+      selectWebhookType: Selecionar Tipo de Webhook
+      generic: Genérico
       msTeams: MS Teams
       alibabaCloudSms: SMS
   auth:
-    label: Auth
-    authType: Auth Type
-    username: Username
-    password: Password
+    label: Autenticação
+    authType: Tipo de Autenticação
+    username: Usuário
+    password: Senha
     none:
-      label: None
+      label: Nenhum
     bearerToken:
       label: Bearer Token
-      placeholder: e.g. secret-token
+      placeholder: 'ex.: secret-token'
     basicAuth:
-      label: Basic Auth
+      label: Autenticação Básica
     bearerTokenFile:
-      label: Bearer Token File
-      placeholder: e.g. ./user_token
+      label: Arquivo do Bearer Token
+      placeholder: 'ex.: ./user_token'
   tls:
-    ca: Secret with CA
-    cert: Secret with Client Cert
-    key: Secret with Client Key
-    serverName: Server Name
-    serverNameTooltip: Used to verify the hostname for the targets.
+    ca: Secret com CA
+    cert: Secret com Certificado do Cliente
+    key: Secret com Chave do Cliente
+    serverName: Nome do Servidor
+    serverNameTooltip: Usado para verificar o hostname dos alvos.
   shared:
     proxyUrl:
-      label: Proxy URL
-      placeholder: e.g. http://my-proxy/
+      label: URL do Proxy
+      placeholder: 'ex.: http://meu-proxy/'
     sendResolved:
-      label: Enable send resolved alerts
+      label: Habilitar envio de alertas resolvidos
 
 alertmanagerConfigReceiver:
   secretKeyId: Key Id from Secret
@@ -5442,166 +5442,166 @@ inactivity:
 
 # Rancher Extensions
 plugins:
-  altIcon: Icon for {extension} extension card
-  incompatiblePrimeOnly: "The latest version of this extension ({ version }) needs Rancher Prime in order to be installed."
-  incompatibleRancherVersion: "The latest version of this extension ({ version }) is not compatible with the current Rancher version ({ required })."
-  incompatibleKubeVersion: "The latest version of this extension ({ version }) is not compatible with the current Kube version ({ required })."
-  incompatibleUiExtensionsApiVersionMissing: 'The latest version of this extension ({ version }) is missing the mandatory annotation catalog.cattle.io/ui-extensions-version from Rancher 2.10 and onwards.'
-  incompatibleUiExtensionsApiVersion: "The latest version of this extension ({ version }) is not compatible with the current Extensions API version ({ required })."
-  incompatibleHost: 'The latest version of this extension ({ version }) has a host of "{ required }" which is not compatible with this application "{ mainHost }".'
-  currentInstalledVersionBlockedByKubeVersion: "This version is not compatible with the current Kubernetes version ({ kubeVersion }  Vs  { kubeVersionToCheck })."
-  closePluginPanel: Close plugin description panel
-  viewVersionDetails: View extension {name} version {version} details/Readme
+  altIcon: Ícone para o cartão de extensão {extension}
+  incompatiblePrimeOnly: A versão mais recente desta extensão ({ version }) requer o Rancher Prime para ser instalada.
+  incompatibleRancherVersion: A versão mais recente desta extensão ({ version }) não é compatível com a versão atual do Rancher ({ required }).
+  incompatibleKubeVersion: A versão mais recente desta extensão ({ version }) não é compatível com a versão atual do Kube ({ required }).
+  incompatibleUiExtensionsApiVersionMissing: A versão mais recente desta extensão ({ version }) está sem a anotação obrigatória catalog.cattle.io/ui-extensions-version do Rancher 2.10 em diante.
+  incompatibleUiExtensionsApiVersion: A versão mais recente desta extensão ({ version }) não é compatível com a versão atual da API de Extensões ({ required }).
+  incompatibleHost: A versão mais recente desta extensão ({ version }) tem um host de "{ required }" que não é compatível com esta aplicação "{ mainHost }".
+  currentInstalledVersionBlockedByKubeVersion: Esta versão não é compatível com a versão atual do Kubernetes ({ kubeVersion } vs { kubeVersionToCheck }).
+  closePluginPanel: Fechar painel de descrição da extensão
+  viewVersionDetails: Ver detalhes/Readme da extensão {name} versão {version}
   labels:
-    isDeveloper: Developer Load
-    primeOnly: Prime only
+    isDeveloper: Carga do Desenvolvedor
+    primeOnly: Somente Prime
     builtin: Integrado
     experimental: Experimental
-    third-party: Third-Party
-    image: Image
-    installing: Installing ...
-    uninstalling: Uninstalling ...
-    upgrading: Upgrading ...
-    downgrading: Downgrading ...
-    menu: Extensions menu
-    reloadRancher: Reload Rancher
-    current: current
+    third-party: Terceiros
+    image: Imagem
+    installing: Instalando ...
+    uninstalling: Desinstalando ...
+    upgrading: Atualizando ...
+    downgrading: Fazendo downgrade ...
+    menu: Menu de extensões
+    reloadRancher: Recarregar Rancher
+    current: atual
   descriptions:
-    experimental: This Extension is marked as experimental
-    third-party: This Extension is provided by a Third-Party
-    built-in: This Extension is built-in
-    image: This Extension Image has been loaded manually
+    experimental: Esta Extensão está marcada como experimental
+    third-party: Esta Extensão é fornecida por Terceiros
+    built-in: Esta Extensão é integrada
+    image: Esta Imagem de Extensão foi carregada manualmente
   tooltips:
-    installing: Installing...
+    installing: Instalando...
   error:
-    title: Error loading extension
-    message: Could not load extension code
-    generic: Extension error
-    primeOnly: Unable to load Rancher Prime Extension in Rancher Community
+    title: Erro ao carregar extensão
+    message: Não foi possível carregar o código da extensão
+    generic: Erro de extensão
+    primeOnly: Não é possível carregar a Extensão Rancher Prime na Comunidade Rancher
     apiAnnotationMissing: 'Unable to load Extension. The version installed is not compatible with the current Extensions API Version (Extension is missing the annotation catalog.cattle.io/ui-extensions-version which implies incompatibility with Rancher 2.10 and onwards)'
     api: Unable to load Extension. The version installed is not compatible with the current Extensions API version
     host: Unable to load Extension. The version installed is not compatible with this application host
     version: Unable to load Extension. The version installed is not compatible with the current version of Rancher
     kubeVersion: Unable to load Extension. The version installed is not compatible with the current Rancher kubernetes version
-    load: An error occurred loading the code for this Extension
-    developerPkg: This Extension has been loaded internally, so we won't load the external version
+    load: Ocorreu um erro ao carregar o código desta Extensão
+    developerPkg: Esta Extensão foi carregada internamente, portanto não carregaremos a versão externa
   success:
-    title: Loaded extension {name}
-    message: Extension was loaded successfully
+    title: Extensão {name} carregada
+    message: A extensão foi carregada com sucesso
   developer:
-    label: Developer Load
-    title: Developer Load Extension
-    prompt: Load an extension from a URL
+    label: Carga do Desenvolvedor
+    title: Carregar Extensão do Desenvolvedor
+    prompt: Carregar uma extensão a partir de uma URL
     fields:
-      url: Extension URL
-      name: Extension module name
-      persist: Persist extension by creating custom resource
+      url: URL da Extensão
+      name: Nome do módulo da extensão
+      persist: Persistir extensão criando recurso personalizado
   info:
-    actions: Actions
+    actions: Ações
     noActions: Nenhuma ação disponível
     detail: Detalhe
-    versions: Versions
-    versionError: Could not load version information
-    requiresRancherPrime: "Requires Rancher Prime"
-    requiresRancherVersion: "Requires Rancher {required}"
-    requiresKubeVersion: "Requires Kube version {required}"
+    versions: Versões
+    versionError: Não foi possível carregar informações de versão
+    requiresRancherPrime: Requer Rancher Prime
+    requiresRancherVersion: Requer Rancher {required}
+    requiresKubeVersion: Requer versão Kube {required}
     requiresExtensionApiVersionMissing: 'Missing the annotation catalog.cattle.io/ui-extensions-version which implies incompatibility with Rancher 2.10 and onwards'
-    requiresExtensionApiVersion: "Requires Extensions API version {required}"
-    requiresHost: 'Requires a host that matches "{mainHost}"'
+    requiresExtensionApiVersion: Requer versão da API de Extensões {required}
+    requiresHost: Requer um host que corresponda a "{mainHost}"
   empty:
-    all: Extensions are neither installed nor available
-    available: No Extensions available
-    installed: No Extensions installed
-    updates: No updates available for installed Extensions
-    images: No Extension Images installed
-  loadError: An error occurred loading the code for this extension
-  helmError: "An error occurred installing the extension via Helm"
-  manageRepos: Manage Repositories
-  addRancherRepos: Add Rancher Repositories
-  manageCharts: Manage Extension Charts
+    all: Nenhuma extensão está instalada nem disponível
+    available: Nenhuma extensão disponível
+    installed: Nenhuma extensão instalada
+    updates: Nenhuma atualização disponível para extensões instaladas
+    images: Nenhuma imagem de extensão instalada
+  loadError: Ocorreu um erro ao carregar o código desta extensão
+  helmError: Ocorreu um erro ao instalar a extensão via Helm
+  manageRepos: Gerenciar Repositórios
+  addRancherRepos: Adicionar Repositórios Rancher
+  manageCharts: Gerenciar Charts de Extensão
   warnNoAuth: This version of the extension will be loaded before authentication and will have access to the login process.
   manageCatalog:
-    label: Manage Extension Catalogs
-    title: Extensions
-    subtitle: Catalogs
+    label: Gerenciar Catálogos de Extensão
+    title: Extensões
+    subtitle: Catálogos
     imageLoad:
-      load: Import Extension Catalog
+      load: Importar Catálogo de Extensão
       prompt: An Extension Catalog contains extension assets bundled into an image, importing will take the image and host a Helm repository to act as a catalog for custom built Extensions.
       fields:
         image:
-          label: Catalog Image Reference
-          placeholder: "e.g. hub.docker.io/example-org/my-image:latest"
+          label: Referência da Imagem do Catálogo
+          placeholder: 'ex.: hub.docker.io/org-exemplo/minha-imagem:latest'
         imagePullSecrets:
-          label: Image Pull Secrets
+          label: Secrets de Pull de Imagem
           tooltip: Deve ser do Tipo `kubernetes.io/dockercfg` ou `kubernetes.io/dockerconfigjson`
         secrets:
           banner: "If the registry that hosts the Catalog Image requires Pull Secrets, they must be created in the following namespace:<pre>cattle-ui-plugin-system</pre>"
       banner: This will create an Deployment, Service, and Helm repository to serve the extension charts.
       imageVersion:
-        title: Image Version Not Found
+        title: Versão da Imagem Não Encontrada
         message: Unable to determine image version from {image}, defaulting to latest
       error:
         exists:
           deployment:
-            title: Deployment Conflict
-            message: A container with the image {image} already exists
+            title: Conflito de Deployment
+            message: Já existe um contêiner com a imagem {image}
           service:
-            title: Service Conflict
-            message: A service with the name {svc} already exists
+            title: Conflito de Service
+            message: Já existe um serviço com o nome {svc}
           repo:
-            title: Helm Repository Conflict
-            message: A repository with the name {repo} already exists
+            title: Conflito de Repositório Helm
+            message: Já existe um repositório com o nome {repo}
       success:
-        title: "Imported Extension Catalog from: {name}"
-        message: Extension Catalog image was imported successfully
+        title: 'Catálogo de Extensão importado de: {name}'
+        message: A imagem do Catálogo de Extensão foi importada com sucesso
     headers:
       image:
-        name: images
-        label: Deployment Image
+        name: imagens
+        label: Imagem do Deployment
       repository:
-        label: Repository Name
+        label: Nome do Repositório
   tabs:
-    all: All
+    all: Todos
     available: Disponível
-    builtin: Built-In
-    images: Images
-    installed: Installed
-    updates: Updates
-  title: Extensions
-  version: "Version: {version}"
+    builtin: Integrado
+    images: Imagens
+    installed: Instalado
+    updates: Atualizações
+  title: Extensões
+  version: 'Versão: {version}'
   install:
-    label: Install
-    title: Install extension {name}
-    prompt: "Are you sure that you want to install this extension?"
-    version: Version
+    label: Instalar
+    title: Instalar extensão {name}
+    prompt: Tem certeza de que deseja instalar esta extensão?
+    version: Versão
     warnNotCertified: Please ensure that you are aware of the risks of installing Extensions from untrusted authors
   upgrade:
-    label: Upgrade
-    title: Upgrade extension {name}
-    prompt: "Are you sure that you want to upgrade this extension?"
+    label: Atualizar
+    title: Atualizar extensão {name}
+    prompt: Tem certeza de que deseja atualizar esta extensão?
   downgrade:
-    label: Downgrade
-    title: Downgrade extension {name}
-    prompt: "Are you sure that you want to downgrade this extension?"
+    label: Fazer downgrade
+    title: Fazer downgrade da extensão {name}
+    prompt: Tem certeza de que deseja fazer downgrade desta extensão?
   uninstall:
-    label: Uninstall
-    title: Uninstall extension {name}
-    prompt: "Are you sure that you want to uninstall this extension?"
+    label: Desinstalar
+    title: Desinstalar extensão {name}
+    prompt: Tem certeza de que deseja desinstalar esta extensão?
     catalog: "Are you sure that you want to uninstall this Extension Catalog Image? This will also remove any Extensions provided by this image."
-  upgradeAvailable: A newer version of this Extension is available
-  reload: Extensions changed - reload required
+  upgradeAvailable: Uma versão mais recente desta Extensão está disponível
+  reload: Extensões alteradas - recarregamento necessário
   safeMode:
-    title: Extensions Safe Mode
-    message: Extensions were not loaded
+    title: Modo Seguro de Extensões
+    message: Extensões não foram carregadas
   addRepos:
     banner: There are new extensions repositories available. To enable these repositories, click the button on the right.
-    bannerBtn: Add repositories
-    title: Add Extensions repositories
+    bannerBtn: Adicionar repositórios
+    title: Adicionar repositórios de Extensões
     prompt: You can install multiple Rancher extension repositories to increase your extensions catalog
   setup:
-    installed: Already installed
-    uninstalled: Already uninstalled
-    title: Extension support is not enabled
+    installed: Já instalado
+    uninstalled: Já desinstalado
+    title: Suporte a extensões não está habilitado
     prompt:
       cant: Automatic installation is not available - required Helm Charts could not be found
       can: 'You need to enable the <code>{ff}</code> Feature Flag in Global Settings. Once enabled, Rancher will require a restart.'
@@ -5609,25 +5609,25 @@ plugins:
       partners: The Partners Extensions Repository provides extensions published by Rancher Partners
       community: The Community Extensions Repository provides extensions published by Rancher Community
     install:
-      title: Enable Extension Support?
+      title: Habilitar Suporte a Extensões?
       prompt: This will lead you to the page where you can enable the Feature Flag needed to enable Extension support.
-      featuresButton: Go to Feature Flags
-      airgap: Air-gapped installations should NOT enable this feature
-      addRancherRepo: Add Official Rancher Extensions Repository
-      addPartnersRancherRepo: Add Partners Extensions Repository
+      featuresButton: Ir para Feature Flags
+      airgap: Instalações sem acesso à internet NÃO devem habilitar este recurso
+      addRancherRepo: Adicionar Repositório Oficial de Extensões Rancher
+      addPartnersRancherRepo: Adicionar Repositório de Extensões de Parceiros
     remove:
-      label: Disable Extension Support
-      title: Disable Extension Support?
-      prompt: This will un-install the Helm charts that enable Extension support
+      label: Desabilitar Suporte a Extensões
+      title: Desabilitar Suporte a Extensões?
+      prompt: Isso desinstalará os charts Helm que habilitam o suporte a Extensões
       registry:
         official:
-          title: Remove the Official Rancher Extensions Repository
+          title: Remover o Repositório Oficial de Extensões Rancher
         partners:
-          title: Remove the Partners Extensions Repository
+          title: Remover o Repositório de Extensões de Parceiros
         community:
-          title: Remove the Community Extensions Repository
+          title: Remover o Repositório de Extensões da Comunidade
       crd:
-        title: Remove the Rancher Extensions Custom Resource Definition
+        title: Remover a Definição de Recurso Personalizado de Extensões Rancher
         prompt: There are one or more extensions installed - removing the CRD will require you to manually reinstall these extensions if you subsequently re-enable extensions support.
 podSecurityAdmission:
   name: Pod Security Admission
@@ -5651,54 +5651,54 @@ podSecurityAdmission:
     description: Allow the creation of pods for specific Usernames, RuntimeClassNames, and Namespaces that would otherwise be prohibited due to the policies set above.
     placeholder: Enter a comma separated list of {psaExemptionsControl}
 prefs:
-  title: Preferences
+  title: Preferências
   theme:
-    label: Theme
-    light: Light
-    auto: Auto
-    dark: Dark
-    autoDetail: Auto uses OS preference if available, or dark from {pm} to {am}
-  language: Language
+    label: Tema
+    light: Claro
+    auto: Automático
+    dark: Escuro
+    autoDetail: Automático usa a preferência do SO se disponível, ou escuro das {pm} às {am}
+  language: Idioma
   landing:
-    label: Login Landing Page
+    label: Página de Destino do Login
     vue: Cluster Explorer
     ember: Cluster Manager
   displaySettings:
-    title: Display Settings
-    detail: Change the way information is displayed in the UI.
+    title: Configurações de Exibição
+    detail: Altere a forma como as informações são exibidas na interface.
   clusterToShow:
-    label: Number of clusters to show in side menu
+    label: Número de clusters a mostrar no menu lateral
     value: |-
       {count, number}
   dateFormat:
-    label: Date Format
+    label: Formato de Data
   timeFormat:
-    label: Time Format
+    label: Formato de Hora
   perPage:
-    label: Table Rows per Page
+    label: Linhas da Tabela por Página
     value: |-
       {count, number}
   keymap:
-    label: YAML Editor Key Mapping
-    sublime: 'Normal human'
-    emacs: 'Emacs'
-    vim: 'Vim'
+    label: Mapeamento de Teclas do Editor YAML
+    sublime: Humano normal
+    emacs: Emacs
+    vim: Vim
   advFeatures:
-    title: Advanced Features
-    viewInApi: Enable "View in API"
+    title: Recursos Avançados
+    viewInApi: Habilitar "Ver na API"
     allNamespaces: Show dynamic Namespaces managed by Rancher (not intended for editing or deletion)
-    themeShortcut: Enable Dark/Light Theme keyboard shortcut toggle (shift+T)
-    pluginDeveloper: Enable Extension developer features
-    pluginDeveloperTooltip: Enables the ability to perform a developer load of UI extensions
+    themeShortcut: Habilitar atalho de teclado para alternar tema Escuro/Claro (shift+T)
+    pluginDeveloper: Habilitar recursos de desenvolvedor de Extensões
+    pluginDeveloperTooltip: Habilita a capacidade de realizar carga de desenvolvedor de extensões de UI
   hideDesc:
-    label: Hide Type Description banners above resource lists
+    label: Ocultar banners de Descrição de Tipo acima das listas de recursos
   helm:
-    'true': Include Prerelease Versions
-    'false': Show Releases Only
-    label: Helm Charts
+    'true': Incluir Versões de Pré-lançamento
+    'false': Mostrar Apenas Lançamentos
+    label: Charts Helm
   confirmationSetting:
-    title: Confirmation Setting
-    scalingDownPrompt: Do not ask for confirmation when scaling down node pools.
+    title: Configuração de Confirmação
+    scalingDownPrompt: Não solicitar confirmação ao reduzir pools de nós.
 
 principal:
   loading: Loading&hellip;
@@ -5754,44 +5754,44 @@ project:
 
 projectMembers:
   project:
-    label: Project
+    label: Projeto
   projectPermissions:
-    label: Project Permissions
-    description: Controls what access users have to the Project
-    noDescription: User created - no description
-    searchForMember: Search for a member to provide project access
+    label: Permissões do Projeto
+    description: Controla o acesso que os usuários têm ao Projeto
+    noDescription: Criado por usuário - sem descrição
+    searchForMember: Buscar um membro para fornecer acesso ao projeto
     owner:
-      label: Owner
-      description: Owners have full control over the Project and all resources inside it.
+      label: Proprietário
+      description: Proprietários têm controle total sobre o Projeto e todos os recursos dentro dele.
     member:
-      label: Member
+      label: Membro
       description: Members can manage the resources inside the Project but not change the Project itself.
     readOnly:
-      label: Read Only
+      label: Somente Leitura
       description: Members can only view the resources inside the Project but not change the resources.
     custom:
-      label: Custom
-      description: Choose individual roles for this user.
-    createNs: Create Namespaces
-    configmapsManage: Manage Config Maps
-    ingressManage: Manage Ingress
-    projectcatalogsManage: Manage Project Catalogs
-    projectroletemplatebindingsManage: Manage Project Members
-    secretsManage: Manage Secrets
-    serviceaccountsManage: Manage Service Accounts
-    servicesManage: Manage Services
+      label: Personalizado
+      description: Escolha funções individuais para este usuário.
+    createNs: Criar Namespaces
+    configmapsManage: Gerenciar Config Maps
+    ingressManage: Gerenciar Ingress
+    projectcatalogsManage: Gerenciar Catálogos do Projeto
+    projectroletemplatebindingsManage: Gerenciar Membros do Projeto
+    secretsManage: Gerenciar Secrets
+    serviceaccountsManage: Gerenciar Contas de Serviço
+    servicesManage: Gerenciar Serviços
     persistentvolumeclaimsManage: Manage Volumes
-    workloadsManage: Manage Workloads
-    configmapsView: View Config Maps
-    ingressView: View Ingress
-    monitoringUiView: View Monitoring
-    projectcatalogsView: View Project Catalogs
-    projectroletemplatebindingsView: View Project Members
-    secretsView: View Secrets
-    serviceaccountsView: View Service Accounts
-    servicesView: View Services
-    persistentvolumeclaimsView: View Volumes
-    workloadsView: View Workloads
+    workloadsManage: Gerenciar Workloads
+    configmapsView: Visualizar Config Maps
+    ingressView: Visualizar Ingress
+    monitoringUiView: Visualizar Monitoramento
+    projectcatalogsView: Visualizar Catálogos do Projeto
+    projectroletemplatebindingsView: Visualizar Membros do Projeto
+    secretsView: Visualizar Secrets
+    serviceaccountsView: Visualizar Contas de Serviço
+    servicesView: Visualizar Serviços
+    persistentvolumeclaimsView: Visualizar Volumes
+    workloadsView: Visualizar Workloads
 
 projectNamespaces:
   tableActionsLabel: More actions for project { resource }
@@ -5804,57 +5804,57 @@ projectNamespaces:
 
 prometheusRule:
   alertingRules:
-    addLabel: Add Alert
+    addLabel: Adicionar Alerta
     annotations:
       description:
-        input: Description Annotation Value
-        label: Description
-      label: Annotations
+        input: Valor da Anotação de Descrição
+        label: Descrição
+      label: Anotações
       message:
-        input: Message Annotation Value
-        label: Message
+        input: Valor da Anotação de Mensagem
+        label: Mensagem
       runbook:
-        input: Runbook URL Annotation Value
-        label: Runbook URL
+        input: Valor da Anotação de URL do Runbook
+        label: URL do Runbook
       summary:
-        input: Summary Annotation Value
-        label: Summary
+        input: Valor da Anotação de Resumo
+        label: Resumo
     bannerText: 'When firing alerts, the annotations and labels will be passed to the configured AlertManagers to allow them to construct the notification that will be sent to any configured Receivers.'
     for:
-      label: Wait to fire for
+      label: Aguardar para disparar por
       placeholder: '60'
-    label: Alerting Rules
+    label: Regras de Alerta
     labels:
       label: Labels
       severity:
         choices:
-          critical: critical
-          label: Severity Label Value
-          none: none
-          warning: warning
-        label: Severity
-    name: Alert Name
-    removeAlert: Remove Alert
+          critical: crítico
+          label: Valor do Label de Severidade
+          none: nenhum
+          warning: aviso
+        label: Severidade
+    name: Nome do Alerta
+    removeAlert: Remover Alerta
   groups:
-    add: Add Rule Group
-    groupRowLabel: Rule Group {index}
+    add: Adicionar Grupo de Regras
+    groupRowLabel: Grupo de Regras {index}
     groupInterval:
-      label: Override Group Interval
+      label: Substituir Intervalo do Grupo
       placeholder: '60'
-    label: Rule Groups
-    name: Group Name
+    label: Grupos de Regras
+    name: Nome do Grupo
     none: Please add at least one rule group that contains at least one alerting or one recording rule.
-    removeGroup: Remove Group
+    removeGroup: Remover Grupo
     responseStrategy:
-      label: Partial Response Strategy
+      label: Estratégia de Resposta Parcial
   promQL:
-    label: PromQL Expression
+    label: Expressão PromQL
   recordingRules:
-    addLabel: Add Record
-    label: Recording Rules
+    addLabel: Adicionar Registro
+    label: Regras de Gravação
     labels: Labels
-    name: Time Series Name
-    removeRecord: Remove Record
+    name: Nome da Série Temporal
+    removeRecord: Remover Registro
 
 promptForceRemove:
   modalTitle: Are you sure?
@@ -7355,59 +7355,59 @@ sideWindow:
     resize: Resize secondary window
 
 wm:
-  resize: Resize Window - use arrow keys {arrow1} and {arrow2} to resize with keyboard
-  tabIcon: Window tab icon
-  closeTab: Close tab - {tabId}
+  resize: Redimensionar Janela - use as teclas de seta {arrow1} e {arrow2} para redimensionar com o teclado
+  tabIcon: Ícone da aba da janela
+  closeTab: Fechar aba - {tabId}
   connection:
-    connected: Connected
-    connecting: Connecting&hellip;
-    disconnected: Disconnected
-    error: Error
+    connected: Conectado
+    connecting: Conectando&hellip;
+    disconnected: Desconectado
+    error: Erro
   containerLogs:
-    options: Additional container logs options
-    expand: Expand additional container logs options
-    searchLogs: Search/filter logs
-    logActionMenu: Logs action menu
-    clear: Clear
-    containerName: "Container: {label}"
-    download: Download
-    follow: Follow
-    noData: There are no log entries to show in the current range.
-    noMatch: No lines match the current filter.
-    previous: Use Previous Container
+    options: Opções adicionais de logs do contêiner
+    expand: Expandir opções adicionais de logs do contêiner
+    searchLogs: Pesquisar/filtrar logs
+    logActionMenu: Menu de ação de logs
+    clear: Limpar
+    containerName: 'Contêiner: {label}'
+    download: Baixar
+    follow: Seguir
+    noData: Não há entradas de log para mostrar no intervalo atual.
+    noMatch: Nenhuma linha corresponde ao filtro atual.
+    previous: Usar Contêiner Anterior
     range:
-      all: Everything
+      all: Tudo
       hours: |-
         {value, number}
         {value, plural,
         =1 {Hour}
         other {Hours}
         }
-      label: Show the last
-      lines: "{value, number} Lines"
+      label: Mostrar os últimos
+      lines: '{value, number} Linhas'
       minutes: |-
         {value, number} {value, plural,
         =1 {Minute}
         other {Minutes}
         }
-    search: Filter
-    timestamps: Show Timestamps
-    wrap: Wrap Lines
+    search: Filtrar
+    timestamps: Mostrar Timestamps
+    wrap: Quebrar Linhas
   containerShell:
-    escapeText: Press Shift+Escape to blur from terminal
-    clear: Clear
-    containerName: "Container: {label}"
-    failed: "Unable to open a shell to the container (none of the shell commands succeeded)\n\r"
+    escapeText: Pressione Shift+Escape para sair do foco do terminal
+    clear: Limpar
+    containerName: 'Contêiner: {label}'
+    failed: Não foi possível abrir um shell para o contêiner (nenhum dos comandos de shell teve sucesso)
     logLevel:
       info: INFO
-      error: ERROR
-      warning: WARN
+      error: ERRO
+      warning: AVISO
       debug: DEBUG
     logMessage:
       containerError: "{ logLevel }: Container missing shell executable (/bin/sh)"
 
   kubectlShell:
-    title: "Kubectl: {name}"
+    title: 'Kubectl: {name}'
 
 workload:
   scaleWorkloads: Escalar cargas de trabalho
@@ -7543,7 +7543,7 @@ workload:
       addGroupIDs: Adicionar IDs de Grupo
       allowPrivilegeEscalation:
         title: Escalação de Privilégio
-        'true': "Container can gain more privileges than its parent process"
+        'true': O contêiner pode obter mais privilégios do que seu processo pai
       capabilities:
         title: Capacidades
         add: Adicionar Capacidades
@@ -7554,20 +7554,20 @@ workload:
       podFsGroup: Grupo do Sistema de Arquivos do Pod
       privileged:
         title: Privilegiado
-        'true': "Container has full access to the host"
+        'true': O contêiner tem acesso total ao host
         help: Habilitar privilégio ocultará Escalação de Privilégio e seccompProfile.
         afterTick: 
-          'true': Privilege Escalation and seccompProfile have been hidden.
-          'false': Privilege Escalation and seccompProfile appeared.
+          'true': Escalonamento de Privilégios e seccompProfile foram ocultados.
+          'false': Escalonamento de Privilégios e seccompProfile apareceram.
       readOnlyRootFilesystem:
         title: Sistema de Arquivos Raiz Somente Leitura
-        'true': "Container has a read-only root filesystem"
+        'true': O contêiner tem um sistema de arquivos raiz somente leitura
       runAsGroup: Executar como ID de Grupo
       runAsNonRoot:
         title: Executar como Não-Root
-        'true': "Container must run as a non-root user"
+        'true': O contêiner deve ser executado como usuário não-root
       runAsNonRootOptions:
-        'true': "Containers must run as non-root-user"
+        'true': Os contêineres devem ser executados como usuário não-root
       runAsUser: 
         title: Executar como ID de Usuário
         label: ID do Usuário
@@ -7822,74 +7822,74 @@ workload:
       gcePersistentDisk: Disco Persistente Google
       driver.longhorn.io: Longhorn
       vsphereVolume: VMWare vSphere Volume
-      emptyDir: Empty Dir
-    addClaim: Add Claim
-    addMount: Add Mount
-    addVolume: Add Volume
-    selectVolume: Select Volume
-    noVolumes: Volumes will appear here after they are added in the Pod tab
-    certificate: Certificate
+      emptyDir: Diretório Vazio
+    addClaim: Adicionar Claim
+    addMount: Adicionar Montagem
+    addVolume: Adicionar Volume
+    selectVolume: Selecionar Volume
+    noVolumes: Os volumes aparecerão aqui após serem adicionados na aba Pod
+    certificate: Certificado
     csi:
-      diskName: Disk Name
-      diskURI: Disk URI
+      diskName: Nome do Disco
+      diskURI: URI do Disco
       cachingMode:
-        label: Caching Mode
+        label: Modo de Cache
         options:
-          none: None
-          readOnly: Read Only
-          readWrite: Read Write
+          none: Nenhum
+          readOnly: Somente Leitura
+          readWrite: Leitura e Escrita
       kind:
-        label: Kind
+        label: Tipo
         options:
-          dedicated: Dedicated
-          managed: Managed
-          shared: Shared
+          dedicated: Dedicado
+          managed: Gerenciado
+          shared: Compartilhado
       drivers:
         driver-longhorn-io: Longhorn
-      fsType: Filesystem Type
-      shareName: Share Name
-      secretName: Secret Name
-      volumeID: Volume ID
-      partition: Partition
-      pdName: Persistent Disk Name
-      storagePolicyID: Storage Policy ID
-      storagePolicyName: Storage Policy Name
-      volumePath: Volume Path
-    defaultMode: Default Mode
+      fsType: Tipo de Sistema de Arquivos
+      shareName: Nome do Compartilhamento
+      secretName: Nome do Secret
+      volumeID: ID do Volume
+      partition: Partição
+      pdName: Nome do Disco Persistente
+      storagePolicyID: ID da Política de Armazenamento
+      storagePolicyName: Nome da Política de Armazenamento
+      volumePath: Caminho do Volume
+    defaultMode: Modo Padrão
     driver: driver
     hostPath:
-      label: The Path on the Node must be
+      label: O Caminho no Nó deve ser
       options:
-        default: 'Anything: do not check the target path'
-        directoryOrCreate: A directory, or create if it doesn't exist
-        directory: An existing directory
-        fileOrCreate: A file, or create if it doesn't exist
-        file: An existing file
-        socket: An existing socket
-        charDevice: An existing character device
-        blockDevice: An existing block device
-    mountPoint: Mount Point
-    nodePath: Path on Node
+        default: 'Qualquer coisa: não verificar o caminho de destino'
+        directoryOrCreate: Um diretório, ou criar se não existir
+        directory: Um diretório existente
+        fileOrCreate: Um arquivo, ou criar se não existir
+        file: Um arquivo existente
+        socket: Um socket existente
+        charDevice: Um dispositivo de caractere existente
+        blockDevice: Um dispositivo de bloco existente
+    mountPoint: Ponto de Montagem
+    nodePath: Caminho no Nó
     optional:
-      label: Optional
-      'no': 'No'
-      'yes': 'Yes'
-    path: Path
-    readOnly: Read Only
-    server: Server
+      label: Opcional
+      'no': Não
+      'yes': Sim
+    path: Caminho
+    readOnly: Somente Leitura
+    server: Servidor
 
-    subPath: Sub Path in Volume
-    title: 'Storage'
-    volumeName: Volume Name
-    volumePath: Volume Path
+    subPath: Subcaminho no Volume
+    title: Armazenamento
+    volumeName: Nome do Volume
+    volumePath: Caminho do Volume
     emptyDir:
       medium:
-        label: Medium
-        default: Node's Default Medium
-        memory: Memory
+        label: Meio
+        default: Meio Padrão do Nó
+        memory: Memória
       sizeLimit:
-        label: Size Limit
-        placeholder: "e.g. 300"
+        label: Limite de Tamanho
+        placeholder: 'ex.: 300'
   typeDescriptions:
     apps.daemonset: DaemonSets run exactly one pod on every eligible node. When new nodes are added to the cluster, DaemonSets automatically deploy to them. Recommended for system-wide or vertically-scalable workloads that never need more than one pod per node.
     apps.deployment: Deployments run a scalable number of replicas of a pod distributed among the eligible nodes. Changes are rolled out incrementally and can be rolled back to the previous revision when needed. Recommended for stateless & horizontally-scalable workloads.
@@ -7899,45 +7899,45 @@ workload:
     pod: Pods are the smallest deployable units of computing that you can create and manage in Kubernetes. A Pod is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers.
   upgrading:
     activeDeadlineSeconds:
-      label: Pod Active Deadline
+      label: Prazo Ativo do Pod
       tip: The duration the pod may be active before the system will try to mark it failed and kill associated containers.
     concurrencyPolicy:
-      label: Concurrency
+      label: Concorrência
       options:
-        allow: Allow CronJobs to run concurrently
-        forbid: Skip next run if current run hasn't finished
-        replace: Replace run if current run hasn't finished
+        allow: Permitir que CronJobs sejam executados concorrentemente
+        forbid: Pular próxima execução se a atual não tiver terminado
+        replace: Substituir execução se a atual não tiver terminado
     maxSurge:
-      label: Max Surge
-      tip: The maximum number of pods allowed beyond the desired scale at any given time.
+      label: Surge Máximo
+      tip: O número máximo de pods além da escala desejada a qualquer momento.
     maxUnavailable:
-      label: Max Unavailable
-      tip: The maximum number of pods which can be unavailable at any given time.
+      label: Máximo Indisponível
+      tip: O número máximo de pods que podem ficar indisponíveis a qualquer momento.
     minReadySeconds:
-      label: Minimum Ready
+      label: Mínimo Pronto
       tip: The minimum duration a pod should be ready without containers crashing for it to be considered available.
     podManagementPolicy:
-      label: Pod Management Policy
+      label: Política de Gerenciamento de Pods
     progressDeadlineSeconds:
-      label: Progress Deadline
+      label: Prazo de Progresso
       tip: The minimum duration to wait for a deployment to progress before marking it failed.
     revisionHistoryLimit:
-      label: Revision History Limit
-      tip: The number of old ReplicaSets to retain for rollback.
+      label: Limite do Histórico de Revisões
+      tip: O número de ReplicaSets antigos a reter para rollback.
     strategies:
       labels:
-        delete: "On Delete: New pods are only created when old pods are manually deleted."
-        recreate: "Recreate: Kill ALL pods, then start new pods."
+        delete: 'Ao Deletar: Novos pods só são criados quando pods antigos são deletados manualmente.'
+        recreate: 'Recriar: Matar TODOS os pods, depois iniciar novos pods.'
         rollingUpdate: "Rolling Update: Create new pods, until max surge is reached, before deleting old pods. Don't stop more pods than max unavailable."
     terminationGracePeriodSeconds:
-      label: Termination Grace Period
-      tip: The duration the pod needs to terminate successfully.
-    title: Upgrading
+      label: Período de Carência para Encerramento
+      tip: A duração que o pod precisa para encerrar com sucesso.
+    title: Atualizando
   tabs:
     labels:
       deployment: Deployment
       pod: Pod
-      containers: Containers
+      containers: Contêineres
 
 ##############################
 # Model Properties
@@ -8643,57 +8643,57 @@ typeLabel:
 oidcclient:
   a11y:
     copyText:
-      issuerURL: Copy Issuer URL to clipboard
-      discoveryDocument: Copy Discovery Document URL to clipboard
-      jwksUri: Copy JWKS URI to clipboard
-      clientId: Copy client Id to clipboard
-      clientSecret: Copy client secret to clipboard
-  usedNever: Never
-  listViewCreate: Add Application
-  oidcEndpoints: Provider Endpoints
-  createClient: Create a new application
-  clientData: Application
-  clientId: Client ID
-  clientSecrets: Client Secrets
-  issuerURL: Issuer URL
-  discoveryDocument: Discovery Document
-  jwksUri: JWKS URI
-  regenerate: Regenerate
-  addNewSecret: Add new secret
+      issuerURL: Copiar URL do Emissor para a área de transferência
+      discoveryDocument: Copiar URL do Documento de Descoberta para a área de transferência
+      jwksUri: Copiar URI do JWKS para a área de transferência
+      clientId: Copiar ID do cliente para a área de transferência
+      clientSecret: Copiar secret do cliente para a área de transferência
+  usedNever: Nunca
+  listViewCreate: Adicionar Aplicativo
+  oidcEndpoints: Endpoints do Provedor
+  createClient: Criar novo aplicativo
+  clientData: Aplicativo
+  clientId: ID do Cliente
+  clientSecrets: Secrets do Cliente
+  issuerURL: URL do Emissor
+  discoveryDocument: Documento de Descoberta
+  jwksUri: URI do JWKS
+  regenerate: Regenerar
+  addNewSecret: Adicionar novo secret
   copySecretText: <b>Copy your secret now<b>. This is the only time it will be displayed. Be sure to save it in a safe place
-  secretRegenerated: Secret regenerated!
-  secretAdded: Secret Added!
+  secretRegenerated: Secret regenerado!
+  secretAdded: Secret adicionado!
   noClientId: No Client Id found for this application. If the problem persists please recreate the application
   errors:
     performSecretAction: The action on OIDC secrets tried to perform is invalid. Please check the the valid parameters for this function
   removeOidcClientModal:
-    title: OIDC Application deletion
-    content: Are you sure you want to delete the following OIDC applications?
-    action: Delete Application
+    title: Exclusão de Aplicativo OIDC
+    content: Tem certeza de que deseja excluir os seguintes aplicativos OIDC?
+    action: Excluir Aplicativo
   regenModal:
-    title: OIDC Application Secret regeneration
+    title: Regeneração do Secret do Aplicativo OIDC
     content: Are you sure you want to regenerate this OIDC application secret? The old secret will stop working immediately
-    action: Regenerate Secret
+    action: Regenerar Secret
   deleteModal:
-    title: OIDC Application Secret deletion
+    title: Exclusão do Secret do Aplicativo OIDC
     content: Are you sure you want to delete this OIDC application secret? It will stop working immediately
-    action: Delete Secret
+    action: Excluir Secret
   appName:
-    placeholder: App name shown during the authorization flow
+    placeholder: Nome do app mostrado durante o fluxo de autorização
   appDescription:
-    placeholder: A brief description of your application
+    placeholder: Uma breve descrição do seu aplicativo
   redirectURIs:
-    label: Authorization Callback URLs
-    addLabel: Add Callback URL
-    valueLabel: Redirect URIs
+    label: URLs de Callback de Autorização
+    addLabel: Adicionar URL de Callback
+    valueLabel: URIs de Redirecionamento
     placeholder: The allowed redirect URL for your application after a user authenticates. HTTPS is required. You may add multiple URLs
   refreshTokenExpirationSeconds:
-    detailLabel: Refresh Token Expiration (seconds)
-    label: Refresh Token Expiration
+    detailLabel: Expiração do Token de Atualização (segundos)
+    label: Expiração do Token de Atualização
     placeholder:  Duration (in seconds) a refresh token can be used to obtain new access/ID tokens without re-login
   tokenExpirationSeconds:
-    detailLabel: Token Expiration (seconds)
-    label: Token Expiration
+    detailLabel: Expiração do Token (segundos)
+    label: Expiração do Token
     placeholder:  Duration (in seconds) the token containing user authentication information is valid
 
 action:
@@ -8993,54 +8993,54 @@ banner:
   toggleTextHtml: Alternar entre texto e html
 
 branding:
-  label: Branding
-  directoryName: Brand Asset Directory Name
+  label: Identidade Visual
+  directoryName: Nome do Diretório de Ativos de Marca
   logos:
-    home: Product main page
+    home: Página principal do produto
     label: Logo
     tip: 'Upload a logo to replace the Rancher logo in the top-level navigation header. Image height should be 21 pixels with a max width of 200 pixels. Max file size is 20KB. Accepted formats: JPEG, PNG, SVG.'
-    lightPreview: Light Theme Preview
-    darkPreview: Dark Theme Preview
-    uploadLight: Upload Light Logo
-    uploadDark: Upload Dark Logo
-    useCustom: Use a Custom Logo
+    lightPreview: Pré-visualização do Tema Claro
+    darkPreview: Pré-visualização do Tema Escuro
+    uploadLight: Enviar Logo Claro
+    uploadDark: Enviar Logo Escuro
+    useCustom: Usar um Logo Personalizado
   banner:
     label: Banner
     tip: 'Upload an image to replace the default Rancher banner in the Dashboard page. We recommend using an SVG image with an aspect ratio of 6:1. The default image size is 4197x633. Max file size is 200KB. Accepted formats: JPEG, PNG, SVG.'
-    lightPreview: Light Theme Preview
-    darkPreview: Dark Theme Preview
-    uploadLight: Upload Light Banner
-    uploadDark: Upload Dark Banner
-    useCustom: Use a Custom Banner
+    lightPreview: Pré-visualização do Tema Claro
+    darkPreview: Pré-visualização do Tema Escuro
+    uploadLight: Enviar Banner Claro
+    uploadDark: Enviar Banner Escuro
+    useCustom: Usar um Banner Personalizado
   loginBackground:
-    label: Login Background
+    label: Plano de Fundo do Login
     tip: 'Upload an image to replace the default Rancher background in the Login page. We recommend using an SVG image with an aspect ratio of 7:8. The default image size is 683x768. Max file size is 200KB. Accepted formats: JPEG, PNG, SVG.'
-    lightPreview: Light Theme Preview
-    darkPreview: Dark Theme Preview
-    uploadLight: Upload Light Background
-    uploadDark: Upload Dark Background
-    useCustom: Use a Custom Background
+    lightPreview: Pré-visualização do Tema Claro
+    darkPreview: Pré-visualização do Tema Escuro
+    uploadLight: Enviar Plano de Fundo Claro
+    uploadDark: Enviar Plano de Fundo Escuro
+    useCustom: Usar um Plano de Fundo Personalizado
   favicon:
     label: Favicon
     tip: 'Upload an icon to replace the Rancher favicon in the browser tab. Max file size is 20KB.'
-    preview: Favicon Preview
-    upload: Upload Favicon
-    useCustom: Use a Custom Favicon
+    preview: Pré-visualização do Favicon
+    upload: Enviar Favicon
+    useCustom: Usar um Favicon Personalizado
   options:
-    default: Default Rancher Theme
-    suse: SUSE Theme
-    custom: Define a Custom Theme
+    default: Tema Padrão do Rancher
+    suse: Tema SUSE
+    custom: Definir um Tema Personalizado
   uiPL:
-    label: Private Label
+    label: Rótulo Privado
   color:
-    label: Primary Color
+    label: Cor Principal
     tip: You can override the primary color used throughout the UI with a custom color of your choice.
-    useCustom: Use a Custom Color
+    useCustom: Usar uma Cor Personalizada
   linkColor:
-    label: Link Color
+    label: Cor do Link
     tip: You can override the link color used throughout the UI with a custom color of your choice.
-    useCustom: Use a Custom Link Color
-    example: Link Example
+    useCustom: Usar uma Cor de Link Personalizada
+    example: Exemplo de Link
 notifications:
   header: Custom notifications
   menuLabel: 'Custom Notifications'
@@ -9218,76 +9218,76 @@ gitPicker:
     label: GitHub
     tableHeaders:
       choose:
-        label: Select
+        label: Selecionar
       sha:
         label: SHA
       author:
-        label: Author
-        unknown: Unknown
+        label: Autor
+        unknown: Desconhecido
       message:
-        label: Message
+        label: Mensagem
       date:
-        label: Date
+        label: Data
     username:
-      label: Username / Organization
-      inputLabel: Username / Organization
-      tooltip: Username / Organization of the Git Repository
+      label: Usuário / Organização
+      inputLabel: Usuário / Organização
+      tooltip: Usuário / Organização do Repositório Git
     branch:
       label: Branch
       inputLabel: Branch
-      tooltip: Branch to deploy
+      tooltip: Branch para implantar
     repo:
-      label: Repository
-      inputLabel: Repository
-      tooltip: Repository to deploy from
+      label: Repositório
+      inputLabel: Repositório
+      tooltip: Repositório para implantar
     commits:
       label: Commits
-      tooltip: Commits to deploy from
+      tooltip: Commits para implantar
     commit:
       label: Commit
       inputLabel: Commit
     commitMessage:
-      label: Commit Message
+      label: Mensagem do Commit
     errors:
-      noAccount: No GitHub account or Organization found. Please review your query and try again.
-      noBranch: No branch found. Please review your query and try again.
+      noAccount: Nenhuma conta GitHub ou Organização encontrada. Revise sua consulta e tente novamente.
+      noBranch: Nenhum branch encontrado. Revise sua consulta e tente novamente.
   gitlab:
     label: GitLab
     tableHeaders:
       choose:
-        label: Select
+        label: Selecionar
       sha:
         label: SHA
       author:
-        label: Author
-        unknown: Unknown
+        label: Autor
+        unknown: Desconhecido
       message:
-        label: Message
+        label: Mensagem
       date:
-        label: Date
+        label: Data
     username:
-      label: Username / Organization
-      inputLabel: Username / Organization
-      tooltip: Username / Organization of the Git Repository
+      label: Usuário / Organização
+      inputLabel: Usuário / Organização
+      tooltip: Usuário / Organização do Repositório Git
     branch:
       label: Branch
       inputLabel: Branch
-      tooltip: Branch to deploy
+      tooltip: Branch para implantar
     repo:
-      label: Repository
-      inputLabel: Repository
-      tooltip: Repository to deploy from
+      label: Repositório
+      inputLabel: Repositório
+      tooltip: Repositório para implantar
     commits:
       label: Commits
-      tooltip: Commits to deploy from
+      tooltip: Commits para implantar
     commit:
       label: Commit
       inputLabel: Commit
     commitMessage:
-      label: Commit Message
+      label: Mensagem do Commit
     errors:
-      noAccount: No GitLab account or Organization found. Please review your query and try again.
-      noBranch: No branch found. Please review your query and try again.
+      noAccount: Nenhuma conta GitLab ou Organização encontrada. Revise sua consulta e tente novamente.
+      noBranch: Nenhum branch encontrado. Revise sua consulta e tente novamente.
 
 networkAttachmentDefinition:
   tabs:
