@@ -72,24 +72,11 @@ Use bash to write and run a script that compares the locale file against `en-us.
 
 ## 4. Translate in priority order
 
-Translate the untranslated strings, working in chunks to stay within output limits. Prioritize:
+Translate the untranslated strings following the translation rules, priority order, chunking strategy, bash script size limits, and maximizing coverage guidance from the shared rules file.
 
-1. **User-facing UI text first**: buttons, labels, messages, descriptions, tooltips, error messages
-2. **Long-form text next**: paragraphs, help text, descriptions
-3. **Technical/edge-case strings last**: rarely-seen messages, debug text
-
-### Workflow-specific limits
-
-Follow all translation rules, chunking strategy, and bash script size limits from the shared rules file. Additionally for this workflow:
+Additionally for this workflow:
 
 - **Stop after translating 1000 strings total** — then proceed immediately to steps 5–7. The workflow can be re-triggered to continue where it left off.
-
-### Maximizing coverage
-
-- **Do NOT skip strings** because they seem hard — attempt every untranslated string
-- **Do NOT leave placeholder English translations** — if you're unsure, make your best translation attempt and note uncertainty in the PR comment
-- Translate **every single** untranslated value you can within the timeout limit
-- If you are running low on time, prioritize the sections with the most untranslated strings
 
 ## 5. Validate after translation
 
