@@ -1,12 +1,15 @@
 # pt-br Translation
 
-Coverage run 4: 74.1% (4,669/6,297). Remaining: 1,628.
-Next: cluster(145), typeLabel(116), catalog(44), logging(42), fleet(39), workload(38), authConfig(34).
+Run 5: 89% (5,577/6,296). Remaining: 719 (mostly brand names).
+Run 4: 74.1% (4,669). Run 3: 60.4%. Run 2: 46.5%. Run 1: 32%.
 
-Tools: patcher3.js (quoted keys, block scalar aware) + coverage2.js (js-yaml).
-Chunk: 50 keys/call max. npm install js-yaml each run.
+Tools: patcher.js (scalar), block_patcher.js (|-). No npm needed.
+Chunk: 40-50 keys/call max. JSON patch files.
 
-typeLabel: all 116 are `|-` block scalars with ICU plurals - need block replacer.
-cluster: many product names (skip), translate only descriptive text.
-Pitfalls: Values with `: ` need quoting. ICU plural keys in block scalars.
-Notes: Add-on→Complemento, Workload→Carga de trabalho, e.g.→ex.
+Remaining: cluster(126), logging(41), typeLabel(37), workload(34), fleet(32),
+persistentVolume(32), model(26), tableHeaders(25), authConfig(22).
+Most remaining = brand names (Calico, LDAP, Amazon) = legitimately English.
+
+Sections done: 90+ sections fully translated.
+Pitfalls: Python yaml fails on `equal: =` (pre-existing). Use Node.js checker.
+Key parity: 8,515 keys ✅. ICU plurals in block scalars work with block_patcher.
