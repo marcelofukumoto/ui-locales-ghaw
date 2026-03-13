@@ -1,15 +1,18 @@
 # pt-br Translation
 
-Run 5: 89% (5,577/6,296). Remaining: 719 (mostly brand names).
-Run 4: 74.1% (4,669). Run 3: 60.4%. Run 2: 46.5%. Run 1: 32%.
+Run 6: 91.6% (5,772/6,301). Remaining: 529 (all brand names/tech terms).
+Run 5: 89% (5,577). Run 4: 74.1%. Run 3: 60.4%. Run 2: 46.5%. Run 1: 32%.
 
-Tools: patcher.js (scalar), block_patcher.js (|-). No npm needed.
+Tools: patcher.js (scalar+block). No npm needed.
 Chunk: 40-50 keys/call max. JSON patch files.
 
-Remaining: cluster(126), logging(41), typeLabel(37), workload(34), fleet(32),
-persistentVolume(32), model(26), tableHeaders(25), authConfig(22).
-Most remaining = brand names (Calico, LDAP, Amazon) = legitimately English.
+True ceiling: ~92%. Remaining 529 = all legitimately English:
+Amazon/Azure/Google, Longhorn/CoreDNS/etc., CPU/RAM/URL/TLS/etc.,
+time units (5s/1m/etc.), pure placeholders.
 
 Sections done: 90+ sections fully translated.
-Pitfalls: Python yaml fails on `equal: =` (pre-existing). Use Node.js checker.
-Key parity: 8,515 keys ✅. ICU plurals in block scalars work with block_patcher.
+Pitfalls:
+- Python yaml fails on `equal: =` (pre-existing). Use Node.js.
+- Multi-line flow scalars: patcher replaces first line only, remove leftover lines.
+- Block scalar keys: patcher converts |- to inline (fewer lines, OK).
+Key parity: 6,347 keys ✅. ICU plurals work with patcher.
