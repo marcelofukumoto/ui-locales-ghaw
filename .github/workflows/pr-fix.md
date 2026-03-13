@@ -2,9 +2,9 @@
 description: |
   This workflow makes fixes to pull requests on-demand by the '/pr-fix' command.
   Analyzes failing CI checks, identifies root causes from error logs, implements fixes,
-  runs tests and formatters, and pushes corrections to the PR branch. Provides detailed
-  comments explaining changes made. Helps rapidly resolve PR blockers and keep
-  development flowing.
+  runs tests and formatters, and pushes corrections to the PR branch. For fork PRs
+  where pushing is not possible, it submits a PR review with inline comments showing
+  the exact fixes needed. Helps rapidly resolve PR blockers and keep development flowing.
 
 on:
   slash_command:
@@ -17,6 +17,9 @@ network: defaults
 
 safe-outputs:
   push-to-pull-request-branch:
+  submit-pull-request-review:
+    target: ${{ github.event.issue.number }}
+    footer: "if-body"
   create-issue:
     title-prefix: "${{ github.workflow }}"
     labels: [automation, pr-fix]
@@ -52,6 +55,11 @@ You are an AI assistant specialized in fixing pull requests with failing CI chec
 
 7. Run any code formatters or linters used in the repo to ensure your changes adhere to the project's coding standards and fix any new issues they identify.
 
-8. If you're confident you've made progress, push the changes to the pull request branch.
+8. If you're confident you've made progress, try to push the changes to the pull request branch.
 
-9. Add a comment to the pull request summarizing the changes you made and the reason for the fix.
+   **If the push fails** (e.g. the PR is from a fork and you don't have write access), fall back to submitting a **PR review** using `submit_pull_request_review` with:
+   - Event: `COMMENT`
+   - A body summarizing all the fixes needed
+   - For each file that needs changes, describe the exact lines and what to change so the PR author can apply them
+
+9. Add a comment to the pull request summarizing the changes you made (or proposed) and the reason for the fix.
