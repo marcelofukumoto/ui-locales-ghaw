@@ -25,9 +25,9 @@
 # '/improve-translation' slash command. It finds all untranslated strings (values
 # still identical to en-us.yaml) in the locale file, translates them in chunks,
 # pushes the improved file, and reports progress. Can be run repeatedly until
-# 100% coverage is reached. Results are logged to the shared learnings discussion.
+# 100% coverage is reached.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"f7835d5253674a25c373971b7aecd9afae887864933e219795e8b62484738ba5","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"0539779278df3432b92a71d0342e6903344eb13d16a8a49d7572d49d61c79d91","compiler_version":"v0.57.2","strict":true}
 
 name: "Improve Translation"
 "on":
@@ -1022,7 +1022,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           WORKFLOW_NAME: "Improve Translation"
-          WORKFLOW_DESCRIPTION: "This workflow improves translation coverage in pull requests on-demand via the\n'/improve-translation' slash command. It finds all untranslated strings (values\nstill identical to en-us.yaml) in the locale file, translates them in chunks,\npushes the improved file, and reports progress. Can be run repeatedly until\n100% coverage is reached. Results are logged to the shared learnings discussion."
+          WORKFLOW_DESCRIPTION: "This workflow improves translation coverage in pull requests on-demand via the\n'/improve-translation' slash command. It finds all untranslated strings (values\nstill identical to en-us.yaml) in the locale file, translates them in chunks,\npushes the improved file, and reports progress. Can be run repeatedly until\n100% coverage is reached."
           HAS_PATCH: ${{ steps.collect_output.outputs.has_patch }}
         with:
           script: |

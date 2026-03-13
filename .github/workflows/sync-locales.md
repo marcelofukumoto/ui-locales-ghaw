@@ -14,7 +14,6 @@ permissions:
   contents: read
   issues: read
   pull-requests: read
-  discussions: read
 
 network: defaults
 
@@ -23,6 +22,10 @@ timeout-minutes: 60
 tools:
   github:
     lockdown: false
+  repo-memory:
+    branch-name: memory/default
+    max-file-size: 32768
+    file-glob: ["memory/default/*.md"]
   bash: true
 
 safe-outputs:
@@ -36,16 +39,9 @@ safe-outputs:
 
 Keep the `en-us.yaml` translation file in sync with the upstream `rancher/dashboard` repository, and update all other language files to reflect any changes.
 
-## Scripting constraint
+## Shared rules
 
-Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
-
-## Learnings discussion
-
-Before doing anything else, search for a discussion in this repository with the title `[learnings] Add New Language Translation`. This discussion accumulates knowledge from previous runs.
-
-- If it exists, **read it carefully** — it contains chunking strategies, known structural pitfalls, and tips that apply when updating existing translation files.
-- If it does not exist, that is fine — proceed without it.
+**Before doing anything else**, read the file `.github/workflows/shared/translation-rules.md` from this repository. It contains the canonical scripting constraints, translation rules, YAML validation procedures, bash size limits, chunking strategy, and learnings instructions that you MUST follow throughout this workflow.
 
 ## What to do
 
@@ -72,15 +68,12 @@ Before doing anything else, search for a discussion in this repository with the 
 
    b. Find all other language files in `pkg/ui-locales/l10n/` (any `.yaml` file that is not `en-us.yaml`, e.g. `pt-br.yaml`, `ja-jp.yaml`, `fr-fr.yaml`, etc.).
 
-   c. For each other language file:
+   c. For each other language file, apply the translation rules from the shared rules file:
       - **New keys** added to `en-us.yaml`: translate the new English values into that language and add them at the **exact same position** in the YAML structure (same nesting level, same order relative to sibling keys)
       - **Removed keys** in `en-us.yaml`: remove the same keys from the language file
       - **Changed values** in `en-us.yaml`: re-translate the updated English value into that language and update it in the language file
-      - Preserve all placeholders, ICU message format syntax, HTML tags, and YAML structure exactly — only translate the human-readable text portions
-      - **Do NOT invent keys** that do not exist in `en-us.yaml`
-      - **Do NOT duplicate keys** — every key must appear exactly once at its nesting level
 
-   d. **Validate each updated language file** using bash: parse the YAML to confirm no duplicate keys, verify exact key parity with the new `en-us.yaml`, and check that all placeholders are preserved. Fix any issues before proceeding.
+   d. **Validate each updated language file** using the YAML validation procedure from the shared rules file. Fix any issues before proceeding.
 
    e. Open a single Pull Request that includes:
       - The updated `pkg/ui-locales/l10n/en-us.yaml`

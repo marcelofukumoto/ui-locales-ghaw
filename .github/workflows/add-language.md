@@ -39,15 +39,9 @@ safe-outputs:
 
 When a GitHub issue requests a new language to be added to the UI locales extension, translate the entire `en-us.yaml` file into the requested language and open a Pull Request.
 
-## Scripting constraint
+## Shared rules
 
-Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
-
-## Learnings (repo-memory)
-
-Before doing anything else, read the file `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md` if it exists. This file accumulates knowledge from all previous translation runs — chunking strategies, known pitfalls, character/token limits, and tips. Apply this knowledge throughout your work.
-
-If the file does not exist yet, that is fine — you will create it at the end.
+**Before doing anything else**, read the file `.github/workflows/shared/translation-rules.md` from this repository. It contains the canonical scripting constraints, translation rules, YAML validation procedures, bash size limits, chunking strategy, and learnings instructions that you MUST follow throughout this workflow.
 
 ## Trigger condition
 
@@ -63,26 +57,9 @@ If the issue does not meet these criteria, do nothing and stop.
 
 3. **Read the full contents** of `pkg/ui-locales/l10n/en-us.yaml` from this repository.
 
-4. **Translate all string values** in chunks to stay within output limits. Rules:
-   - **Mirror the source exactly**: the output file must have the exact same keys, in the exact same order, at the exact same nesting depth as `en-us.yaml` — only leaf values change
-   - **Do NOT invent keys**: never add keys that do not exist in `en-us.yaml`
-   - **Do NOT skip keys**: every key in `en-us.yaml` must appear in the output
-   - **Do NOT duplicate keys**: every key must appear exactly once at its nesting level — YAML forbids duplicate keys and parsers will reject the file
-   - Preserve all placeholders as-is: `{variableName}`, `{count, plural, ...}`, `&hellip;`, HTML tags like `<b>`, `<a href=...>`, `<code>`, etc.
-   - Preserve all ICU message format syntax (plurals, selects) — only translate the human-readable text portions inside them
-   - Do not translate YAML comments (lines starting with `#`) — preserve them in the same positions
-   - Empty values must remain empty; special values like `'—'` must be preserved exactly
-   - If a key's value is a mapping (has children) in `en-us.yaml`, it must also be a mapping in the output — never flatten a nested structure into a scalar
-   - Use chunking sizes and strategies noted in the learnings file (if available), otherwise split at top-level YAML keys to keep each chunk manageable
+4. **Translate all string values** in chunks following the translation rules and chunking strategy from the shared rules file.
 
-5. **Self-validate before opening the PR**. Use bash to write and run a validation script that checks:
-   - The output file is valid YAML (no parse errors, no duplicate keys)
-   - Every key in `en-us.yaml` exists in the output and vice-versa (exact key parity)
-   - Key order matches `en-us.yaml`
-   - All placeholders (`{...}`, `&hellip;`, HTML tags) from `en-us.yaml` are present in the corresponding translated values
-   - If any issues are found, fix them and re-validate until the file is clean
-
-   **Fixing YAML parse errors**: If the generated file has YAML parse errors, identify the broken key from the parser error (line number), look up that key in `en-us.yaml` to get the original value and formatting, re-translate it preserving the exact same YAML quoting and formatting style (single quotes, block scalars `|`/`>`, etc.), replace the broken line, and re-validate. Common causes: unescaped colons/hashes in translations, broken quoting, mangled ICU `{count, plural, ...}` syntax. Always mirror `en-us.yaml`'s formatting.
+5. **Self-validate before opening the PR** using the YAML validation procedure from the shared rules file. If any issues are found, follow the YAML parse error fix procedure and re-validate until clean.
 
 6. **Open a Pull Request** that:
    - Creates the new file at `pkg/ui-locales/l10n/<locale-code>.yaml` with the translated content
@@ -95,19 +72,7 @@ If the issue does not meet these criteria, do nothing and stop.
 
 ## Update learnings
 
-After completing the work (or after hitting any significant obstacle), write your learnings to `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md`. This is the most important step for improving future runs.
-
-If the file already exists, **merge** your new observations into the existing content — do not discard previous learnings. If it does not exist, create it.
-
-The file should be written in Markdown and cover:
-
-- **Chunking strategy**: how you split `en-us.yaml` (e.g. by top-level key, how many keys per chunk, approximate line count per chunk) and what worked well
-- **Output size limits**: any limits you hit (token/character limits per PR file, per commit) and how you worked around them
-- **Performance tips**: what made the run faster (e.g. reading only the keys you needed, avoiding re-reads)
-- **Known pitfalls**: keys or sections that are tricky (ICU plurals, nested HTML, very long values) and how to handle them
-- **Anything that caused errors or timeouts** and how to avoid them next time
-
-Keep the file concise and actionable — it is read at the start of every future run. The file auto-commits to the `memory/default` branch when the workflow finishes.
+After completing the work (or after hitting any significant obstacle), update the learnings file following the instructions in the shared rules file.
 
 ## Style
 

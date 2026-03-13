@@ -45,19 +45,13 @@ safe-outputs:
 
 You are an AI assistant specialized in auditing translation YAML files for the Rancher UI locales project. Your job is to **verify** the translated locale file in pull request #${{ github.event.issue.number }} of ${{ github.repository }} and produce a detailed quality report. You do **NOT** modify or fix any files — you only analyze and report.
 
+## Shared rules
+
+**Before doing anything else**, read the file `.github/workflows/shared/translation-rules.md` from this repository. It contains the canonical scripting constraints, translation rules, YAML validation procedures, bash size limits, chunking strategy, and learnings instructions that you MUST follow throughout this workflow.
+
 ## Important: read-only workflow
 
 This workflow is strictly read-only. You must **never** push changes, edit files, or modify the PR branch. All findings are reported as a PR comment. If issues are found, recommend that the user runs `/improve-translation` to apply fixes.
-
-## Scripting constraint
-
-Do **NOT** use Python or pip in any scripts. The runner does not have access to `pypi.org` and package installs will fail. Use **Node.js** or **pure bash** (with tools like `awk`, `sed`, `grep`, `sort`, `diff`) for all scripting needs including YAML parsing and validation.
-
-## Learnings (repo-memory)
-
-Before doing anything else, read the file `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md` if it exists. This file accumulates knowledge from all previous translation runs — chunking strategies, known structural pitfalls, duplicate key patterns, and tips. Apply this knowledge throughout your work.
-
-If the file does not exist, skip this step.
 
 ## 1. Read the PR and previous comments
 
@@ -237,17 +231,4 @@ If the coverage is below 100% or any structural check failed, do **not** add the
 
 ## 7. Update learnings
 
-After completing the verification and labeling, update the learnings file at `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md`.
-
-If the file already exists, **merge** your new observations into the existing content — do not discard previous learnings. If it does not exist, create it.
-
-Add or update these sections:
-
-- **Common structural issues**: duplicate keys found (which ones, why they occur), invented keys, missing sections
-- **Chunking strategy**: what chunk sizes work for the ~9500-line en-us.yaml, which top-level sections are largest
-- **Placeholder patterns**: tricky placeholders that get lost during translation (ICU plurals, nested HTML)
-- **Key ordering pitfalls**: sections where the AI tends to reorder or skip keys
-- **Validation approach**: how to efficiently validate the file (tools, scripts, strategies)
-- **Anything that caused errors** and how to avoid them next time
-
-Keep the file concise and actionable. It auto-commits to the `memory/default` branch when the workflow finishes.
+After completing the verification and labeling, update the learnings file following the instructions in the shared rules file.
