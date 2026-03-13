@@ -1,13 +1,16 @@
-# pt-br Translation Learnings
+# pt-br Learnings
 
-Run 3 (2026-03-13): 89.78% -> 90.33% (35 new strings, 6348 total keys)
+Run 3 (2026-03-13): 89.78%->90.33% (35 new strings, 6348 total keys)
+Run 4 (2026-03-13): Added noPods key + 7 blank lines to sync structure.
 
-Cross-fork push fix: git remote set-url origin https://github.com/MYoshi/ui-locales-ghaw.git; git fetch origin pt-br-test-flow
+ICU plurals already translated: fleet, limitrange, resourcequota, poddisruptionbudget, servicemonitor, podmonitor, prometheusrule, oidcclient
 
-Top untranslated (mostly legitimately identical): cluster(118), typeLabel(70), logging(42), fleet(33)
+YAML: js-yaml strips comments. Use extractLeafPaths() for dotted-key types.
 
-Already-translated ICU plurals: fleet.application, fleet.helmop, limitrange, resourcequota, poddisruptionbudget, servicemonitor, podmonitor, prometheusrule, thanosruler, alertmanagerconfig, cluster.x-k8s.io (Cluster CAPI), oidcclient (App OIDC)
+PT-BR: Dashboard=Painel, Login=Entrar, Download=Baixar
 
-YAML: js-yaml strips comments. Use extractLeafPaths() for dotted-key types. isNonTranslatable: add refresh/error/checkmark/time units.
-
-PT-BR: Dashboard=Painel, Login=Entrar, Download=Baixar, Plugins=Extensoes, Core=Nucleo, English=Ingles, App Bundles=Pacotes de App, Autoscaler=Autoescalador, Network Policy=Politica de Rede, restricted=restrito
+## UPDATE workflow diff tips
+- `diff en-us locale | grep "^[0-9].*[ad]"` = missing/extra keys
+- Asymmetric c-hunks = missing blank lines; fix all to get identical line counts
+- Avoid simple regex key parsing on YAML with ICU content (false positives)
+- Use separate .js files, not inline node -e (arrow fn/template literal issues)
