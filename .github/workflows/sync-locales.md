@@ -1,10 +1,10 @@
 ---
 description: |
   This workflow checks for changes in the en-us.yaml translation file from
-  rancher/dashboard and opens a Pull Request in this repository with the diff
-  when updates are found, so translations stay in sync with the upstream source.
-  It also updates all other existing language files to reflect any new or changed
-  keys introduced in en-us.yaml.
+  rancher/dashboard and opens a Pull Request in this repository with the updated
+  en-us.yaml when changes are found. It only syncs the English source file — it
+  does NOT update other language files. Use the [UPDATE] issue workflow to bring
+  individual language files up to date after the sync PR is merged.
 
 on:
   schedule: daily
@@ -31,17 +31,17 @@ tools:
 safe-outputs:
   create-pull-request:
     title-prefix: "chore: "
-    labels: [translations, automated]
+    labels: [translations, sync, automated]
   add-comment: {}
 ---
 
-# Sync Locales from rancher/dashboard
+# Sync en-us.yaml from rancher/dashboard
 
-Keep the `en-us.yaml` translation file in sync with the upstream `rancher/dashboard` repository, and update all other language files to reflect any changes.
+Keep the `en-us.yaml` translation source file in sync with the upstream `rancher/dashboard` repository. This workflow **only** updates `en-us.yaml` — it does not touch other language files.
 
 ## Shared rules
 
-**Before doing anything else**, read the file `.github/workflows/shared/translation-rules.md` from this repository. It contains the canonical scripting constraints, translation rules, YAML validation procedures, bash size limits, chunking strategy, and learnings instructions that you MUST follow throughout this workflow.
+**Before doing anything else**, read the file `.github/workflows/shared/translation-rules.md` from this repository. It contains the canonical scripting constraints and learnings instructions that you MUST follow throughout this workflow.
 
 ## What to do
 
@@ -54,7 +54,7 @@ Keep the `en-us.yaml` translation file in sync with the upstream `rancher/dashbo
 
 4. **Before creating a PR, check for existing open sync PRs**:
 
-   a. Search for open pull requests in this repository with the label `translations` and title containing `sync en-us.yaml`. Use the GitHub tools to list open PRs.
+   a. Search for open pull requests in this repository with the label `sync` and title containing `sync en-us.yaml`. Use the GitHub tools to list open PRs.
 
    b. If an open sync PR exists, check out its branch and compare the upstream `en-us.yaml` you just fetched against the `en-us.yaml` **on that PR branch**.
 
@@ -64,26 +64,16 @@ Keep the `en-us.yaml` translation file in sync with the upstream `rancher/dashbo
 
 5. If there **are changes** to `en-us.yaml` and no existing PR already covers them:
 
-   a. Identify what changed — keys added, removed, or values modified.
+   a. Identify what changed — keys added, removed, or values modified. Produce a summary.
 
-   b. Find all other language files in `pkg/ui-locales/l10n/` (any `.yaml` file that is not `en-us.yaml`, e.g. `pt-br.yaml`, `ja-jp.yaml`, `fr-fr.yaml`, etc.).
-
-   c. For each other language file, apply the translation rules from the shared rules file:
-      - **New keys** added to `en-us.yaml`: translate the new English values into that language and add them at the **exact same position** in the YAML structure (same nesting level, same order relative to sibling keys)
-      - **Removed keys** in `en-us.yaml`: remove the same keys from the language file
-      - **Changed values** in `en-us.yaml`: re-translate the updated English value into that language and update it in the language file
-
-   d. **Validate each updated language file** using the YAML validation procedure from the shared rules file. Fix any issues before proceeding.
-
-   e. Open a single Pull Request that includes:
-      - The updated `pkg/ui-locales/l10n/en-us.yaml`
-      - All updated language files
-      - Title: `chore: sync en-us.yaml from rancher/dashboard and update translations`
-      - A body that summarizes: what changed in `en-us.yaml`, which language files were updated, and validation results for each file
-      - Labels: `translations`, `automated`
+   b. Open a Pull Request that includes **only** the updated `pkg/ui-locales/l10n/en-us.yaml`:
+      - Title: `chore: sync en-us.yaml from rancher/dashboard`
+      - Body that summarizes: what changed (keys added, removed, values modified), with counts
+      - Include a note: "After merging, open an `[UPDATE] <language>` issue for each language that needs to be brought up to date."
+      - Labels: `translations`, `sync`, `automated`
 
 ## Style
 
 - Be precise and technical 🔍
-- Summarize the diff clearly — highlight added keys, removed keys, and changed values
-- Note in the PR body that AI-generated translations for other languages should be reviewed by a native speaker before merging
+- Summarize the diff clearly — highlight added keys, removed keys, and changed values with counts
+- Keep the PR body concise and scannable
