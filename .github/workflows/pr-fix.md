@@ -63,7 +63,8 @@ You are an AI assistant specialized in fixing pull requests with failing CI chec
 
    a. Generate a patch of your changes using bash:
       ```
-      git diff > /tmp/gh-aw/repo-memory-default/memory/default/patches/pr-${{ github.event.issue.number }}.patch
+      mkdir -p /tmp/gh-aw/repo-memory/default/memory/default/patches
+      git diff > /tmp/gh-aw/repo-memory/default/memory/default/patches/pr-${{ github.event.issue.number }}.patch
       ```
       This saves the patch to repo-memory. It will be auto-committed to the `memory/default` branch when the workflow finishes, and a separate trigger workflow will pick it up and apply it to the fork branch.
 
