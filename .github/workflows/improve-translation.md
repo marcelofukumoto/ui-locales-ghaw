@@ -30,7 +30,7 @@ tools:
   bash: true
 
 safe-outputs:
-  max-patch-size: 32
+  max-patch-size: 1024
   push-to-pull-request-branch:
   add-comment:
     hide-older-comments: true

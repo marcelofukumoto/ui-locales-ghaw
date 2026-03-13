@@ -31,7 +31,7 @@ tools:
   bash: true
 
 safe-outputs:
-  max-patch-size: 32
+  max-patch-size: 1024
   add-comment:
     hide-older-comments: true
   add-labels:
