@@ -1018,6 +1018,7 @@ asyncButton:
     action: Gerar
     success: Gerado
     waiting: Gerando&hellip;
+
 backupRestoreOperator:
   backup:
     label: Conjunto de Recursos
@@ -1444,6 +1445,7 @@ catalog:
   os:
     versionIncompatible: "Esta versão não é compatível com nós Windows."
     chartIncompatible: "Este chart não é compatível com nós Windows."
+
 changePassword:
   title: Alterar Senha
   cancel: Cancelar
@@ -1537,6 +1539,7 @@ compliance:
   detail:
     subRow:
       noNodes: Nenhuma Informação Adicional
+
 cluster:
   jwtAuthentication:
     banner: "O acesso a Service Accounts com autenticação JWT pode ser configurado após a criação do cluster em <br>
@@ -2720,6 +2723,7 @@ cluster:
     iamInstanceProfileName: Se o provedor de nuvem Amazon estiver selecionado, o "Nome do Perfil de Instância IAM" deve ser definido para cada Pool de Máquinas
   capi:
     notSupported: O gerenciamento de clusters provisionados usando provedores de infraestrutura CAPI via UI está atualmente limitado a clusters provisionados pelo Rancher Turtles.
+
 clusterIndexPage:
   hardwareResourceGauge:
     consumption: "{useful} de {total} {units} {suffix}"
@@ -4124,6 +4128,7 @@ landing:
       lastVisited: Ir para a área que visitei por último
       custom: "Ir para o cluster:"
   welcomeToRancher: 'Bem-vindo ao {vendor}'
+
 logging:
   clusterFlow:
     noOutputsBanner: Não há saídas de cluster no namespace selecionado.
@@ -4399,6 +4404,7 @@ longhorn:
         description: 'Gerenciar sistema de armazenamento via UI'
         na: Recurso Indisponível
         uiServiceUnavailable: O serviço de UI do Longhorn não está disponível ou você não tem permissão para acessá-lo.
+
 neuvector:
   overview:
     title: Visão Geral
@@ -5922,6 +5928,7 @@ promptRollback:
 promptRedeploy:
   title: Reimplantar {type}?
   attemptingToRedeploy: "Você está tentando reimplantar {type} {names}<br><br>Reimplantar reiniciará os workloads selecionados e pode causar indisponibilidade temporária."
+
 promptRotateEncryptionKey:
   title: Rotacionar Chaves de Criptografia
   description: O último backup {name} foi realizado em {date}
@@ -8632,6 +8639,7 @@ typeLabel:
     one { Token de Registro de Cluster }
     other { Tokens de Registro de Cluster }
     }
+
 oidcclient:
   a11y:
     copyText:
@@ -9355,6 +9363,7 @@ component:
         podsCard:
           title: Pods
           ariaResourceName: pods
+          noPods: Não há pods presentes atualmente.
         jobsCard:
           title: Jobs
           ariaResourceName: trabalhos
