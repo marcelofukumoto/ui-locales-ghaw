@@ -1,8 +1,9 @@
 # pt-br Translation
 
-Coverage: 46.5% (2,871/6,180). Remaining: 3,309.
-Next: logging(159), tableHeaders(157), cluster(147), monitoring(142), plugins(141).
+Coverage: 60.4% (3,781/6,264). Remaining: 2,483.
+Next: cluster(152), logging(150), plugins(141), monitoring(135), istio(118), typeLabel(116), workload(114).
 
-Pitfalls: Line 3492 multiline ICU valid. Product names stay English.
-Chunk: 50 keys/call max. Patch by line number.
-Notes: Add-on→Complemento, Workload→Carga de trabalho, e.g.→ex.:
+Pitfalls: `|-` block scalars skip in patcher. Values with `: ` need quoting. ICU plural keys skip.
+Chunk: 50 keys/call max. Patch by line number (0-indexed ptLine).
+Patcher: patcher.js takes {ptLine, newValue} JSON array, patches in-place.
+Notes: Add-on→Complemento, Workload→Carga de trabalho, e.g.→ex.
