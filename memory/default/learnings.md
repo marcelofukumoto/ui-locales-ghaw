@@ -1,16 +1,12 @@
 # pt-br Learnings
 
-Run 3 (2026-03-13): 89.78%->90.33% (35 new strings, 6348 total keys)
-Run 4 (2026-03-13): Added noPods key + 7 blank lines to sync structure.
+Run 3-5 (2026-03-13): coverage improved to 100% after verify run.
 
-ICU plurals already translated: fleet, limitrange, resourcequota, poddisruptionbudget, servicemonitor, podmonitor, prometheusrule, oidcclient
+ICU translated: fleet, limitrange, resourcequota, poddisruptionbudget, servicemonitor, podmonitor, prometheusrule, oidcclient. PT-BR: Dashboard=Painel, Login=Entrar.
 
-YAML: js-yaml strips comments. Use extractLeafPaths() for dotted-key types.
-
-PT-BR: Dashboard=Painel, Login=Entrar, Download=Baixar
-
-## UPDATE workflow diff tips
-- `diff en-us locale | grep "^[0-9].*[ad]"` = missing/extra keys
-- Asymmetric c-hunks = missing blank lines; fix all to get identical line counts
-- Avoid simple regex key parsing on YAML with ICU content (false positives)
-- Use separate .js files, not inline node -e (arrow fn/template literal issues)
+## Tips
+- js-yaml: `npm install --prefix /tmp/gh-aw/agent js-yaml`
+- ICU arm text is translatable not a placeholder; angle brackets in CLI are not HTML
+- cluster.provider.*, csi.drivers.*, model.authConfig.* = kept-in-English (product names)
+- Multi-var templates ({subtype} {name}) are skippable; "(experimental)" same in PT
+- diff tips: `grep "^[0-9].*[ad]"` for missing/extra keys; separate .js files not inline node -e
