@@ -62,27 +62,13 @@ You are an AI assistant specialized in fixing pull requests with failing CI chec
       git diff > /tmp/pr-fix.patch
       ```
    b. Read the patch file content.
-   c. Post a **single comment** to the PR with this exact format (the markers are used by an automated workflow to extract and apply the patch):
+   c. Post a **single comment** to the PR with:
+      - A heading: `🔧 **PR Fix — Patch Available**`
+      - A summary of what was fixed and why
+      - The full patch inside a ` ```diff ` code block so it can be extracted automatically
+      - Instructions for the author: save the patch to a file and run `git apply fix.patch && git add -A && git commit -m "fix: apply pr-fix patch" && git push`
+      - A note that a separate workflow will attempt to apply the patch automatically
 
-      ```
-      🔧 **PR Fix — Patch Available**
-
-      ### Summary
-      {summary of what was fixed and why}
-
-      ### Patch
-      A separate workflow will attempt to apply this patch automatically. If that fails (e.g. maintainer edits not allowed), you can apply it manually:
-
-      1. Save the patch below to a file (e.g. `fix.patch`)
-      2. Run: `git apply fix.patch && git add -A && git commit -m "fix: apply pr-fix patch" && git push`
-
-      <!-- pr-fix-patch-start -->
-      ```diff
-      {paste the full patch content here}
-      ```
-      <!-- pr-fix-patch-end -->
-      ```
-
-      The `<!-- pr-fix-patch-start -->` and `<!-- pr-fix-patch-end -->` markers are **critical** — do not omit them.
+      The ` ```diff ` code block is critical — an automated workflow extracts the patch from it.
 
 9. Add a comment to the pull request summarizing the changes you made (if pushed directly) and the reason for the fix. If a patch was posted instead, the patch comment in step 8 serves as the summary — no additional comment is needed.

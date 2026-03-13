@@ -27,22 +27,23 @@ jobs:
             exit 0
           fi
 
-          # Check each open PR for a patch comment with our markers
+          # Check each open PR for a pr-fix patch comment
+          # Look for comments containing a diff block from the pr-fix workflow
           FOUND_PR=""
           PATCH_BODY=""
 
           for PR_NUMBER in $(gh pr list --repo "$REPO" --state open --json number --jq '.[].number'); do
-            echo "Checking PR #$PR_NUMBER for patch comments..."
+            echo "Checking PR #$PR_NUMBER for pr-fix patch comments..."
 
-            # Get the most recent comment containing our patch markers
+            # Find the most recent comment that has both a diff block and the gh-aw pr-fix marker
             COMMENT=$(gh api \
               "repos/$REPO/issues/$PR_NUMBER/comments" \
-              --jq '[.[] | select(.body | contains("<!-- pr-fix-patch-start -->"))] | last | .body // empty')
+              --jq '[.[] | select((.body | contains("```diff")) and (.body | contains("gh-aw-workflow-call-id: '"$REPO"'/pr-fix")))] | last | .body // empty')
 
             if [ -n "$COMMENT" ]; then
               FOUND_PR="$PR_NUMBER"
               PATCH_BODY="$COMMENT"
-              echo "Found patch comment on PR #$PR_NUMBER"
+              echo "Found pr-fix patch comment on PR #$PR_NUMBER"
               break
             fi
           done
@@ -53,8 +54,8 @@ jobs:
             exit 0
           fi
 
-          # Extract the patch content between the markers
-          PATCH=$(echo "$PATCH_BODY" | sed -n '/<!-- pr-fix-patch-start -->/,/<!-- pr-fix-patch-end -->/p' | sed '1d;$d' | sed '1d;$d')
+          # Extract the patch from the ```diff block
+          PATCH=$(echo "$PATCH_BODY" | awk '/^```diff$/,/^```$/{if(!/^```/)print}')
 
           if [ -z "$PATCH" ]; then
             echo "Could not extract patch content from comment, skipping."
