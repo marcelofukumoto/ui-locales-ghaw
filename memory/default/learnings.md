@@ -1,18 +1,14 @@
-# pt-br Translation
+# Translation Learnings
 
-Run 6: 91.6% (5,772/6,301). Remaining: 529 (all brand names/tech terms).
-Run 5: 89% (5,577). Run 4: 74.1%. Run 3: 60.4%. Run 2: 46.5%. Run 1: 32%.
+## Environment
+- Node.js v20. Run `npm install js-yaml` in `/tmp/gh-aw/agent/`.
 
-Tools: patcher.js (scalar+block). No npm needed.
-Chunk: 40-50 keys/call max. JSON patch files.
+## pt-br PR #36 Issues (2026-03-13)
+YAML errors: line 344 `percent: %`→`"%"`, line 6435 helmPrefix ends with `:`, line 9033 `max: Total:`.
+Structure: `cluster.harvester.warning.cloudProvider.incompatible` has `https: //` space → mismatch.
+Placeholders dropped: authConfig.associatedWarning, ldap.oktaSchema, azuread modal, backupRestoreOperator (2), catalog.install.steps.basics.description ({vendor} lost).
 
-True ceiling: ~92%. Remaining 529 = all legitimately English:
-Amazon/Azure/Google, Longhorn/CoreDNS/etc., CPU/RAM/URL/TLS/etc.,
-time units (5s/1m/etc.), pure placeholders.
-
-Sections done: 90+ sections fully translated.
-Pitfalls:
-- Python yaml fails on `equal: =` (pre-existing). Use Node.js.
-- Multi-line flow scalars: patcher replaces first line only, remove leftover lines.
-- Block scalar keys: patcher converts |- to inline (fewer lines, OK).
-Key parity: 6,347 keys ✅. ICU plurals work with patcher.
+## Tips
+- Fix YAML errors with loop: `while(!parse) fix line N`
+- ICU word changes (outros/recurso) are false positives in placeholder check
+- Most "untranslated" strings are tech terms; expect ~99.8% real coverage after agent review
