@@ -1,29 +1,13 @@
-# Translation Learnings — pt-br PR #36
+# pt-br Learnings
 
-## Environment
-- Node.js v20. No pip/Python packages (no pypi access).
+## Tooling: use `yaml` npm package (not js-yaml)
 
-## Coverage History
-- Initial 16% → Runs 1-6: 91.6% → Run 7: 93.0%
-- **True ceiling: ~93-94%** — remaining ~430 are brand/tech names, correctly English
+## Recurring issues
+- `cluster.harvester.warning.cloudProvider.incompatible`: double-quoted value with HTML attrs — use plain scalar
+- `{vendor}` frequently dropped; `&nbsp;`,`&lt;`,`&gt;` stripped in performance keys
+- ICU plural text `{other}→{outro}` = false positive, not a real violation
 
-## YAML Pitfalls (all fixed in Run 7)
-- Bare `%` → quote as `"%"`
-- Values ending with `:` → quote: `'value:'`
-- `https: //` space in URLs → YAML key-value separator, causes structural mismatch
-- Multi-line ICU plurals → use Python str.replace() with \n, not sed
+## Agent review: "untranslated" items are kept-in-English technical terms
+Pod,Namespace,CPU,TLS,LDAP,Grafana,Prometheus,Longhorn etc = keep in English
 
-## Placeholder Violations Fixed
-authConfig.associatedWarning ({docsBase} link), ldap.oktaSchema (Okta link), azuread modal title/body, cluster.harvester.incompatible (https:// space)
-
-## Chunking Strategy
-- Python str.replace() for multi-line values; sed for simple single-line
-- Max ~50 per script; verify with coverage.js after each chunk
-
-## Remaining "Untranslated" — Correctly English
-Brand names (Longhorn/Grafana/Elasticsearch), cloud providers (Amazon/Azure/Google), K8s terms (Pods/Cluster/etcd), protocol acronyms (TLS/OAuth/CSI), K8s enums (NoExecute/NoSchedule), icon IDs (refresh/error/checkmark), time formats (5s/10m/1h)
-
-## Validation Tools in /tmp/gh-aw/agent/
-- check_yaml.js — basic YAML validation
-- coverage.js — coverage analysis
-- list_untranslated.js — generate untranslated list
+## Coverage PR#36 (Mar 14): ~99.98% after review; 1 genuine: catalog.install.warning.managed
