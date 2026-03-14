@@ -1263,10 +1263,10 @@ catalog:
     chart: Gráfico
     warning:
       managed:
-        Warning, {manager} manages deployment and upgrade of the {name} app. Upgrading this app is not supported.<br>
+        Aviso, {manager} gerencia a implantação e atualização do app {name}. A atualização manual deste app não é suportada.<br>
         {version, select,
           null { }
-          other { Under most circumstances, no user intervention should be needed to ensure that the {version} version is compatible with the version of Rancher that you are running.}
+          other { Na maioria das circunstâncias, nenhuma intervenção do usuário é necessária para garantir que a versão {version} seja compatível com a versão do Rancher em execução.}
         }
     error:
       requiresFound: '<a href="{url}">{name}</a> deve ser instalado antes que você possa instalar este gráfico.'
@@ -1328,8 +1328,14 @@ catalog:
         subtext: Definir metadados do App
         description: |-
           Este processo ajudará {action, select,
-                  install {a instalar}
-                  other {a atualizar}} este aplicativo.
+            install { criar }
+            upgrade { atualizar }
+            downgrade { atualizar }
+            editVersion { atualizar }
+          } o {existing, select,
+            true { app}
+            false { chart}
+          }. Comece definindo algumas informações básicas usadas pelo {vendor} para gerenciar o App.
         nsCreationDescription: "Para instalar o app em um novo namespace, insira o nome no campo Namespace e selecione-o."
         createNamespace: "O namespace <code>{namespace}</code> será criado."
         requiresImagePullSecret: "Este Gráfico requer um Segredo de Pull de Imagem para que as imagens sejam extraídas com sucesso."
@@ -1475,7 +1481,10 @@ chartHeading:
 
 compliance:
   addTest: Adicionar ID de Teste
-  alertNeeded: Alertas precisam estar habilitados nos valores do chart de conformidade. Isso requer que o recurso <a tabindex="0">Alertmanager</a> esteja habilitado.
+  alertNeeded: |-
+    Os alertas devem ser habilitados nos valores.yaml do chart de conformidade.
+    Isso requer que o <a tabindex="0" href="{link}">App de Monitoramento e Alertas {vendor}</a> esteja instalado
+    e que os Receptores e Rotas estejam <a target="_blank" rel='noopener noreferrer nofollow' href='{docsBase}/how-to-guides/advanced-user-guides/monitoring-v2-configuration-guides/advanced-configuration/alertmanager'> configurados para enviar alertas.</a>
   alertOnComplete: Alertar na conclusão da verificação
   alertOnFailure: Alertar na falha de verificação
   benchmarkVersion: Versão de Benchmark
@@ -1776,7 +1785,7 @@ cluster:
       state: Aviso
       cloudProvider:
         incompatible:
-          "Você não pode selecionar o provedor de nuvem Harvester pois a versão atual do Harvester não é compatível com a versão do Kubernetes RKE2 selecionada. Clique <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são suportadas."
+          Você não pode selecionar o provedor de nuvem Harvester pois a versão atual do Harvester não é compatível com a versão do Kubernetes RKE2 selecionada. Clique <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são suportadas.
     clusterWarning: |-
         Há {count, plural,
         =1 {1 cluster Harvester que não está sendo exibido}
@@ -1811,7 +1820,7 @@ cluster:
   haveOneOwner: Deve haver pelo menos um membro com a função de Proprietário.
   import:
     warningBanner: 'Você não deve importar um cluster que já foi conectado a outra instância do Rancher, pois isso levará à corrupção de dados.'
-    commandInstructions: 'Execute o comando <code>kubectl</code> abaixo em um cluster Kubernetes existente em execução.'
+    commandInstructions: 'Execute o comando <code>kubectl</code> abaixo em um cluster Kubernetes existente em execução de uma versão compatível do Kubernetes para importá-lo para o {vendor}:'
     commandInstructionsInsecure: 'Se você receber um erro de &quot;certificado assinado por autoridade desconhecida&quot;, sua instalação {vendor} tem um certificado SSL autoassinado ou não confiável. Execute o comando abaixo para contornar a verificação de certificado:'
     clusterRoleBindingInstructions: 'Se você receber erros de permissão ao criar alguns dos recursos, seu usuário pode não ter a função <code>cluster-admin</code>. Use este comando para aplicá-la:'
     clusterRoleBindingCommand: 'kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user <seu nome de usuário do kubeconfig>'
@@ -1858,9 +1867,12 @@ cluster:
     aws:
       sizeLabel: |-
         {apiName}: {cpu, plural,
-                =1 {1 vCPU}
-                  other {# vCPUs}
-                } / {memory, number} GB
+        =1 {1 vCPU}
+          other {# vCPUs}
+        } / {memory, number} GiB Memória / {storageSize, plural,
+          =0 {Somente EBS}
+          other {{storageSize, number} {storageUnit} {storageType}}
+        } - {architecture}
     azure:
       acceleratedNetworking:
         label: Rede Acelerada
@@ -1951,20 +1963,27 @@ cluster:
     digitalocean:
       sizeLabel: |-
         {plan, select,
-                  s {Básico: }
-                  g {Geral: }
-                  gd {Geral: }
-                  c {Computação: }
-                  other {{plan}: }} {size}
+          s {Básico: }
+          g {Geral: }
+          gd {Geral: }
+          c {Computação: }
+          m {Memória: }
+          so {Armazenamento: }
+          standard {Padrão: }
+          other {}
+        }{memoryGb} GB, {vcpus, plural,
+          =1 {# vCPU}
+          other {# vCPUs}
+        }, {disk} GB Disco ({value})
       tags:
         label: Tags do Droplet
         placeholder: ex. meu_servidor
     linode:
       typeLabel: |-
         {label}, {vcpus, plural,
-                  =1 {# vCPU}
-                  other {# vCPUs}
-                }, {disk} GB Disco
+          =1 {# vCPU}
+          other {# vCPUs}
+        }, {disk} GB Disco ({value})
     vsphere:
       hostOptions:
         any: Qualquer
@@ -3443,7 +3462,7 @@ fleet:
       ociRegistry: Registro OCI Padrão
     timeout: Tempo limite de criação da área de trabalho. É possível que a área de trabalho tenha sido criada. Sugerimos verificar a página de áreas de trabalho antes de tentar criar outra.
     remove:
-      warning: Excluir um Workspace também exclui todos os recursos nele. Isso inclui GitRepos, bem como Clusters e Grupos de Cluster.
+      warning: Excluir um Workspace também exclui todos os recursos nele. Isso inclui GitRepos, mas também Clusters.<br><br>Os Clusters excluídos serão removidos do {vendor}, e se o {vendor} gerencia o ciclo de vida do Cluster, a infraestrutura subjacente também será excluída.
   restrictions:
     addTitle: allowedTargetNamespaces
     addLabel: Adicionar
@@ -3496,7 +3515,7 @@ gatekeeperConstraint:
     action: Ação de Aplicação
   violations:
     title: "Violações: {total}"
-    notAll: Nem todas as violações são exibidas devido ao limite de violações de restrição do OPA Gatekeeper — a restrição atingiu o limite configurado.
+    notAll: Nem todas as violações são exibidas devido ao limite configurado de violações de restrição do OPA Gatekeeper — a restrição inclui detalhes apenas para {shown}
 
 gatekeeperIndex:
   poweredBy: OPA Gatekeeper
@@ -4595,7 +4614,7 @@ monitoring:
       keyFilePath:
         label: Caminho do Arquivo de Chave
         placeholder: 'ex.: ./key-file.pfx'
-      secretsBanner: Os caminhos de arquivo abaixo devem ser referenciados na configuração do <pre class="inline-block m-0 p-0 vertical-middle">alertmanager</pre>.
+      secretsBanner: Os caminhos de arquivo abaixo devem ser referenciados em <pre class="inline-block m-0 p-0 vertical-middle">alertmanager.alertmanagerSpec.secrets</pre> ao implantar o chart de Monitoramento. Para mais informações, consulte nossa <a href="{docsBase}/how-to-guides/advanced-user-guides/monitoring-alerting-guides" target="_blank" rel="noopener noreferrer nofollow">documentação</a>.
   projectMonitoring:
     detail:
       error: 'Não foi possível buscar valores do Painel com o status: '
@@ -4946,8 +4965,13 @@ networkpolicy:
       matchesSome: |-
         {matchedPods, plural,
                   =0 {Corresponde a 0 de {totalPods, number} pods}
-                  =1 {Corresponde a 1 de {totalPods, number} pods}
-                  other {Corresponde a {matchedPods, number} de {totalPods, number} pods}}
+                  =1 {Corresponde a 1 de {totalPods, number} pods: "{samplePods}"}
+                  other {Corresponde a {matchedPods, number} de {totalPods, number} pods existentes, incluindo "{samplePods}"}
+                } em {matchedNamespaces, plural,
+                  =0 {0 de {totalNamespaces, number} namespaces}
+                  =1 {1 de {totalNamespaces, number} namespaces: "{sampleNamespaces}"}
+                  other {{matchedNamespaces, number} de {totalNamespaces, number} namespaces existentes, incluindo "{sampleNamespaces}"}
+                }
 node:
   list:
     pool: Pool
@@ -5962,7 +5986,7 @@ rbac:
         description: |-
           Controla o acesso que o {isUser, select,
                     true {usuário}
-                    false {grupo}} tem para administrar o {vendor} geral.
+                    false {grupo}} tem para administrar a instalação geral do {appName}.
       custom:
         label: Personalizado
         description: 'Funções não criadas pelo {vendor}.'
@@ -6820,7 +6844,7 @@ tableHeaders:
   bundlesReady: Bundles Prontos
   bundleDeploymentsReady: Implantações
   builtin: Integrado
-  chart: Chart
+  chart: Gráfico
   capacity: Capacidade
   current: Atual
   clusterCreatorDefault: Padrão do Criador de Cluster
@@ -8756,7 +8780,7 @@ advancedSettings:
     'system-default-registry': 'Registro privado a ser usado para todas as Imagens de Contêiner do Sistema Rancher. Se nenhum valor for especificado, o registro Docker público será usado por padrão.'
     'ui-index': 'Localização do índice HTML para a UI do Gerenciador de Cluster.'
     'ui-dashboard-index': 'Localização do índice HTML para a UI do {appName}.'
-    'ui-offline-preferred': 'Controla se os recursos da UI são servidos localmente pelo contêiner do servidor ou a partir da URL remota definida em ui-index.'
+    'ui-offline-preferred': 'Controla se os recursos da UI são servidos localmente pelo contêiner do servidor ou a partir da URL remota definida nas configurações ui-index e ui-dashboard-index. A opção `Dinâmico` usará recursos locais em builds de produção do {appName}.'
     'ui-pl': 'Nome da empresa Private-Label.'
     'auth-user-info-max-age-seconds': 'A idade máxima dos tokens de autenticação de um usuário antes que uma sincronização de membros de grupo do provedor de autenticação seja realizada.'
     'auth-user-info-resync-cron': 'Agendamento cron padrão para ressincronizar memberships de grupos do provedor de autenticação.'
@@ -8817,7 +8841,7 @@ featureFlags:
 performance:
   label: Configurações de Desempenho da UI
   settingName: Desempenho
-  deprecatedInactivitySetting: A configuração <i class="mr-5">"Inatividade"</i> agora está obsoleta em favor da configuração <i class="mr-5">"Expiração de Sessão por Inatividade"</i>.
+  deprecatedInactivitySetting: A configuração <i class="mr-5">"Inatividade"</i> agora está obsoleta em favor da <i class="mr-5">auth-user-session-idle-ttl-minutes</i>&nbsp;<a href="{settingsPageUrl}">Configuração</a>.
   deprecatedForSSP: A configuração <i class="mr-5">"{setting}"</i> agora está obsoleta e será removida em uma versão futura.
   incrementalLoad:
     label: Carregamento Incremental
@@ -8879,7 +8903,7 @@ performance:
     label: Paginação no Servidor
     description: Por padrão, as Listas buscam todos os recursos e paginam no lado do cliente. A Paginação no Servidor move isso para o servidor.
     applicable: "A paginação no servidor se aplica a Tipos de Recursos"
-    featureFlag: Habilitar/Desabilitar <i class="mr-5">"Paginação no Servidor"</i> agora é feito exclusivamente via flag de funcionalidade.
+    featureFlag: Habilitar/Desabilitar <i class="mr-5">"Paginação no Servidor"</i> agora é feito exclusivamente via <i class="mr-5">ui-sql-cache</i>&nbsp;<a href="{ffUrl}">Flag de Funcionalidade</a>
     resources:
       generic: a maioria dos recursos na seção 'Mais Recursos' do cluster
       all: Todos os Recursos
