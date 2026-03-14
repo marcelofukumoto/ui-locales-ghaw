@@ -1,13 +1,11 @@
-# pt-br Learnings
+# PT-BR Learnings
 
-## Tooling: use `yaml` npm package (not js-yaml)
+Coverage: 92.1% (5791/6291). ~500 remaining = legitimate English terms (CPU, RAM, Pods, Namespace, TLS, LDAP, product names). Do not translate.
 
-## Recurring issues
-- `cluster.harvester.warning.cloudProvider.incompatible`: double-quoted value with HTML attrs — use plain scalar
-- `{vendor}` frequently dropped; `&nbsp;`,`&lt;`,`&gt;` stripped in performance keys
-- ICU plural text `{other}→{outro}` = false positive, not a real violation
+YAML: quote values with `:` — `'Total:'`. HTML in double-quoted = use plain scalar. "Aviso: " = YAML key error; use "Aviso, ".
 
-## Agent review: "untranslated" items are kept-in-English technical terms
-Pod,Namespace,CPU,TLS,LDAP,Grafana,Prometheus,Longhorn etc = keep in English
+js-yaml available: `node -e "require('js-yaml')"`
 
-## Coverage PR#36 (Mar 14): ~99.98% after review; 1 genuine: catalog.install.warning.managed
+Placeholders fixed (3ea2015): {vendor}→{appName} in rbac.globalRoles.types.global.description; {settingsPageUrl} in performance.deprecatedInactivitySetting; {ffUrl} in performance.serverPagination.featureFlag; {docsBase} in monitoring.receiver.tls.secretsBanner; {samplePods}/{sampleNamespaces} in networkpolicy matchesSome.
+
+False positives: {other}→{outro}, {resource}→{recurso} in ICU plural are correct translations, not violations.
