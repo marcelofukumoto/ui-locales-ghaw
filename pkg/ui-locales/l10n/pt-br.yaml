@@ -341,8 +341,8 @@ product:
   plugins: Plugins
 
 suffix:
-  percent: %
-  milliCpus: milli CPUs
+  percent: "%"
+  milliCpus: mili CPUs
   cores: Núcleos
   cpus: CPUs
   gpus: GPUs
@@ -500,7 +500,7 @@ authConfig:
     unrestricted: Permitir qualquer usuário válido
   allowedPrincipalIds:
     title: Usuários e Grupos Autorizados
-  associatedWarning: 'A conta {provider} usada para habilitar o provedor externo receberá acesso de proprietário.'
+  associatedWarning: 'A conta {provider} usada para habilitar o provedor externo receberá permissões de administrador. Se você usar uma conta de teste ou conta sem privilégios de administrador, essa conta ainda receberá permissões de nível administrador. Consulte <a href="{docsBase}/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config#external-authentication-configuration-and-principal-users" target="_blank" rel="noopener noreferrer nofollow">Configuração de Autenticação Externa e Usuários Principais</a> para entender o motivo.'
   githubapp:
     clientId:
       label: ID do Cliente
@@ -655,7 +655,7 @@ authConfig:
       ldap: LDAP
       tls: LDAPS (TLS)
     customizeSchema: Personalizar Schema
-    oktaSchema: Os padrões abaixo são para um servidor OpenLDAP genérico. Para mais informações sobre o esquema do Okta, consulte a documentação.
+    oktaSchema: 'Os padrões abaixo são para um servidor OpenLDAP genérico. Para mais informações sobre os valores a usar com a interface LDAP do Okta, consulte: <a target="_blank" rel="noopener noreferrer nofollow" href="https://help.okta.com/en-us/Content/Topics/Directory/LDAP-interface-connection-settings.htm">Configurações de conexão da interface LDAP do Okta</a>'
     users: Usuários
     groups: Grupos
     searchAttribute: Atributo de Busca
@@ -750,8 +750,8 @@ authConfig:
         message: 'A autenticação do Azure AD deve ser atualizada: está usando a API Graph do Azure, que será descontinuada no final de 2022.'
         linkText: 'Atualize aqui.'
       modal:
-        title: Você tem certeza? This update is irreversible.
-        body: <p><b>Pode ser necessário fazer alterações adicionais</b>. Certifique-se de que o app do Azure AD tem as permissões de Leitura do Diretório configuradas corretamente.</p>
+        title: Você tem certeza? Esta atualização é irreversível.
+        body: '<p><b>Pode ser necessário fazer algumas alterações adicionais</b>. Certifique-se de que o aplicativo Azure AD tem a permissão <b>Application</b> Directory.Read.All adicionada ao Microsoft Graph.<br> Se algum endpoint foi personalizado ao configurar a autenticação Azure AD no Rancher, ele não será atualizado automaticamente. </p>'
   oidc:
     endSessionEndpoint: 
       title: Endpoint de Encerramento de Sessão
@@ -767,7 +767,7 @@ authConfig:
       custom: Especificar
       standard: Gerar
     url: URL
-    realm: Realm
+    realm: Domínio
     keycloak:
       url: URL do Keycloak
       realm: Realm do Keycloak
@@ -1282,7 +1282,7 @@ catalog:
         mcmNotSupported: Apps Multi-cluster Legados não podem ser gerenciados por esta interface
         category:
           legacy: Legado
-          mcm: Multi-cluster
+          mcm: Vários clusters
     header:
       install: 'Instalar {name}'
       installGeneric: Instalar Gráfico
@@ -1776,7 +1776,7 @@ cluster:
       state: Aviso
       cloudProvider:
         incompatible:
-          You cannot select the Harvester cloud provider as the current Harvester version is not compatible with the selected RKE2 Kubernetes version, click <a target="_blank" rel="noopener noreferrer nofollow" href="https: //www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são compatíveis.
+          "Você não pode selecionar o provedor de nuvem Harvester pois a versão atual do Harvester não é compatível com a versão do Kubernetes RKE2 selecionada. Clique <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.suse.com/suse-harvester/support-matrix/all-supported-versions">aqui</a> para ver quais versões do Kubernetes são suportadas."
     clusterWarning: |-
         Há {count, plural,
         =1 {1 cluster Harvester que não está sendo exibido}
@@ -2737,9 +2737,9 @@ clusterIndexPage:
         etcd:
           label: Etcd
         scheduler:
-          label: Scheduler
+          label: Agendador
         controller-manager:
-          label: Controller Manager
+          label: Gerenciador de Controladores
         cattle:
           label: Cattle
         fleet:
@@ -3448,11 +3448,11 @@ fleet:
     addTitle: allowedTargetNamespaces
     addLabel: Adicionar
     banner: "{count, plural,
-          =0 { Adding namespaces here will create a GitRepoRestriction. }
-          other { Only the Git Repo Restriction's <code>allowedTargetNamespaces</code> is managed here. You can make additional changes to the Git Repo Restriction}
+          =0 { Adicionar namespaces aqui criará uma GitRepoRestriction. }
+          other { Somente o <code>allowedTargetNamespaces</code> da Restrição do Git Repo é gerenciado aqui. Você pode fazer alterações adicionais na Restrição do Git Repo}
         }"
   configMaps:
-    label: Config Maps
+    label: Mapas de Configuração
   secrets:
     label: Segredos
 footer:
@@ -3788,7 +3788,7 @@ ingress:
       port: Porta
       target: Serviço de Destino
       certificates: Certificados
-    hostname: Hostname
+    hostname: Nome do host
     path:
       label: Caminho
       placeholder: ex. /foo
@@ -4199,7 +4199,7 @@ logging:
   loki:
     url: URL
     urlInvalid: Formato de URL incorreto. Verifique e corrija o formato da URL antes de salvar.
-    tenant: Tenant
+    tenant: Locatário
     username: Usuário do Secret
     password: Senha do Secret
     configureKubernetesLabels: Configurar metadados do Kubernetes no formato Prometheus
@@ -4244,7 +4244,7 @@ logging:
     secretKey: Chave Secreta do Secret
   logdna:
     apiKey: Chave de API
-    hostname: Hostname
+    hostname: Nome do host
     app: Aplicativo
   logz:
     url: URL
@@ -4794,7 +4794,7 @@ namespace:
   createNamespace: Criar um novo Namespace
   selectOrCreate: Selecionar ou Criar um Namespace
   snapshots:
-    label: Snapshots
+    label: Instantâneos
     totalSnapshotSize: Tamanho Total dos Snapshots
   resourceStates:
       success: 'Ativo'
@@ -5605,8 +5605,8 @@ prefs:
   language: Idioma
   landing:
     label: Página de Destino do Login
-    vue: Cluster Explorer
-    ember: Cluster Manager
+    vue: Explorador de Cluster
+    ember: Gerenciador de Cluster
   displaySettings:
     title: Configurações de Exibição
     detail: Altere a forma como as informações são exibidas na interface.
@@ -6432,7 +6432,7 @@ setup:
     dockerPrefix: 'Para uma instalação via "docker run":'
     dockerPs: 'Encontre o ID do seu contêiner com <code>docker ps</code>, depois execute:'
     dockerSuffix: ""
-    helmPrefix: Para uma instalação Helm, execute:
+    helmPrefix: 'Para uma instalação Helm, execute:'
     helmSuffix: ""
   eula: I agree to the End User License Agreement
   newPassword: Nova Senha
@@ -6884,7 +6884,7 @@ tableHeaders:
   internalExternalIp: IP Externo/Interno
   ipaddress: Endereço IP
   internalIpSameAsExternal: Igual ao Externo
-  jobs: Jobs
+  jobs: Tarefas
   key: Chave
   keys: Dados
   labels: Rótulos
@@ -7749,7 +7749,7 @@ workload:
     subtypes:
       secret: Segredo
       configMap: ConfigMap
-      hostPath: Bind-Mount
+      hostPath: Montagem Bind
       persistentVolumeClaim: Reivindicação de Volume Persistente
       createPVC: Criar Reivindicação de Volume Persistente
       csi: CSI
@@ -7759,7 +7759,7 @@ workload:
       azureFile: Arquivo Azure
       gcePersistentDisk: Disco Persistente Google
       driver.longhorn.io: Longhorn
-      vsphereVolume: VMWare vSphere Volume
+      vsphereVolume: Volume VMWare vSphere
       emptyDir: Diretório Vazio
     addClaim: Adicionar Claim
     addMount: Adicionar Montagem
@@ -7934,7 +7934,7 @@ model:
     role:
       controlPlane: Plano de Controle
       etcd: etcd
-      worker: Worker
+      worker: Trabalhador
   openldapconfig:
     domain:
       help: Somente usuários abaixo desta base serão usados.
@@ -8995,7 +8995,7 @@ resourceQuota:
   resourceIdentifier:
     placeholder: ex. configmaps
     tooltip: Selecione 'Personalizado' na lista 'Tipo de Recurso' e insira o identificador de recurso (ex. requests.storage).
-  configMaps: Config Maps
+  configMaps: Mapas de Configuração
   limitsCpu: Limite de CPU
   limitsMemory: Limite de Memória
   persistentVolumeClaims: Reivindicações de Volume Persistente
@@ -9030,7 +9030,7 @@ resourceQuota:
     reserved: 'Outros Namespaces:'
     namespace: 'Este Namespace:'
     available: 'Disponível:'
-    max: Total:
+    max: 'Total:'
   ariaLabel:
     grid: Cotas de Recursos
     resourceType: 'Tipo de Recurso, linha {row}'
@@ -9058,7 +9058,7 @@ customLinks:
     issues: Reportar um Problema
     getStarted: Começar
     commercialSupport: Suporte Comercial
-    appCo: SUSE Application Collection
+    appCo: Coleção de Aplicações SUSE
 
 ##############################
 ### Support Page
@@ -9295,8 +9295,8 @@ component:
           ariaResourceName: pods
           noPods: Não há pods presentes no momento.
         jobsCard:
-          title: Jobs
-          ariaResourceName: jobs
+          title: Tarefas
+          ariaResourceName: tarefas
         insightsCard:
           title: Insights
           rows:
