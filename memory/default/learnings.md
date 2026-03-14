@@ -1,14 +1,29 @@
-# Translation Learnings
+# Translation Learnings — pt-br PR #36
 
 ## Environment
-- Node.js v20. Run `npm install js-yaml` in `/tmp/gh-aw/agent/`.
+- Node.js v20. No pip/Python packages (no pypi access).
 
-## pt-br PR #36 Issues (2026-03-13)
-YAML errors: line 344 `percent: %`→`"%"`, line 6435 helmPrefix ends with `:`, line 9033 `max: Total:`.
-Structure: `cluster.harvester.warning.cloudProvider.incompatible` has `https: //` space → mismatch.
-Placeholders dropped: authConfig.associatedWarning, ldap.oktaSchema, azuread modal, backupRestoreOperator (2), catalog.install.steps.basics.description ({vendor} lost).
+## Coverage History
+- Initial 16% → Runs 1-6: 91.6% → Run 7: 93.0%
+- **True ceiling: ~93-94%** — remaining ~430 are brand/tech names, correctly English
 
-## Tips
-- Fix YAML errors with loop: `while(!parse) fix line N`
-- ICU word changes (outros/recurso) are false positives in placeholder check
-- Most "untranslated" strings are tech terms; expect ~99.8% real coverage after agent review
+## YAML Pitfalls (all fixed in Run 7)
+- Bare `%` → quote as `"%"`
+- Values ending with `:` → quote: `'value:'`
+- `https: //` space in URLs → YAML key-value separator, causes structural mismatch
+- Multi-line ICU plurals → use Python str.replace() with \n, not sed
+
+## Placeholder Violations Fixed
+authConfig.associatedWarning ({docsBase} link), ldap.oktaSchema (Okta link), azuread modal title/body, cluster.harvester.incompatible (https:// space)
+
+## Chunking Strategy
+- Python str.replace() for multi-line values; sed for simple single-line
+- Max ~50 per script; verify with coverage.js after each chunk
+
+## Remaining "Untranslated" — Correctly English
+Brand names (Longhorn/Grafana/Elasticsearch), cloud providers (Amazon/Azure/Google), K8s terms (Pods/Cluster/etcd), protocol acronyms (TLS/OAuth/CSI), K8s enums (NoExecute/NoSchedule), icon IDs (refresh/error/checkmark), time formats (5s/10m/1h)
+
+## Validation Tools in /tmp/gh-aw/agent/
+- check_yaml.js — basic YAML validation
+- coverage.js — coverage analysis
+- list_untranslated.js — generate untranslated list
