@@ -2850,8 +2850,9 @@ drivers:
             other { e <b>{count} outros</b>}}
     warningDrivers: |-
       {count, plural,
-            =1 { Você não poderá mais editar a configuração de clusters usando {name}.}
-            other { Você não poderá mais editar a configuração de clusters usando {name} e outros.}}
+      =1 { Você não poderá mais editar a configuração de clusters usando o driver {names}.}
+      other { Você não poderá mais editar a configuração de clusters usando os drivers {names}.}
+      }
     warning: |-
       {count, plural,
             =1 { {warningDrivers} Os recursos no provedor correspondente não serão provisionados automaticamente.}
@@ -3848,7 +3849,7 @@ istio:
   cni: Habilitar CNI
   customOverlayFile:
     label: Arquivo de Overlay Personalizado
-    tip: O arquivo <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/">IstioOperator</a> de sobreposição personalizado permite personalizar a instalação do Istio.
+    tip: 'O <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">arquivo de overlay</a> permite configuração adicional sobre a instalação base do Istio do {vendor}. Você pode utilizar a <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >IstioOperator API</a> para fazer alterações e adições em todos os componentes e aplicar essas mudanças por meio deste arquivo YAML de overlay.'
   description: "{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para que você comece a integrar serviços."
   destinationRule:
     title:
@@ -4598,7 +4599,9 @@ monitoring:
       size: Tamanho
       volumeName: Nome do Volume
     title: Configurar Prometheus
-    warningInstalled: "Aviso: Operadores Prometheus estão atualmente implantados. Implantar múltiplos Operadores Prometheus em um cluster não é suportado."
+    warningInstalled: |
+      Aviso: Operadores Prometheus estão atualmente implantados. Implantar múltiplos Operadores Prometheus em um cluster não é suportado. Por favor, remova todos os outros deployments de Operadores Prometheus deste cluster antes de tentar instalar este chart.
+      Se você está migrando de uma versão mais antiga do {vendor} com Monitoramento habilitado, por favor desabilite o Monitoramento neste cluster completamente antes de tentar instalar este chart.
   receiver:
     addReceiver: Adicionar Receptor
     fields:
@@ -4699,7 +4702,7 @@ monitoringReceiver:
     label: Webhook
     title: Configuração do Webhook
     urlTooltip: Para alguns webhooks, esta é uma URL que aponta para o DNS do serviço
-    modifyNamespace: Se os valores padrão do <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foram alterados, ajuste conforme necessário.
+    modifyNamespace: Se os valores padrão do <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> foram alterados, por favor atualize a url abaixo no formato http://&lt;new_service_name&gt;.&lt;new_namespace&gt.svc.&lt;port&gt/&lt;path&gt
     banner: Para usar MS Teams ou SMS, você precisará ter pelo menos uma instância do <pre class="inline-block m-0 p-0 vertical-middle">rancher-alerting-drivers</pre> instalada.
     add:
       selectWebhookType: Selecionar Tipo de Webhook
