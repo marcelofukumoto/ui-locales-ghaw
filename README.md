@@ -8,7 +8,7 @@ The locales in this repository are maintained on a best-effort basis.
 
 This repository uses [GitHub Agentic Workflows](https://docs.github.com/en/copilot/github-copilot-in-github/using-github-copilot-agentic-workflows) to automate common maintenance tasks — adding, updating, and verifying translations, syncing the source file from upstream, and keeping documentation up to date. All workflows are AI-powered; results should be reviewed by a human before merging.
 
-> **Note:** Workflows triggered by issue title prefixes (`[ADD]`, `[UPDATE]`, `[FIX]`, `[README]`) require `admin` or `maintainer` role. Slash commands on PRs (`/verify-translation`, `/improve-translation`, `/verify-readme`, `/update-readme`) also require `admin` or `maintainer` role unless noted otherwise.
+> **Note:** The `[README]` issue workflow and the `/verify-readme` and `/update-readme` slash commands require `admin` or `maintainer` role. All other workflows (`[ADD]`, `[UPDATE]`, `[FIX]`, `/verify-translation`, `/improve-translation`) have no role restriction.
 
 ---
 
