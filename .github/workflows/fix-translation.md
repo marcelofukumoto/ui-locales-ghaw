@@ -49,19 +49,9 @@ Only act if the issue title starts with `[FIX]` and the body reports a translati
 
 If the issue does not meet these criteria, do nothing and stop.
 
-## Control flags
-
-Read the issue body for any of these optional flags that override the default behaviour:
-
-- `--no-similar` — skip the check for similar cases in the same file (PR 2)
-- `--no-other-languages` — skip the check across other language files (PR 3+)
-- `--simple` — shorthand for both `--no-similar` and `--no-other-languages`
-
-Default behaviour (no flags): do all three steps.
-
 ## What to do
 
-### Step 1 — Fix the specific reported translation (always)
+### Step 1 — Fix the specific reported translation
 
 1. Identify from the issue:
    - The **language** and its locale code (e.g. Portuguese Brazil → `pt-br`)
@@ -84,7 +74,7 @@ Default behaviour (no flags): do all three steps.
 
 ---
 
-### Step 2 — Check for similar cases in the same file (unless `--no-similar` or `--simple`)
+### Step 2 — Check for similar cases in the same file
 
 1. Re-read the full `pkg/ui-locales/l10n/<locale-code>.yaml`.
 
@@ -103,21 +93,9 @@ Default behaviour (no flags): do all three steps.
 
 ---
 
-### Step 3 — Check other language files (unless `--no-other-languages` or `--simple`)
+### Important — Only fix the requested language
 
-1. List all other `.yaml` files in `pkg/ui-locales/l10n/` (excluding `en-us.yaml` and the already-fixed locale file).
-
-2. For each other language file, check whether:
-   - The same key(s) that were fixed contain a similarly wrong or suspicious translation
-   - The translation for that key looks inconsistent with the fix made in Step 1
-
-3. For each language file that **needs a fix**, open a **separate PR**:
-   - File changed: `pkg/ui-locales/l10n/<other-locale-code>.yaml`
-   - Title: `fix(<other-locale-code>): review translation for key(s) affected in issue #<issue-number>`
-   - Body: explains which keys were reviewed, what was changed and why, notes it is AI-suggested and needs native speaker review, references the original issue
-   - Label: `translations`, `fix`, `automated`
-
-4. Add a comment to the issue listing which other languages were checked, which had PRs opened, and which were clean.
+Do **NOT** check or modify other language files. Only fix the specific language file identified in the issue. Each language has its own ownership and should be fixed through its own dedicated issue.
 
 ---
 
