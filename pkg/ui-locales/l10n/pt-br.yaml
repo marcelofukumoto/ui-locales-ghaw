@@ -6120,7 +6120,7 @@ resourceDetail:
     managedWarning: |-
       Este {type} é gerenciado por {hasName, select,
               no {um app {managedBy}}
-              yes {o app {managedBy} {appName}}}
+              yes {o app {managedBy} {appName}}}; as alterações feitas aqui provavelmente serão sobrescritas na próxima vez que {managedBy} for executado.
 resourceList:
   head:
     create: Criar
@@ -7161,7 +7161,10 @@ validation:
   chars: '"{key}" contém {count, plural, =1 {um caractere inválido} other {# caracteres inválidos}}: {chars}'
   cluster:
     name: O nome do cluster não pode ser 'local' nem ter a forma 'c-xxxxx'
-  conflict: Este recurso foi modificado desde que você começou a editá-lo, e algumas dessas modificações conflitam com suas alterações.
+  conflict: |-
+    Este recurso foi modificado desde que você começou a editá-lo, e algumas dessas modificações conflitam com suas alterações.
+    Esta tela foi atualizada para refletir os valores atuais no cluster. Revise e reaplique as alterações que desejava fazer e clique em Salvar novamente.
+    {fieldCount, plural, =1 {Campo} other {Campos}} em conflito: {fields}
   custom:
     missing: 'Nenhum validador existe para { validatorName }! O validador existe em custom-validators?'
   dns:
@@ -8662,8 +8665,8 @@ oidcclient:
 
 action:
   ariaLabel:
-    hidePass: Ocultar senha
-    showPass: Mostrar senha
+    hidePass: Ocultar {area}
+    showPass: Mostrar {area}
   clone: Clonar
   disable: Desabilitar
   download: Baixar
@@ -8762,7 +8765,7 @@ advancedSettings:
     label: Editar Configuração
     changeSetting: "Alterar Configuração:"
     agentConfigBanner: 
-      text: Editar este valor não alterará o valor definido nos clusters em execução! Para atualizar um cluster em execução, edite a configuração na seção de edição do cluster.
+      text: Editar este valor não alterará o valor definido nos clusters em execução! Para atualizar um cluster em execução para usar os novos valores, edite o cluster e clique em "Aplicar configurações globais para Priority Class e Pod Disruption Budget" na aba de configuração do Agente {agent}.
       cluster: Cluster
       fleet: Fleet
     trueOption: "Verdadeiro"
@@ -8901,7 +8904,7 @@ performance:
     inputLabel: Timeout de inatividade (minutos)
     information: Para alterar o comportamento de logout automático, edite os tempos de expiração do token de autorização e/ou sessão.
     description: Quando habilitado e o usuário ficar inativo além do timeout especificado, a UI não atualizará mais os dados automaticamente.
-    authUserTTL: Este timeout não pode ser maior que o timeout de sessão do usuário auth-user-session-ttl-minutes.
+    authUserTTL: Este timeout não pode ser maior que o timeout de sessão do usuário auth-user-session-ttl-minutes, que atualmente é de {current} minutos.
   serverPagination:
     label: Paginação no Servidor
     description: Por padrão, as Listas buscam todos os recursos e paginam no lado do cliente. A Paginação no Servidor move isso para o servidor.
