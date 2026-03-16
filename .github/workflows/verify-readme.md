@@ -11,6 +11,7 @@ description: |
 on:
   slash_command:
     name: verify-readme
+  roles: [admin, maintainer]
   reaction: "eyes"
 
 permissions:

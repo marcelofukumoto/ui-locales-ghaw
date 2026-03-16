@@ -9,6 +9,7 @@ description: |
 on:
   slash_command:
     name: update-readme
+  roles: [admin, maintainer]
   reaction: "eyes"
 
 permissions:

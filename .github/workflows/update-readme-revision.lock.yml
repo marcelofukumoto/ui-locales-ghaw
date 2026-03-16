@@ -27,7 +27,7 @@
 # changes to the PR branch. A separate workflow_run trigger handles re-triggering
 # validation.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"ba2850a30e925822ffaa8a676ad7c771c2929bdca95cbf1ea649d298ff342e70","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"00ea7cd55e5ef9110bf43bf206d307720db0cb247d57f080b22324ad73cbcdde","compiler_version":"v0.57.2","strict":true}
 
 name: "Update README — Revision"
 "on":
@@ -57,6 +57,9 @@ name: "Update README — Revision"
     types:
     - created
     - edited
+  # roles: # Roles processed as role check in pre-activation job
+  # - admin # Roles processed as role check in pre-activation job
+  # - maintainer # Roles processed as role check in pre-activation job
 
 permissions: {}
 
@@ -69,7 +72,9 @@ jobs:
   activation:
     needs: pre_activation
     if: >
-      (needs.pre_activation.outputs.activated == 'true') && ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/update-readme ')) ||
+      (needs.pre_activation.outputs.activated == 'true') && (((github.event_name == 'issues' || github.event_name == 'issue_comment' ||
+      github.event_name == 'pull_request' || github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' ||
+      github.event_name == 'discussion_comment') && ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/update-readme ')) ||
       (github.event.issue.body == '/update-readme')) || (github.event_name == 'issue_comment') && (((startsWith(github.event.comment.body, '/update-readme ')) ||
       (github.event.comment.body == '/update-readme')) && (github.event.issue.pull_request == null)) || (github.event_name == 'issue_comment') &&
       (((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme')) &&
@@ -78,7 +83,9 @@ jobs:
       (github.event_name == 'pull_request') && ((startsWith(github.event.pull_request.body, '/update-readme ')) ||
       (github.event.pull_request.body == '/update-readme')) || (github.event_name == 'discussion') && ((startsWith(github.event.discussion.body, '/update-readme ')) ||
       (github.event.discussion.body == '/update-readme')) || (github.event_name == 'discussion_comment') &&
-      ((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme')))
+      ((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme')))) ||
+      (!(github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment')))
     runs-on: ubuntu-slim
     permissions:
       contents: read
@@ -1221,7 +1228,9 @@ jobs:
 
   pre_activation:
     if: >
-      (github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/update-readme ')) || (github.event.issue.body == '/update-readme')) ||
+      ((github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment') &&
+      ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/update-readme ')) || (github.event.issue.body == '/update-readme')) ||
       (github.event_name == 'issue_comment') && (((startsWith(github.event.comment.body, '/update-readme ')) ||
       (github.event.comment.body == '/update-readme')) && (github.event.issue.pull_request == null)) || (github.event_name == 'issue_comment') &&
       (((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme')) &&
@@ -1230,7 +1239,9 @@ jobs:
       (github.event_name == 'pull_request') && ((startsWith(github.event.pull_request.body, '/update-readme ')) ||
       (github.event.pull_request.body == '/update-readme')) || (github.event_name == 'discussion') && ((startsWith(github.event.discussion.body, '/update-readme ')) ||
       (github.event.discussion.body == '/update-readme')) || (github.event_name == 'discussion_comment') &&
-      ((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme'))
+      ((startsWith(github.event.comment.body, '/update-readme ')) || (github.event.comment.body == '/update-readme')))) ||
+      (!(github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment'))
     runs-on: ubuntu-slim
     outputs:
       activated: ${{ (steps.check_membership.outputs.is_team_member == 'true') && (steps.check_command_position.outputs.command_position_ok == 'true') }}
@@ -1244,7 +1255,7 @@ jobs:
         id: check_membership
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          GH_AW_REQUIRED_ROLES: admin,maintainer,write
+          GH_AW_REQUIRED_ROLES: admin,maintainer
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

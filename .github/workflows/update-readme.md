@@ -9,6 +9,7 @@ description: |
 on:
   issues:
     types: [opened, reopened]
+  roles: [admin, maintainer]
   reaction: "eyes"
 
 if: contains(github.event.issue.title, '[README]')

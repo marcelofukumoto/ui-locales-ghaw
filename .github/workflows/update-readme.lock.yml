@@ -27,7 +27,7 @@
 # with that documentation, and opens a Pull Request. A separate lightweight
 # workflow (trigger-verify-readme) handles posting the /verify-readme comment.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"323aee694384912c6eb9b5c9df5eb5e77a10bf93ef34d02cd73d06f7d3dadff3","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"217aa04af75e2e09714d10c6c629d66e2ceceb2228b37c6f367ef150798ab585","compiler_version":"v0.57.2","strict":true}
 
 name: "Update README with Workflow Documentation"
 "on":
@@ -35,6 +35,9 @@ name: "Update README with Workflow Documentation"
     types:
     - opened
     - reopened
+  # roles: # Roles processed as role check in pre-activation job
+  # - admin # Roles processed as role check in pre-activation job
+  # - maintainer # Roles processed as role check in pre-activation job
 
 permissions: {}
 
@@ -1122,7 +1125,7 @@ jobs:
         id: check_membership
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          GH_AW_REQUIRED_ROLES: admin,maintainer,write
+          GH_AW_REQUIRED_ROLES: admin,maintainer
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

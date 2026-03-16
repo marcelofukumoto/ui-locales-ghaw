@@ -29,7 +29,7 @@
 # trigger handles posting '/update-readme' to start the revision. It will not
 # trigger more than 5 verification rounds per PR.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"68959887f5a4f2352efe4dfd1f11f1602254042a3fd383df0286986bd7f551fa","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"4fe7522195f4be8c9ff11feabaa0bcb5e8764754bae8a8f8028b80df3043f049","compiler_version":"v0.57.2","strict":true}
 
 name: "Verify README Documentation"
 "on":
@@ -59,6 +59,9 @@ name: "Verify README Documentation"
     types:
     - created
     - edited
+  # roles: # Roles processed as role check in pre-activation job
+  # - admin # Roles processed as role check in pre-activation job
+  # - maintainer # Roles processed as role check in pre-activation job
 
 permissions: {}
 
@@ -71,7 +74,9 @@ jobs:
   activation:
     needs: pre_activation
     if: >
-      (needs.pre_activation.outputs.activated == 'true') && ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/verify-readme ')) ||
+      (needs.pre_activation.outputs.activated == 'true') && (((github.event_name == 'issues' || github.event_name == 'issue_comment' ||
+      github.event_name == 'pull_request' || github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' ||
+      github.event_name == 'discussion_comment') && ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/verify-readme ')) ||
       (github.event.issue.body == '/verify-readme')) || (github.event_name == 'issue_comment') && (((startsWith(github.event.comment.body, '/verify-readme ')) ||
       (github.event.comment.body == '/verify-readme')) && (github.event.issue.pull_request == null)) || (github.event_name == 'issue_comment') &&
       (((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme')) &&
@@ -80,7 +85,9 @@ jobs:
       (github.event_name == 'pull_request') && ((startsWith(github.event.pull_request.body, '/verify-readme ')) ||
       (github.event.pull_request.body == '/verify-readme')) || (github.event_name == 'discussion') && ((startsWith(github.event.discussion.body, '/verify-readme ')) ||
       (github.event.discussion.body == '/verify-readme')) || (github.event_name == 'discussion_comment') &&
-      ((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme')))
+      ((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme')))) ||
+      (!(github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment')))
     runs-on: ubuntu-slim
     permissions:
       contents: read
@@ -1205,7 +1212,9 @@ jobs:
 
   pre_activation:
     if: >
-      (github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/verify-readme ')) || (github.event.issue.body == '/verify-readme')) ||
+      ((github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment') &&
+      ((github.event_name == 'issues') && ((startsWith(github.event.issue.body, '/verify-readme ')) || (github.event.issue.body == '/verify-readme')) ||
       (github.event_name == 'issue_comment') && (((startsWith(github.event.comment.body, '/verify-readme ')) ||
       (github.event.comment.body == '/verify-readme')) && (github.event.issue.pull_request == null)) || (github.event_name == 'issue_comment') &&
       (((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme')) &&
@@ -1214,7 +1223,9 @@ jobs:
       (github.event_name == 'pull_request') && ((startsWith(github.event.pull_request.body, '/verify-readme ')) ||
       (github.event.pull_request.body == '/verify-readme')) || (github.event_name == 'discussion') && ((startsWith(github.event.discussion.body, '/verify-readme ')) ||
       (github.event.discussion.body == '/verify-readme')) || (github.event_name == 'discussion_comment') &&
-      ((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme'))
+      ((startsWith(github.event.comment.body, '/verify-readme ')) || (github.event.comment.body == '/verify-readme')))) ||
+      (!(github.event_name == 'issues' || github.event_name == 'issue_comment' || github.event_name == 'pull_request' ||
+      github.event_name == 'pull_request_review_comment' || github.event_name == 'discussion' || github.event_name == 'discussion_comment'))
     runs-on: ubuntu-slim
     outputs:
       activated: ${{ (steps.check_membership.outputs.is_team_member == 'true') && (steps.check_command_position.outputs.command_position_ok == 'true') }}
@@ -1228,7 +1239,7 @@ jobs:
         id: check_membership
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          GH_AW_REQUIRED_ROLES: admin,maintainer,write
+          GH_AW_REQUIRED_ROLES: admin,maintainer
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
