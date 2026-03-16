@@ -1023,7 +1023,7 @@ backupRestoreOperator:
   backup:
     label: Conjunto de Recursos
     description: O Conjunto de Recursos determina quais recursos o backup-restore-operator coleta em um backup.
-    enableEncryptionWarning: 'Habilitar criptografia é altamente recomendado ao usar <b><i>o conjunto de recursos de backup completo do Rancher</i></b>.'
+    enableEncryptionWarning: 'Habilitar criptografia é altamente recomendado ao usar <b><i>o conjunto de recursos de backup completo do Rancher</i></b>, caso contrário, informações sensíveis serão copiadas em texto simples. <a target="_blank" rel="noopener noreferrer nofollow" href="https://ranchermanager.docs.rancher.com/reference-guides/backup-restore-configuration/backup-configuration#resourcesets">Leia mais</a>.'
     missingResourceSetWarning: O conjunto de recursos <b><i>{resourceSet}</i></b> não existe, é possível que tenha sido excluído. Você pode selecionar outro conjunto de recursos ou criar um novo.
     resourceSetOptions:
       'rancher-resource-set-basic': 'Conjunto de recursos de backup básico do Rancher'
@@ -1053,7 +1053,7 @@ backupRestoreOperator:
       warning: 'Este {type} não tem sua política de retenção definida como "Retain". Seus backups podem ser perdidos se o PVC for excluído.'
   encryption: Criptografia
   encryptionConfigName:
-    backuptip: 'Qualquer secret no namespace <code>{ns}</code> que tenha uma chave <code>encryption-provider-config</code> será listado aqui.'
+    backuptip: 'Qualquer secret no namespace <code>{ns}</code> que tenha uma chave <code>encryption-provider-config.yaml</code>. <br/>O conteúdo deste arquivo é necessário para realizar uma restauração deste backup e não é armazenado pelo Rancher Backup.'
     label: Secret de Configuração de Criptografia
     options:
       none: Armazenar o conteúdo do backup sem criptografia
@@ -1541,7 +1541,7 @@ compliance:
 
 cluster:
   jwtAuthentication:
-    banner: O acesso à Conta de Serviço com autenticação JWT pode ser configurado após a criação do cluster.
+    banner: "O acesso à Conta de Serviço com autenticação JWT pode ser configurado após a criação do cluster a partir de <br>
       <code>Cluster Management > Advanced > JWT Authentication</code>"
   addonChart:
     rancher-vsphere-cpi:
@@ -1722,14 +1722,21 @@ cluster:
           shared: '<p>Crie uma <a href="https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts" target="_blank" rel="noopener noreferrer nofollow">Conta de Serviço</a> com uma chave privada JSON e forneça o JSON aqui.</p>'
           gke: |-
             <p>Estas funções IAM são necessárias para o GKE:</p>
-                        <ul>
-                        <li><b>Compute Engine:</b> Usuário do Compute Engine</li>
-                        </ul>
+            <ul>
+            <li><b>Compute Engine:</b> Visualizador do Compute (roles/compute.viewer)</li>
+            <li><b>Projeto:</b> Visualizador (roles/viewer)</li>
+            <li><b>Kubernetes Engine:</b> Administrador do Kubernetes Engine (roles/container.admin)</li>
+            <li><b>Contas de Serviço:</b> Usuário da Conta de Serviço (roles/iam.serviceAccountUser)</li>
+            </ul>
+            Mais informações sobre funções podem ser encontradas <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration" target="_blank" rel="noopener noreferrer nofollow">aqui</a>.
           gce: |-
             <p>Estas funções IAM são necessárias para o GCE:</p>
-                        <ul>
-                        <li><b>Compute Engine:</b> Administrador do Compute Engine</li>
-                        </ul>
+            <ul>
+            <li><b>Compute Engine:</b> Administrador do Compute Engine (roles/compute.admin)</li>
+            <li><b>Projeto:</b> Visualizador (roles/viewer)</li>
+            <li><b>Contas de Serviço:</b> Usuário da Conta de Serviço (roles/iam.serviceAccountUser)</li>
+            </ul>
+            Mais informações sobre funções podem ser encontradas <a href="https://cloud.google.com/compute/docs/access/iam" target="_blank" rel="noopener noreferrer nofollow">aqui</a>.
     harvester:
       namespace: Namespace
       cpu: CPUs
@@ -2820,7 +2827,7 @@ providers:
 drivers:
   kontainer:
     title: Drivers de Cluster
-    emberDeprecationMessage: O suporte para Plugins de UI (baseados em Ember) para drivers de cluster e nó foi descontinuado no Rancher 2.11.
+    emberDeprecationMessage: 'O suporte para Plugins de UI (baseados em Ember) para drivers de cluster e nó foi descontinuado no Rancher 2.11.0 e será removido em uma versão futura. Eles precisam ser migrados para o novo <a href="https://extensions.rancher.io" target="_blank" rel="noopener noreferrer nofollow">framework de UI Extensions</a>.'
     refreshError: 'Erro ao atualizar drivers de cluster: {error}'
   node:
     title: Drivers de Nó
@@ -3524,7 +3531,7 @@ gatekeeperIndex:
   poweredBy: OPA Gatekeeper
   unavailable: OPA + Gatekeeper não está disponível no catálogo system-charts.
   violations: Violações
-  deprecated: O chart OPA Gatekeeper foi descontinuado no Rancher 2.8 e será removido em uma versão futura. Por favor, migre para uma solução alternativa.
+  deprecated: O chart OPA Gatekeeper foi descontinuado no Rancher 2.8 e será removido em uma versão futura. Por favor, considere migrar para o <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.kubewarden.io">Kubewarden</a>.
 
 gatekeeperInstall:
   auditInterval: Intervalo Automático
@@ -3852,7 +3859,7 @@ istio:
   customOverlayFile:
     label: Arquivo de Overlay Personalizado
     tip: 'O <a target="_blank" rel="noopener noreferrer nofollow" href="https://istio.io/latest/docs/setup/additional-setup/customize-installation/#patching-the-output-manifest">arquivo de overlay</a> permite configuração adicional sobre a instalação base do Istio do {vendor}. Você pode utilizar a <a href="https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/" target="_blank" rel="noopener noreferrer nofollow" >IstioOperator API</a> para fazer alterações e adições em todos os componentes e aplicar essas mudanças por meio deste arquivo YAML de overlay.'
-  description: "{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para que você comece a integrar serviços."
+  description: '{vendor} O chart Helm do Istio instala uma configuração mínima do Istio para que você comece a integrar seus aplicativos. Se você quiser obter mais informações sobre o Istio, visite <a target="_blank" href="https://istio.io/latest/docs/concepts/what-is-istio" rel="noopener noreferrer nofollow">https://istio.io/latest/docs/concepts/what-is-istio/</a>'
   destinationRule:
     title:
       new: Adicionar Regra de Destino
@@ -4500,7 +4507,11 @@ monitoring:
         info: Os Secrets devem ser montados em <pre class='inline-block m-0'>/etc/alertmanager/secrets/</pre>
         label: Secrets Adicionais
       existing: Escolher um secret de configuração existente
-      info: <span class="text-bold">Criar configuração padrão</span>:<br>Um Segredo contendo sua Configuração do Alertmanager será criado com os valores padrão. Personalize-o conforme necessário.
+      info: |
+        <span class="text-bold">Criar configuração padrão</span>:<br>Um Segredo contendo sua Configuração do Alertmanager será criado no namespace <pre class='inline-block m-0'>cattle-monitoring-system</pre> ao implantar este chart com o nome <pre class='inline-block m-0'>alertmanager-rancher-monitoring-alertmanager</pre>. Por padrão, este Segredo nunca será modificado em uma desinstalação ou atualização deste chart. <br /><br />
+        Após implantar este chart, você deve editar o Segredo via UI para adicionar suas configurações de notificação personalizadas que serão usadas pelo Alertmanager para enviar alertas. <br /> <br />
+        <span class="text-bold">Escolher um secret de configuração existente</span>:<br>Você deve especificar um Secret que exista no namespace <pre class='inline-block m-0'>cattle-monitoring-system</pre>. Se o namespace não existir, você não poderá selecionar um secret existente.
+        
       label: Secret do Alertmanager
       new: Criar configuração padrão
       radio:
@@ -4695,11 +4706,11 @@ monitoringReceiver:
   pagerduty:
     label: PagerDuty
     title: Configuração do PagerDuty
-    info: Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty na documentação oficial.
+    info: "Você pode encontrar informações adicionais sobre como criar uma Chave de Integração para o PagerDuty <a href='https://www.pagerduty.com/docs/guides/prometheus-integration-guide/' target='_blank' rel='noopener nofollow' class='flex-right'>aqui</a>."
   slack:
     label: Slack
     title: Configuração do Slack
-    info: Você pode encontrar informações adicionais sobre como criar Webhooks de entrada para o Slack na documentação oficial.
+    info: "Você pode encontrar informações adicionais sobre como criar Webhooks de entrada para o Slack <a href='https://rancher.slack.com/apps/A0F7XDUAZ-incoming-webhooks' target='_blank' rel='noopener noreferrer nofollow'>aqui</a> ."
   webhook:
     label: Webhook
     title: Configuração do Webhook
@@ -5510,7 +5521,7 @@ plugins:
           label: Secrets de Pull de Imagem
           tooltip: Deve ser do Tipo `kubernetes.io/dockercfg` ou `kubernetes.io/dockerconfigjson`
         secrets:
-          banner: Se o registro que hospeda a Imagem do Catálogo requer Segredos de Pull, eles devem ser criados no namespace especificado.
+          banner: "Se o registro que hospeda a Imagem do Catálogo requer Segredos de Pull, eles devem ser criados no seguinte namespace:<pre>cattle-ui-plugin-system</pre>"
       banner: 'Isso criará um Deployment, um Serviço e um repositório Helm para servir os charts de extensão.'
       imageVersion:
         title: Versão da Imagem Não Encontrada
@@ -5837,7 +5848,7 @@ promptForceRemove:
   forceDelete: Forçar Exclusão
   ariaLabel: Copiar o nome da Máquina para a área de transferência
   confirmName: "Insira o nome do pool abaixo para confirmar:"
-  podRemoveWarning: A exclusão forçada de pods não aguarda confirmação de que os processos do pod foram encerrados. Isso pode resultar em corrupção de dados ou outros problemas.
+  podRemoveWarning: "A exclusão forçada de pods não aguarda confirmação de que os processos do pod foram encerrados. Isso pode resultar em <strong>corrupção de dados ou inconsistências</strong>"
 
 promptScaleMachineDown:
   attemptingToRemove: "Você está tentando excluir {count} {type}"
@@ -5846,8 +5857,9 @@ promptScaleMachineDown:
   retainedMachine2: '<b>{ name }</b> permanecerá'
   scaling: |-
     {count, plural,
-          =1 {Este pool de máquinas ainda está sendo reconciliado. Um nó diferente pode ser excluído em vez do que você selecionou.}
-          other {Estes pools de máquinas ainda estão sendo reconciliados.}}
+      =1 {Este pool de máquinas ainda está sendo reconciliado. Um nó diferente pode ser excluído em vez do que você selecionou. É melhor aguardar até que a reconciliação termine.<br> Você ainda deseja marcar este nó para exclusão?}
+      other {Pelo menos um desses pools de máquinas ainda está sendo reconciliado. Nós diferentes podem ser excluídos em vez dos que você selecionou. É melhor aguardar até que a reconciliação termine.<br> Você ainda deseja marcar esses nós para exclusão?}
+    }
 promptSlo:
   title: "Sair"
   text: "Sair apenas do Rancher, ou de todos os aplicativos {name}."
@@ -6460,13 +6472,13 @@ setup:
   currentPassword: Senha de Bootstrap
   confirmPassword: Confirmar Nova Senha
   defaultPassword:
-    intro: Parece que é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha de bootstrap, insira-a aqui.
+    intro: Parece que é a sua primeira visita ao {vendor}; se você pré-definiu sua própria senha de bootstrap, insira-a aqui. Caso contrário, uma senha aleatória foi gerada para você. Para encontrá-la:<br/><br/>
     dockerPrefix: 'Para uma instalação via "docker run":'
     dockerPs: 'Encontre o ID do seu contêiner com <code>docker ps</code>, depois execute:'
     dockerSuffix: ""
     helmPrefix: 'Para uma instalação Helm, execute:'
     helmSuffix: ""
-  eula: I agree to the End User License Agreement
+  eula: Ao marcar esta caixa, você aceita o <a href="https://www.suse.com/licensing/eula/download/suse_end_user_license_agreement_june_2024.pdf" target="_blank" rel="noopener noreferrer nofollow">Contrato de Licença de Usuário Final e Termos e Condições</a>
   newPassword: Nova Senha
   newUserSetPassword: A primeira ordem de negócios é definir uma senha forte. Sugerimos usar esta aleatória gerada especialmente para você, mas insira a sua própria se preferir.
   serverUrl:
