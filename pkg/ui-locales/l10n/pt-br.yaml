@@ -2282,8 +2282,9 @@ cluster:
     cloudProviderMigrateAzure: 'No Kubernetes 1.30 ou superior, o Provedor de Nuvem <b>Azure</b> foi removido. Para atualizar o Kubernetes, o cluster deve ser migrado para o provedor Externo primeiro.<br> Consulte <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/set-up-cloud-providers/azure" target="_blank" rel="noopener noreferrer nofollow">a documentação</a> para mais informações.'
     machinePoolError: |-
       {count, plural,
-              =1 { {pool_name}: O valor fornecido para {fields} não foi encontrado na lista de opções disponíveis.}
-              other { Vários pools de máquinas têm problemas com campos inválidos.}}
+        =1 { {pool_name}: O valor fornecido para {fields} não foi encontrado na lista de valores esperados. Isso pode acontecer com clusters provisionados fora do Rancher ou quando as opções do provedor foram alteradas. }
+        other { {pool_name}: Os valores fornecidos para {fields} não foram encontrados na lista de valores esperados. Isso pode acontecer com clusters provisionados fora do Rancher ou quando as opções do provedor foram alteradas. }
+      }
     rke1DeprecationMessage: 'O Rancher Kubernetes Engine (RKE / RKE1) chegou ao fim de vida e esses clusters não são mais suportados. Recomendamos migrar clusters RKE1 para RKE2 para garantir suporte contínuo e atualizações de segurança. Saiba mais sobre a transição <a href="https://www.suse.com/support/kb/doc/?id=000021518" target="_blank" rel="noopener noreferrer nofollow">aqui</a>.'
     nginxDeprecated: O controlador NGINX está obsoleto e será removido em versões futuras
   rke1Unsupported: Clusters RKE1 não são mais suportados
@@ -3448,7 +3449,8 @@ fleet:
       matchesSome: |-
         {matched, plural,
                   =1 {Corresponde a 1 de {total, number} clusters existentes: "{sample}"}
-                  other {Corresponde a {matched, number} de {total, number} clusters existentes}}
+          other {Corresponde a {matched, number} de {total, number} clusters existentes, incluindo "{sample}"}
+        }
   fdc:
     id: ID
     type: Tipo
@@ -4676,7 +4678,7 @@ monitoring:
     grafana: Grafana
     prometheus: Prometheus
     projectMetrics: Métricas do Projeto
-  v1Warning: O monitoramento está atualmente implantado pelo Cluster Manager. Se você está migrando de uma versão mais antiga do {vendor} com monitoramento, remova o monitoramento antigo primeiro.
+  v1Warning: 'O monitoramento está atualmente implantado pelo Cluster Manager. Se você está migrando de uma versão mais antiga do {vendor} com monitoramento ativado, desative o monitoramento no Cluster Manager antes de tentar instalar o novo gráfico de Monitoramento do {vendor} no Cluster Explorer.'
 
 monitoringReceiver:
   addButton: Adicionar {type}
@@ -4956,13 +4958,15 @@ networkpolicy:
         {matched, plural,
                   =0 {Corresponde a 0 de {total, number} pods}
                   =1 {Corresponde a 1 de {total, number} pods: "{sample}"}
-                  other {Corresponde a {matched, number} de {total, number} pods}}
+                  other {Corresponde a {matched, number} de {total, number} pods existentes, incluindo "{sample}"}
+        }
     matchingNamespaces:
       matchesSome: |-
         {matched, plural,
                   =0 {Corresponde a 0 de {total, number} namespaces}
                   =1 {Corresponde a 1 de {total, number} namespaces: "{sample}"}
-                  other {Corresponde a {matched, number} de {total, number} namespaces}}
+                  other {Corresponde a {matched, number} de {total, number} namespaces existentes, incluindo "{sample}"}
+        }
     matchingNamespacesAndPods:
       tooltip: 'Uma regra de entrada única que especifica tanto o Seletor de Namespace quanto o Seletor de Pod, selecionando Pods específicos em namespaces específicos'
       matchesSome: |-
@@ -6426,7 +6430,8 @@ servicesPage:
         {matched, plural,
                   =0 {Corresponde a 0 de {total, number} pods. Se nenhum seletor for criado, endpoints manuais precisam ser configurados.}
                   =1 {Corresponde a 1 de {total, number} pods: "{sample}"}
-                  other {Corresponde a {matched, number} de {total, number} pods}}
+                  other {Corresponde a {matched, number} de {total, number} pods existentes, incluindo "{sample}"}
+        }
   serviceTypes:
     clusterIp:
       abbrv: IP
@@ -8836,7 +8841,11 @@ advancedSettings:
 featureFlags:
   label: Flags de Funcionalidade
   title: "Tem certeza?"
-  warning: Os feature flags permitem ao {vendor} ativar/desativar determinados recursos. Recursos desativados por padrão devem ser considerados experimentais.
+  warning: |-
+    Os feature flags permitem ao {vendor} ativar/desativar determinados recursos.
+    Recursos desativados por padrão devem ser considerados funcionalidades experimentais.
+    Alguns recursos requerem uma reinicialização do servidor {vendor} para alteração.
+    Isso resultará em uma breve interrupção da API e da UI, mas não afetará clusters ou workloads em execução.
   promptActivate: 'Por favor confirme que você deseja ativar o flag de funcionalidade "{flag}"'
   promptDeactivate: 'Por favor confirme que você deseja desativar o flag de funcionalidade "{flag}"'
   restartRequired: "Nota: A atualização deste flag de funcionalidade reiniciará o {vendor}"
