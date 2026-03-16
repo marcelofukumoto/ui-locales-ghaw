@@ -49,6 +49,10 @@ You are an AI assistant that improves translation coverage for locale files in t
 
 Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
 
+- **Check for a previous `/verify-translation` report.** If one exists, read it carefully — it contains structural issues found, translation coverage by section, placeholder errors, and the list of untranslated strings. Use this to:
+  - **Fix structural issues first** (duplicate keys, missing placeholders, key ordering problems) before translating new strings.
+  - **Prioritise sections** with the lowest coverage.
+  - **Avoid re-checking** things the verification already confirmed as clean.
 - If there are previous `/improve-translation` comments from earlier runs, read them to understand what was already translated and what coverage was achieved.
 - Take heed of any additional instructions in the slash command: "${{ steps.sanitized.outputs.text }}"
 - Identify the locale file (e.g. `pkg/ui-locales/l10n/pt-br.yaml`) and the target language.
