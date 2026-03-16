@@ -51,7 +51,7 @@ If the issue does not meet these criteria, do nothing and stop.
 
 ## What to do
 
-### Step 1 — Fix the reported translation and similar cases
+### Step 1 — Fix the specific reported translation
 
 1. Identify from the issue:
    - The **language** and its locale code (e.g. Portuguese Brazil → `pt-br`)
@@ -62,17 +62,34 @@ If the issue does not meet these criteria, do nothing and stop.
 
 3. Find the exact line(s) containing the wrong text and replace with the correct translation.
 
-4. Scan the **entire file** for similar issues — other occurrences of the same wrong word/phrase, or translations that appear similarly incorrect based on the context of the fix (e.g. same root word, same mistranslation pattern). Fix all of them.
+4. **Validate the file** after the fix: use bash to parse the YAML and confirm no duplicate keys, no structural breakage, and all placeholders are still intact. Fix any issues before proceeding.
 
-5. **Validate the file** after all fixes: use bash to parse the YAML and confirm no duplicate keys, no structural breakage, and all placeholders are still intact. Fix any issues before proceeding.
-
-6. Open a **single PR**:
+5. Open **PR #1**:
    - File changed: `pkg/ui-locales/l10n/<locale-code>.yaml`
    - Title: `fix(<locale-code>): correct "<wrong text>" → "<correct text>"`
-   - Body: references the issue, explains the specific fix requested, lists any additional similar fixes found in the same file, closes the issue
+   - Body: references the issue, explains the specific fix, closes the issue
    - Label: `translations`, `fix`, `automated`
 
-7. Add a comment to the issue confirming the PR was opened, with a link. If similar cases were also fixed, mention them in the comment.
+6. Add a comment to the issue confirming PR #1 was opened, with a link.
+
+---
+
+### Step 2 — Check for similar cases in the same file
+
+1. Re-read the full `pkg/ui-locales/l10n/<locale-code>.yaml`.
+
+2. Look for other occurrences of the same wrong word/phrase, OR other translations that appear similarly incorrect based on the context of the fix (e.g. same root word, same mistranslation pattern).
+
+3. If similar issues are found:
+   - Fix all of them
+   - Open **PR #2**:
+     - File changed: `pkg/ui-locales/l10n/<locale-code>.yaml`
+     - Title: `fix(<locale-code>): fix similar translation issues related to issue #<issue-number>`
+     - Body: lists each additional fix found, references the original issue, explains the pattern
+     - Label: `translations`, `fix`, `automated`
+   - Add a comment to the issue linking PR #2 and summarising what was found.
+
+4. If no similar issues are found, add a comment to the issue confirming the file was checked and no other issues were found.
 
 ---
 
