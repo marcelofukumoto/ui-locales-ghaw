@@ -1,13 +1,8 @@
-# PT-BR 2026-03-16
-Keys:6349 Coverage:~100% (all 327 script-untranslated are tech terms/cognates/skippable)
-ICU false positives: {item}→{item_pt} inside plural=NOT missing placeholder
-7 unresolved violations (truncated other branches):
-1.cluster.banner.machinePoolError other:{pool_name}/{fields}
-2.fleet.clusterGroup.selector.matchesSome other:{sample}
-3.monitoring.v1Warning 2nd{vendor}
-4.networkpolicy.selectors.matchingPods.matchesSome other:{sample}
-5.networkpolicy.selectors.matchingNamespaces.matchesSome other:{sample}
-6.featureFlags.warning sentences3-4+2nd{vendor}
-7.servicesPage.selectors.matchingPods.matchesSome other:{sample}
-YAML:bare% quoted,value-ending-colon quoted,HTML-in-doublequotes escaped
-Tool:npm install js-yaml --prefer-offline --no-save
+# PT-BR 2026-03-16 (updated)
+Keys:6349 Coverage:~92% (5795/6297 translatable; ~502 "untranslated" are tech terms/cognates/correct)
+All 7 placeholder violations FIXED in commit 5c8cdc7 (2026-03-16).
+ICU false positives: {item}→{item_pt} inside plural=NOT missing placeholder.
+YAML: bare% quoted, value-ending-colon quoted, HTML-in-doublequotes escaped.
+Tool: npm install js-yaml --prefer-offline --no-save (no pypi).
+Chunking: max ~50 keys/bash call; patch in-place with Node.js read/splice/write; do NOT commit yarn.lock.
+Remaining ~502 "untranslated": K8s terms, cloud/auth provider names, time abbrevs, pure vars, CSS classes — all correct pt-br practice.
