@@ -1,5 +1,13 @@
 # PT-BR Learnings
 
-Fixes (2026-03-16): `drivers.deactivate.warningDrivers` `{names}`, `istio.customOverlayFile.tip` `{vendor}`, `monitoring.prometheus.warningInstalled` 2nd para, `monitoringReceiver.webhook.modifyNamespace` URL, `resourceDetail.masthead.managedWarning` trailing `{managedBy}`, `validation.conflict` 3-line block `{fieldCount}/{fields}`, `action.ariaLabel.hidePass/showPass` `{area}`, `advancedSettings.edit.agentConfigBanner.text` `{agent}`, `performance.inactivity.authUserTTL` `{current}`.
+Outstanding placeholder violations (2026-03-16):
+- `cluster.banner.machinePoolError`: other branch missing `{pool_name}`, `{fields}`
+- `fleet.clusterGroup.selector.matchesSome`: other drops `{sample}`
+- `monitoring.v1Warning`: truncated, missing second `{vendor}`
+- `networkpolicy.selectors.matchingPods.matchesSome`: other drops `{sample}`
+- `networkpolicy.selectors.matchingNamespaces.matchesSome`: other drops `{sample}`
+- `featureFlags.warning`: truncated, missing `{vendor}` restart warning
 
-Coverage: 100%. ~502 kept in English. Tricky: `validation.conflict` is 3-line `|-` block. python3 yaml fails on `equal: =` (pre-existing) — use custom constructor.
+ICU false positives: `{other}→{outro}`, `{items}→{itens}` etc. are text, not vars.
+Coverage: 100% (345 "untranslated" are all tech terms/cognates).
+Tools: js-yaml via npm; python3 yaml fails on `equal: =`.
