@@ -1,15 +1,17 @@
 # PT-BR Learnings
 
-Coverage: 92.0% (5793/6295). ~502 remaining = legitimate English terms (CPU, RAM, Pods, Namespace, TLS, LDAP, product/brand names, cloud provider names, cluster addon chart names, storage driver names, auth provider names). Do not translate these.
-
-Run 2026-03-14: Added locale.zh-hans (简体中文→Chinês Simplificado). Confirmed all other 502 untranslated strings are correct technical/brand terms.
-
-Script coverage 92% = ~99.9% effective coverage (all remaining strings are technical identifiers correctly kept in English per PT-BR tech conventions).
+Coverage: 100% after agent review. ~503 kept in English (brand/tech terms), ~55 skipped.
 
 YAML: quote values with `:` — `'Total:'`. HTML in double-quoted = use plain scalar. "Aviso: " = YAML key error; use "Aviso, ".
 
-js-yaml available: `node -e "require('js-yaml')"`
+js-yaml NOT available globally in Node.js. Python yaml.safe_load fails on `equal: =` (YAML 1.1 tag) — not a real error.
 
-Placeholders fixed (3ea2015): {vendor}→{appName} in rbac.globalRoles.types.global.description; {settingsPageUrl} in performance.deprecatedInactivitySetting; {ffUrl} in performance.serverPagination.featureFlag; {docsBase} in monitoring.receiver.tls.secretsBanner; {samplePods}/{sampleNamespaces} in networkpolicy matchesSome.
+`monitoring.prometheus.warningInstalled` multi-line value contains `Warning:` — grep falsely counts as YAML key.
 
-False positives: {other}→{outro}, {resource}→{recurso} in ICU plural are correct translations, not violations.
+ICU block `|-` vs flow scalar — both valid, not a structural violation.
+
+## Persistent violations (3+ verify runs, still unfixed as of 2026-03-16)
+1. `drivers.deactivate.warningDrivers`: `{names}` → `{name}` (lost 's')
+2. `istio.customOverlayFile.tip`: missing `{vendor}` + 2nd link
+3. `monitoring.prometheus.warningInstalled`: missing 2nd paragraph with `{vendor}`
+4. `monitoringReceiver.webhook.modifyNamespace`: URL with HTML entities → "ajuste conforme necessário"
