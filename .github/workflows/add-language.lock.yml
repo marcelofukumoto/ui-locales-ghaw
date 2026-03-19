@@ -25,7 +25,7 @@
 # a new language translation. It reads the en-us.yaml file, translates all values
 # into the requested language, and opens a Pull Request with the new locale file.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"e5682baedca81527636e6ccf0dc03f9776374d23fd9736f1607f735334a8921d","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"17d86d0f162708dd095ae3c885d5594358594993019b6c3075729c4a88eeb16e","compiler_version":"v0.57.2","strict":true}
 
 name: "Add New Language Translation"
 "on":
@@ -208,7 +208,7 @@ jobs:
           GH_AW_GITHUB_RUN_ID: ${{ github.run_id }}
           GH_AW_GITHUB_WORKSPACE: ${{ github.workspace }}
           GH_AW_MEMORY_BRANCH_NAME: 'memory/default'
-          GH_AW_MEMORY_CONSTRAINTS: "\n\n**Constraints:**\n- **Allowed Files**: Only files matching patterns: memory/default/*.md\n- **Max File Size**: 32768 bytes (0.03 MB) per file\n- **Max File Count**: 100 files per commit\n- **Max Patch Size**: 10240 bytes (10 KB) total per push (max: 100 KB)\n"
+          GH_AW_MEMORY_CONSTRAINTS: "\n\n**Constraints:**\n- **Allowed Files**: Only files matching patterns: memory/default/**/*.md\n- **Max File Size**: 32768 bytes (0.03 MB) per file\n- **Max File Count**: 100 files per commit\n- **Max Patch Size**: 10240 bytes (10 KB) total per push (max: 100 KB)\n"
           GH_AW_MEMORY_DESCRIPTION: ''
           GH_AW_MEMORY_DIR: '/tmp/gh-aw/repo-memory/default/'
           GH_AW_MEMORY_TARGET_REPO: ' of the current repository'
@@ -1278,7 +1278,7 @@ jobs:
           MAX_FILE_COUNT: 100
           MAX_PATCH_SIZE: 10240
           ALLOWED_EXTENSIONS: '[]'
-          FILE_GLOB_FILTER: "memory/default/*.md"
+          FILE_GLOB_FILTER: "memory/default/**/*.md"
         with:
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');

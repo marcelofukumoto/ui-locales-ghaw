@@ -29,7 +29,7 @@ tools:
   repo-memory:
     branch-name: memory/default
     max-file-size: 32768
-    file-glob: ["memory/default/*.md"]
+    file-glob: ["memory/default/**/*.md"]
   bash: true
 
 safe-outputs:
@@ -51,7 +51,7 @@ Do **NOT** use Python or pip in any scripts. The runner does not have access to 
 
 ## Review state (repo-memory)
 
-Read the file `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md` if it exists. This file tracks the review state for README documentation PRs across rounds:
+Read the file `/tmp/gh-aw/repo-memory/default/memory/default/readme/review-state.md` if it exists. This file tracks the review state for README documentation PRs across rounds:
 
 - **Round counter** — how many verification rounds have occurred for the current PR
 - **Previous findings** — what issues were found in prior rounds
@@ -64,7 +64,7 @@ Use this information to avoid repeating feedback that was already addressed, and
 
 Read pull request #${{ github.event.issue.number }} — its description, all comments, and the list of changed files.
 
-**Critical**: Determine the current round number from the repo-memory file (`readme-review.md`). If the file exists and has a round counter for PR #${{ github.event.issue.number }}, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on this PR as a fallback.
+**Critical**: Determine the current round number from the repo-memory file (`readme/review-state.md`). If the file exists and has a round counter for PR #${{ github.event.issue.number }}, increment it by 1. If the file does not exist or has no entry for this PR, this is round 1. Also cross-check by counting comments that contain `/verify-readme` on this PR as a fallback.
 
 - If this is round 5 or higher, **stop immediately**. Post a comment saying:
   > ⚠️ **Verification limit reached** — this PR has been through {round_number} verification rounds (maximum is 5). Please review manually and merge or close as appropriate.
@@ -159,7 +159,7 @@ Be specific and actionable in your feedback. Do not give vague instructions like
 
 ## 6. Update review state (repo-memory)
 
-After posting your comment, update `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md`. The file should contain:
+After posting your comment, update `/tmp/gh-aw/repo-memory/default/memory/default/readme/review-state.md`. The file should contain:
 
 ```markdown
 # README Review State

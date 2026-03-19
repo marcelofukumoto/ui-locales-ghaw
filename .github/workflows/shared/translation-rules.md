@@ -100,16 +100,57 @@ When translating, prioritize:
 
 ## Learnings (repo-memory)
 
-Before doing anything else, read the file `/tmp/gh-aw/repo-memory-default/memory/default/learnings.md` if it exists. This file accumulates knowledge from all previous translation runs — chunking strategies, known pitfalls, character/token limits, and tips. Apply this knowledge throughout your work.
+The repo-memory directory is at `/tmp/gh-aw/repo-memory/default/memory/default/`. Translation workflows use a structured layout under `translations/`:
 
-If the file does not exist, skip this step.
+```
+memory/default/
+  translations/
+    learnings.md        ← cross-language learnings (shared by all languages)
+    pt-br.md            ← per-language notes for Portuguese (Brazil)
+    zh-hans.md          ← per-language notes for Simplified Chinese
+    ...                 ← one file per locale code
+```
 
-After completing work (or hitting a significant obstacle), update the learnings file by **merging** new observations into the existing content. If it does not exist, create it. Cover:
+### 1. Read learnings before starting
 
-- **Chunking strategy**: how you split the file, chunk sizes, what worked
-- **Output size limits**: any limits hit and workarounds
-- **Performance tips**: what made the run faster
-- **Known pitfalls**: tricky keys/sections (ICU plurals, nested HTML, long values)
-- **Anything that caused errors or timeouts** and how to avoid them
+Read **both** files if they exist:
+- `/tmp/gh-aw/repo-memory/default/memory/default/translations/learnings.md` — cross-language learnings
+- `/tmp/gh-aw/repo-memory/default/memory/default/translations/<locale-code>.md` — language-specific notes
 
-Keep the file concise and actionable. It auto-commits to the `memory/default` branch when the workflow finishes.
+Apply all knowledge from these files throughout your work.
+
+### 2. Update learnings after completing work
+
+After completing work (or hitting a significant obstacle), update the relevant file(s) by **merging** new observations into the existing content. Create the file if it does not exist.
+
+**Cross-language learnings** (`translations/learnings.md`) — things that apply regardless of language:
+- Scripting environment: what tools work (Node.js, bash, awk) and what doesn't (Python/pip)
+- YAML parsing pitfalls: special characters, block scalars, duplicate key gotchas
+- Chunking strategy: optimal chunk sizes, what worked, what caused timeouts
+- Output size limits: any limits hit and workarounds
+- Placeholder/ICU patterns that cause false positives in validation
+- Performance tips: what made runs faster or more reliable
+
+**Per-language learnings** (`translations/<locale-code>.md`) — things specific to one language:
+- Coverage stats: keys total, translated, untranslated, coverage % (with date)
+- Language-specific translation notes: tricky terms, false cognates, gender agreement patterns
+- Keys that are correctly "kept in English" for this language (brand names, tech terms the community keeps untranslated)
+- Known problematic keys: keys that repeatedly cause issues in this language
+- Any reviewer feedback incorporated from previous PRs
+
+### File format
+
+Use this structure for each file:
+
+```markdown
+# <Title>
+Last updated: YYYY-MM-DD
+
+## Key facts
+- Bullet list of the most important things to know
+
+## Details
+Additional context, organised by topic with ### headings as needed
+```
+
+Keep each file **concise and actionable** — max ~50 lines. Remove outdated information when updating. Files auto-commit to the `memory/default` branch when the workflow finishes.

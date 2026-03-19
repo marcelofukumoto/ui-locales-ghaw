@@ -29,7 +29,7 @@
 # trigger handles posting '/update-readme' to start the revision. It will not
 # trigger more than 5 verification rounds per PR.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"4fe7522195f4be8c9ff11feabaa0bcb5e8764754bae8a8f8028b80df3043f049","compiler_version":"v0.57.2","strict":true}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"eb88ac44a1e4f05966eb44562018a3939836d7390b214cd353e488870014f21e","compiler_version":"v0.57.2","strict":true}
 
 name: "Verify README Documentation"
 "on":
@@ -271,7 +271,7 @@ jobs:
           GH_AW_GITHUB_WORKSPACE: ${{ github.workspace }}
           GH_AW_IS_PR_COMMENT: ${{ github.event.issue.pull_request && 'true' || '' }}
           GH_AW_MEMORY_BRANCH_NAME: 'memory/default'
-          GH_AW_MEMORY_CONSTRAINTS: "\n\n**Constraints:**\n- **Allowed Files**: Only files matching patterns: memory/default/*.md\n- **Max File Size**: 32768 bytes (0.03 MB) per file\n- **Max File Count**: 100 files per commit\n- **Max Patch Size**: 10240 bytes (10 KB) total per push (max: 100 KB)\n"
+          GH_AW_MEMORY_CONSTRAINTS: "\n\n**Constraints:**\n- **Allowed Files**: Only files matching patterns: memory/default/**/*.md\n- **Max File Size**: 32768 bytes (0.03 MB) per file\n- **Max File Count**: 100 files per commit\n- **Max Patch Size**: 10240 bytes (10 KB) total per push (max: 100 KB)\n"
           GH_AW_MEMORY_DESCRIPTION: ''
           GH_AW_MEMORY_DIR: '/tmp/gh-aw/repo-memory/default/'
           GH_AW_MEMORY_TARGET_REPO: ' of the current repository'
@@ -1316,7 +1316,7 @@ jobs:
           MAX_FILE_COUNT: 100
           MAX_PATCH_SIZE: 10240
           ALLOWED_EXTENSIONS: '[]'
-          FILE_GLOB_FILTER: "memory/default/*.md"
+          FILE_GLOB_FILTER: "memory/default/**/*.md"
         with:
           script: |
             const { setupGlobals } = require('/opt/gh-aw/actions/setup_globals.cjs');

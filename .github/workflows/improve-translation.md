@@ -26,7 +26,7 @@ tools:
   repo-memory:
     branch-name: memory/default
     max-file-size: 32768
-    file-glob: ["memory/default/*.md"]
+    file-glob: ["memory/default/**/*.md"]
   bash: true
 
 safe-outputs:

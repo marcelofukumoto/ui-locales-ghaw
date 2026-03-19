@@ -27,7 +27,7 @@ tools:
   repo-memory:
     branch-name: memory/default
     max-file-size: 32768
-    file-glob: ["memory/default/*.md"]
+    file-glob: ["memory/default/**/*.md"]
   bash: true
 
 safe-outputs:
@@ -49,7 +49,7 @@ Do **NOT** use Python or pip in any scripts. The runner does not have access to 
 
 ## Review state (repo-memory)
 
-Read the file `/tmp/gh-aw/repo-memory-default/memory/default/readme-review.md` if it exists. This file tracks the review state written by the verify-readme workflow:
+Read the file `/tmp/gh-aw/repo-memory/default/memory/default/readme/review-state.md` if it exists. This file tracks the review state written by the verify-readme workflow:
 
 - **Round counter** — what verification round we're on
 - **Previous findings** — what issues were found
